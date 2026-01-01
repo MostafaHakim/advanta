@@ -1,7 +1,16 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Check, Search, TrendingUp, MessageSquare, Code, PenTool, BarChart } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Search,
+  TrendingUp,
+  MessageSquare,
+  Code,
+  PenTool,
+  BarChart,
+} from "lucide-react";
 
 interface Service {
   id: string;
@@ -18,12 +27,12 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
   const iconMap: { [key: string]: ReactNode } = {
-    "SEO": <Search className="w-6 h-6" />,
+    SEO: <Search className="w-6 h-6" />,
     "Social Media": <MessageSquare className="w-6 h-6" />,
     "Web Development": <Code className="w-6 h-6" />,
     "Content Marketing": <PenTool className="w-6 h-6" />,
-    "PPC": <BarChart className="w-6 h-6" />,
-    "AI": <TrendingUp className="w-6 h-6" />,
+    PPC: <BarChart className="w-6 h-6" />,
+    AI: <TrendingUp className="w-6 h-6" />,
   };
   return (
     <motion.div
