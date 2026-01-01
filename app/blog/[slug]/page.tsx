@@ -12,6 +12,8 @@ interface BlogPost {
 }
 
 import { getBaseUrl } from "@/lib/url";
+import dbConnect from "@/lib/db";
+import blogModel from "@/models/blogModel";
 // ... (rest of the file)
 async function getBlogPosts(): Promise<BlogPost[]> {
   const res = await fetch(`${getBaseUrl()}/api/blogs`, {
@@ -22,10 +24,18 @@ async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function generateStaticParams() {
-  const blogPosts = await getBlogPosts();
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    await dbConnect(); // MongoDB connect
+
+    const blogs = await blogModel.find({}, "slug").lean();
+
+    return blogs.map((blog) => ({
+      slug: blog.slug,
+    }));
+  } catch (err) {
+    console.error("Failed to generateStaticParams:", err);
+    return []; // যদি fail হয়, build বন্ধ হবে না
+  }
 }
 
 export async function generateMetadata({

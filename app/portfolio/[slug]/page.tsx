@@ -20,6 +20,8 @@ interface PortfolioItem {
 }
 
 import { getBaseUrl } from "@/lib/url";
+import dbConnect from "@/lib/db";
+import projectModel from "@/models/projectModel";
 // ... (rest of the file)
 async function getPortfolioItems(): Promise<PortfolioItem[]> {
   const res = await fetch(`${getBaseUrl()}/api/projects`, {
@@ -30,10 +32,19 @@ async function getPortfolioItems(): Promise<PortfolioItem[]> {
 }
 
 export async function generateStaticParams() {
-  const portfolioItems = await getPortfolioItems();
-  return portfolioItems.map((item) => ({
-    slug: item.slug,
-  }));
+  try {
+    await dbConnect();
+
+    const portfolios = await projectModel.find({}, "slug").lean();
+
+    return portfolios.map((p) => ({
+      slug: p.slug,
+    }));
+  } catch (err) {
+    console.error("Failed to generateStaticParams:", err);
+    // কোনো connection fail হলে empty array return
+    return [];
+  }
 }
 
 export async function generateMetadata({
