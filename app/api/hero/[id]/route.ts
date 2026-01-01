@@ -5,12 +5,13 @@ import Hero from "@/models/heroModel";
 // GET a specific hero by ID
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await dbConnect();
 
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
+
     const hero = await Hero.findById(id);
     if (!hero) {
       return NextResponse.json(
@@ -18,6 +19,7 @@ export async function GET(
         { status: 404 }
       );
     }
+
     return NextResponse.json({ success: true, data: hero });
   } catch (error) {
     return NextResponse.json(
@@ -30,23 +32,26 @@ export async function GET(
 // UPDATE a specific hero by ID
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await dbConnect();
 
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
     const body = await request.json();
+
     const hero = await Hero.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
+
     if (!hero) {
       return NextResponse.json(
         { success: false, message: "Hero not found" },
         { status: 404 }
       );
     }
+
     return NextResponse.json({ success: true, data: hero });
   } catch (error) {
     return NextResponse.json(
@@ -59,12 +64,13 @@ export async function PUT(
 // DELETE a specific hero by ID
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   await dbConnect();
 
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
+
     const deletedHero = await Hero.findByIdAndDelete(id);
     if (!deletedHero) {
       return NextResponse.json(
@@ -72,7 +78,8 @@ export async function DELETE(
         { status: 404 }
       );
     }
-    return NextResponse.json({ success: true, data: {} });
+
+    return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
       { success: false, message: "Server error" },
