@@ -1,9 +1,4 @@
-import {
-  Zap,
-  Users,
-  Target,
-  Rocket,
-} from "lucide-react";
+import { Zap, Users, Target, Rocket } from "lucide-react";
 import { Metadata } from "next";
 import { ServiceCard } from "@/components/services";
 import { FAQSection, ProcessSection } from "@/components/sections";
@@ -65,8 +60,8 @@ export default async function ServicesPage() {
       <section className="py-20 bg-white">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <ServiceCard key={service._id} service={service} />
+            {services.map((service, index) => (
+              <ServiceCard key={index} service={service} />
             ))}
           </div>
         </div>
