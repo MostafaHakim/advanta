@@ -1,21 +1,11 @@
-"use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  Calendar,
-  User,
-  Clock,
-  TrendingUp,
-  MessageSquare,
-  BookOpen,
-} from "lucide-react";
+import { Metadata } from "next";
 import { BlogCard, NewsletterSection } from "@/components/blog";
 
 interface BlogPost {
-  id: string;
+  _id: string;
   title: string;
+  slug: string;
   image: string;
   category: string;
   date: string;
@@ -25,17 +15,24 @@ interface BlogPost {
   excerpt: string;
 }
 
-export default function BlogPage() {
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+import { getBaseUrl } from "@/lib/url";
+// ... (rest of the file)
+async function getBlogs() {
+  const res = await fetch(`${getBaseUrl()}/api/blogs`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return data.data;
+}
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      const res = await fetch("/api/blogs");
-      const data = await res.json();
-      setBlogPosts(data);
-    };
-    fetchBlogs();
-  }, []);
+export const metadata: Metadata = {
+  title: "Our Blog | Latest Trends in Digital Marketing",
+  description:
+    "Explore our blog for the latest trends, tips, and insights in digital marketing. Our experts share their knowledge on SEO, content marketing, social media, and more to help you stay ahead of the curve.",
+};
+
+export default async function BlogPage() {
+  const blogPosts: BlogPost[] = await getBlogs();
 
   const featuredPosts = blogPosts.filter((post) => post.featured);
   const recentPosts = blogPosts.slice(2);
@@ -107,7 +104,7 @@ export default function BlogPage() {
           <div className="grid lg:grid-cols-2 gap-8">
             {featuredPosts.map((post) => (
               <div
-                key={post.id}
+                key={post._id}
                 className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
               >
                 <div className="relative h-96">
@@ -171,7 +168,7 @@ export default function BlogPage() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 {recentPosts.map((post) => (
-                  <BlogCard key={post.id} post={post} />
+                  <BlogCard key={post._id} post={post} />
                 ))}
               </div>
 
@@ -233,8 +230,8 @@ export default function BlogPage() {
                 <div className="space-y-4">
                   {blogPosts.slice(0, 3).map((post) => (
                     <Link
-                      key={post.id}
-                      href={`/blog/${post.id}`}
+                      key={post._id}
+                      href={`/blog/${post.slug}`}
                       className="group flex items-start gap-3 p-2 rounded-lg hover:bg-blue-50 transition-colors"
                     >
                       <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">

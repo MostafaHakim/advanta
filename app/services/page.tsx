@@ -1,24 +1,16 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import {
-  Search,
-  TrendingUp,
-  MessageSquare,
-  Code,
-  PenTool,
-  BarChart,
   Zap,
   Users,
   Target,
   Rocket,
 } from "lucide-react";
+import { Metadata } from "next";
 import { ServiceCard } from "@/components/services";
-
 import { FAQSection, ProcessSection } from "@/components/sections";
 
 interface Service {
-  id: string;
+  _id: string;
+  slug: string;
   title: string;
   description: string;
   features: string[];
@@ -26,19 +18,24 @@ interface Service {
   color: string;
 }
 
-export default function ServicesPage() {
-  const [services, setServices] = useState<Service[]>([]);
+import { getBaseUrl } from "@/lib/url";
+// ... (rest of the file)
+async function getServices() {
+  const res = await fetch(`${getBaseUrl()}/api/services`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return data.data;
+}
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      const res = await fetch("/api/services");
-      const data = await res.json();
-      if (data && Array.isArray(data.data)) {
-        setServices(data.data);
-      }
-    };
-    fetchServices();
-  }, []);
+export const metadata: Metadata = {
+  title: "Our Services | Comprehensive Digital Marketing Solutions",
+  description:
+    "Discover our comprehensive digital marketing services designed to grow your business. From SEO and content marketing to social media and PPC, we have the expertise to deliver results.",
+};
+
+export default async function ServicesPage() {
+  const services: Service[] = await getServices();
 
   return (
     <>
@@ -69,7 +66,7 @@ export default function ServicesPage() {
         <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard key={service._id} service={service} />
             ))}
           </div>
         </div>

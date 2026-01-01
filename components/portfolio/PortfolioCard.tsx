@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link"; // Import Link
 import {
   ExternalLink,
   Github,
@@ -13,7 +14,8 @@ import {
 } from "lucide-react";
 
 interface PortfolioItem {
-  id: string;
+  _id: string; // Changed from id to _id
+  slug: string; // Added slug
   title: string;
   category: string;
   client: string;
@@ -36,19 +38,20 @@ interface PortfolioCardProps {
 
 const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
   const iconMap: { [key: string]: ReactNode } = {
-      TrendingUp: <TrendingUp className="w-4 h-4" />,
-      Users: <Users className="w-4 h-4" />,
-      Target: <Target className="w-4 h-4" />,
-      DollarSign: <DollarSign className="w-4 h-4" />,
-    };
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ y: -5 }}
-        className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
-      >
+    TrendingUp: <TrendingUp className="w-4 h-4" />,
+    Users: <Users className="w-4 h-4" />,
+    Target: <Target className="w-4 h-4" />,
+    DollarSign: <DollarSign className="w-4 h-4" />,
+  };
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -5 }}
+      className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
+    >
+      <Link href={`/portfolio/${item.slug}`}>
         {/* Image Container */}
         <div className="relative h-64 overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
@@ -57,7 +60,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
               {item.category}
             </span>
           </div>
-  
+
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-blue-600/80 to-purple-600/80 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="flex gap-4">
@@ -67,6 +70,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 bg-white rounded-full hover:bg-blue-50 transition-colors transform hover:scale-110"
+                  onClick={(e) => e.stopPropagation()} // Prevent parent Link click
                 >
                   <ExternalLink className="w-5 h-5" />
                 </a>
@@ -77,6 +81,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 bg-white rounded-full hover:bg-blue-50 transition-colors transform hover:scale-110"
+                  onClick={(e) => e.stopPropagation()} // Prevent parent Link click
                 >
                   <Github className="w-5 h-5" />
                 </a>
@@ -84,7 +89,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
             </div>
           </div>
         </div>
-  
+
         {/* Content */}
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
@@ -97,17 +102,17 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
               </span>
             )}
           </div>
-  
+
           <p className="text-gray-600 text-sm mb-4 line-clamp-2">
             {item.description}
           </p>
-  
+
           {/* Client Info */}
           <div className="flex items-center text-sm text-gray-500 mb-4">
             <span className="font-medium">Client:</span>
             <span className="ml-2">{item.client}</span>
           </div>
-  
+
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
             {item.tags.map((tag) => (
@@ -119,7 +124,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
               </span>
             ))}
           </div>
-  
+
           {/* Results */}
           {item.results && (
             <div className="pt-4 border-t border-gray-100">
@@ -143,14 +148,18 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
               </div>
             </div>
           )}
-  
+
           {/* View Details */}
-          <button className="w-full mt-6 py-2 text-blue-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors">
+          <Link
+            href={`/portfolio/${item.slug}`}
+            className="w-full mt-6 py-2 text-blue-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors block text-center"
+          >
             View Case Study
-          </button>
+          </Link>
         </div>
-      </motion.div>
-    );
-  };
+      </Link>
+    </motion.div>
+  );
+};
 
 export default PortfolioCard;

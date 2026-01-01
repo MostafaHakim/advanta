@@ -1,20 +1,11 @@
-"use client";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import {
-  ExternalLink,
-  Github,
-  Filter,
-  TrendingUp,
-  Users,
-  Target,
-  DollarSign,
-} from "lucide-react";
-import { PortfolioFilter, PortfolioCard } from "@/components/portfolio";
+
+import { Metadata } from "next";
+import { PortfolioClientWrapper } from "@/components/portfolio";
+import { getBaseUrl } from "@/lib/url"; // Import getBaseUrl
 
 interface PortfolioItem {
-  id: string;
+  _id: string;
+  slug: string;
   title: string;
   description: string;
   category: string;
@@ -30,28 +21,23 @@ interface PortfolioItem {
   githubUrl?: string;
 }
 
-export default function PortfolioPage() {
-  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [showAll, setShowAll] = useState(false);
+async function getProjects() {
+  const res = await fetch(`${getBaseUrl()}/api/projects`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return data.data;
+}
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const res = await fetch("/api/projects");
-      const data = await res.json();
-      if (data && Array.isArray(data.data)) {
-        setPortfolioItems(data.data);
-      }
-    };
-    fetchProjects();
-  }, []);
+export const metadata: Metadata = {
+  title: "Our Portfolio | Successful Digital Marketing Campaigns",
+  description:
+    "Explore our portfolio of successful digital marketing campaigns and web development projects. See how we've helped businesses like yours achieve their goals with our expert services.",
+};
 
-  const filteredItems =
-    activeCategory === "all"
-      ? portfolioItems
-      : portfolioItems.filter((item) => item.category === activeCategory);
+export default async function PortfolioPage() {
+  const portfolioItems: PortfolioItem[] = await getProjects();
 
-  const displayItems = showAll ? filteredItems : filteredItems.slice(0, 6);
   const categories = [
     { id: "all", name: "All Projects" },
     { id: "web-development", name: "Web Development" },
@@ -61,6 +47,7 @@ export default function PortfolioPage() {
     { id: "content-marketing", name: "Content Marketing" },
     { id: "design", name: "Design" },
   ];
+
   return (
     <>
       {/* Hero Section */}
@@ -102,33 +89,10 @@ export default function PortfolioPage() {
       {/* Portfolio Section */}
       <section className="py-20 bg-white">
         <div className="container-custom">
-          {/* Filter */}
-          <PortfolioFilter
+          <PortfolioClientWrapper
+            initialPortfolioItems={portfolioItems}
             categories={categories}
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
           />
-
-          {/* Portfolio Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="wait">
-              {displayItems.map((item, index) => (
-                <PortfolioCard key={item.id} item={item} index={index} />
-              ))}
-            </AnimatePresence>
-          </div>
-
-          {/* Load More */}
-          {filteredItems.length > 6 && !showAll && (
-            <div className="text-center mt-12">
-              <button
-                onClick={() => setShowAll(true)}
-                className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors"
-              >
-                Load More Projects
-              </button>
-            </div>
-          )}
 
           {/* Featured Projects */}
           <div className="mt-20">
@@ -140,7 +104,7 @@ export default function PortfolioPage() {
                 .filter((item) => item.featured)
                 .map((item) => (
                   <div
-                    key={item.id}
+                    key={item._id}
                     className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl overflow-hidden"
                   >
                     <div className="p-8">

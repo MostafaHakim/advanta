@@ -6,7 +6,8 @@ import Link from "next/link";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 
 interface BlogPost {
-  id: string;
+  _id: string;
+  slug: string;
   title: string;
   excerpt: string;
   category: string;
@@ -60,7 +61,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
         </div>
 
         <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-          <Link href={`/blog/${post.id}`}>{post.title}</Link>
+          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h3>
 
         <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
@@ -75,7 +76,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           </div>
           {/* newe */}
           <Link
-            href={`/blog/${post.id}`}
+            href={`/blog/${post.slug}`}
             className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
           >
             Read More
