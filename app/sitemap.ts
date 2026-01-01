@@ -16,28 +16,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await Project.find({}, "slug updatedAt").lean();
   const services = await Service.find({}, "slug updatedAt").lean();
 
-  const blogUrls = blogs.map((blog) => ({
+  const blogUrls: MetadataRoute.Sitemap = blogs.map((blog: any) => ({
     url: `${baseUrl}/blog/${blog.slug}`,
-    lastModified: blog.updatedAt || new Date(),
+    lastModified: blog.updatedAt ?? new Date(),
     changeFrequency: "daily",
     priority: 0.8,
   }));
 
-  const projectUrls = projects.map((project) => ({
+  const projectUrls: MetadataRoute.Sitemap = projects.map((project: any) => ({
     url: `${baseUrl}/portfolio/${project.slug}`,
-    lastModified: project.updatedAt || new Date(),
+    lastModified: project.updatedAt ?? new Date(),
     changeFrequency: "weekly",
     priority: 0.7,
   }));
 
-  const serviceUrls = services.map((service) => ({
+  const serviceUrls: MetadataRoute.Sitemap = services.map((service: any) => ({
     url: `${baseUrl}/services/${service.slug}`,
-    lastModified: service.updatedAt || new Date(),
+    lastModified: service.updatedAt ?? new Date(),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const staticUrls = [
+  const staticUrls: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
