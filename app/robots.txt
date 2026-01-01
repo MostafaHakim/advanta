@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nextmarketing.vercel.app/sitemap.xml
+Sitemap: https://advanta-three.vercel.app/sitemap.xml
