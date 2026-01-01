@@ -1,4 +1,3 @@
-
 import { Metadata } from "next";
 import { BlogCard, NewsletterSection } from "@/components/blog";
 
@@ -16,6 +15,9 @@ interface BlogPost {
 }
 
 import { getBaseUrl } from "@/lib/url";
+import Link from "next/link";
+import Image from "next/image";
+import { BookOpen, Calendar, Clock, TrendingUp, User } from "lucide-react";
 // ... (rest of the file)
 async function getBlogs() {
   const res = await fetch(`${getBaseUrl()}/api/blogs`, {
