@@ -645,7 +645,7 @@ export default async function ServicePage({
   return (
     <>
       <ServiceDetail service={service} />
-      <RelatedServices currentServiceId={service.id} />
+      <RelatedServices currentServiceId={service._id} />
       <CTASection />
     </>
   );
