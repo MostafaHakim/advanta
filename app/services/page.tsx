@@ -17,8 +17,17 @@ import { ServiceCard } from "@/components/services";
 
 import { FAQSection, ProcessSection } from "@/components/sections";
 
+interface Service {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  benefits: string[];
+  color: string;
+}
+
 export default function ServicesPage() {
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
     const fetchServices = async () => {

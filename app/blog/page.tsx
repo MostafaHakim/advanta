@@ -13,8 +13,20 @@ import {
 } from "lucide-react";
 import { BlogCard, NewsletterSection } from "@/components/blog";
 
+interface BlogPost {
+  id: string;
+  title: string;
+  image: string;
+  category: string;
+  date: string;
+  author: string;
+  readTime: string;
+  featured: boolean;
+  excerpt: string;
+}
+
 export default function BlogPage() {
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     const fetchBlogs = async () => {

@@ -13,8 +13,25 @@ import {
 } from "lucide-react";
 import { PortfolioFilter, PortfolioCard } from "@/components/portfolio";
 
+interface PortfolioItem {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  client: string;
+  featured: boolean;
+  results: {
+    value: string;
+    label: string;
+  }[];
+  image: string;
+  tags: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+}
+
 export default function PortfolioPage() {
-  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
   const [activeCategory, setActiveCategory] = useState("all");
   const [showAll, setShowAll] = useState(false);
 

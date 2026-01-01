@@ -1,5 +1,4 @@
-import type { NextConfig } from "next";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
@@ -9,11 +8,6 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-  },
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "1mb",
-    },
   },
 };
 

@@ -4,8 +4,17 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+interface HeroData {
+  success: boolean;
+  data: {
+    titleFirst: string;
+    titleLast: string;
+    subTitle: string;
+  }[];
+}
+
 const HeroSection = () => {
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState<HeroData | null>(null);
 
   React.useEffect(() => {
     // Fetch hero data from the API

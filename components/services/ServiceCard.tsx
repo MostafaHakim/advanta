@@ -1,12 +1,10 @@
-"use client";
-
+import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Search, TrendingUp, MessageSquare, Code, PenTool, BarChart } from "lucide-react";
 
 interface Service {
   id: string;
-  icon: React.ReactNode;
   title: string;
   description: string;
   features: string[];
@@ -19,6 +17,14 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  const iconMap: { [key: string]: ReactNode } = {
+    "SEO": <Search className="w-6 h-6" />,
+    "Social Media": <MessageSquare className="w-6 h-6" />,
+    "Web Development": <Code className="w-6 h-6" />,
+    "Content Marketing": <PenTool className="w-6 h-6" />,
+    "PPC": <BarChart className="w-6 h-6" />,
+    "AI": <TrendingUp className="w-6 h-6" />,
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -32,7 +38,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mr-4">
-              {service.icon}
+              {iconMap[service.title]}
             </div>
             <h3 className="text-xl font-bold">{service.title}</h3>
           </div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 
 interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   category: string;
