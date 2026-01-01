@@ -3,8 +3,25 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
-
+import React from "react";
 const HeroSection = () => {
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    // Fetch hero data from the API
+    const fetchHeroData = async () => {
+      try {
+        const res = await fetch("/api/hero");
+        const heroData = await res.json();
+        setData(heroData);
+      } catch (error) {
+        console.error("Failed to fetch hero data", error);
+      }
+    };
+
+    fetchHeroData();
+  }, []);
+  console.log("Hero Section Data:", data);
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden mt-20 md:-mt-10">
       {/* Background Gradient */}
@@ -29,7 +46,7 @@ const HeroSection = () => {
               </span>
             </div> */}
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            {/* <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
               <span className="block">Transform Your</span>
               <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Digital Presence
@@ -40,7 +57,22 @@ const HeroSection = () => {
               We help businesses grow online with cutting-edge digital marketing
               strategies, SEO optimization, and result-driven campaigns that
               deliver measurable ROI.
-            </p>
+            </p> */}
+
+            {data && data.success && data.data.length > 0 && (
+              <>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                  <span className="block">{data.data[0].titleFirst}</span>
+                  <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    {data.data[0].titleLast}
+                  </span>
+                </h1>
+
+                <p className="text-xl text-gray-600 mb-8 max-w-2xl">
+                  {data.data[0].subTitle}
+                </p>
+              </>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link

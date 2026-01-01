@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
@@ -14,232 +13,21 @@ import {
 } from "lucide-react";
 import { PortfolioFilter, PortfolioCard } from "@/components/portfolio";
 
-const portfolioItems = [
-  {
-    id: 1,
-    title: "E-commerce Platform Redesign",
-    category: "web-development",
-    client: "FashionHub",
-    description:
-      "Complete redesign and optimization of fashion e-commerce platform resulting in 35% increase in conversions.",
-    image: "/api/placeholder/600/400",
-    tags: ["React", "Next.js", "E-commerce", "UI/UX"],
-    results: [
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Conversion Rate",
-        value: "+35%",
-      },
-      {
-        icon: <DollarSign className="w-4 h-4" />,
-        label: "Revenue Growth",
-        value: "+200%",
-      },
-      {
-        icon: <Users className="w-4 h-4" />,
-        label: "User Engagement",
-        value: "+150%",
-      },
-    ],
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Global SEO Campaign",
-    category: "seo",
-    client: "TechCorp International",
-    description:
-      "International SEO strategy targeting 50+ countries with 300% organic traffic growth.",
-    image: "/api/placeholder/600/400",
-    tags: ["SEO", "International", "Content Strategy"],
-    results: [
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Organic Traffic",
-        value: "+300%",
-      },
-      {
-        icon: <Target className="w-4 h-4" />,
-        label: "Keyword Rankings",
-        value: "+250",
-      },
-      { icon: <DollarSign className="w-4 h-4" />, label: "ROI", value: "5x" },
-    ],
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Social Media Transformation",
-    category: "social-media",
-    client: "Wellness Brand",
-    description:
-      "Complete social media overhaul resulting in 50K+ engaged followers.",
-    image: "/api/placeholder/600/400",
-    tags: ["Instagram", "Facebook", "Content Creation"],
-    results: [
-      {
-        icon: <Users className="w-4 h-4" />,
-        label: "Followers Growth",
-        value: "+50K",
-      },
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Engagement Rate",
-        value: "8.5%",
-      },
-      {
-        icon: <DollarSign className="w-4 h-4" />,
-        label: "Sales from Social",
-        value: "+300%",
-      },
-    ],
-  },
-  {
-    id: 4,
-    title: "PPC Optimization",
-    category: "ppc",
-    client: "SaaS Company",
-    description:
-      "Google Ads campaign optimization reducing CPA by 40% while increasing conversions.",
-    image: "/api/placeholder/600/400",
-    tags: ["Google Ads", "Conversion Tracking", "A/B Testing"],
-    results: [
-      {
-        icon: <DollarSign className="w-4 h-4" />,
-        label: "Cost Reduction",
-        value: "-40%",
-      },
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Conversions",
-        value: "+200%",
-      },
-      { icon: <Target className="w-4 h-4" />, label: "ROAS", value: "8x" },
-    ],
-  },
-  {
-    id: 5,
-    title: "Content Marketing Strategy",
-    category: "content-marketing",
-    client: "B2B Software",
-    description:
-      "Comprehensive content strategy generating 10K monthly qualified leads.",
-    image: "/api/placeholder/600/400",
-    tags: ["Blogging", "Whitepapers", "Case Studies"],
-    results: [
-      {
-        icon: <Users className="w-4 h-4" />,
-        label: "Monthly Leads",
-        value: "10K",
-      },
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Website Traffic",
-        value: "+400%",
-      },
-      {
-        icon: <Target className="w-4 h-4" />,
-        label: "Conversion Rate",
-        value: "15%",
-      },
-    ],
-  },
-  {
-    id: 6,
-    title: "Mobile App Development",
-    category: "web-development",
-    client: "Fitness Startup",
-    description:
-      "Native mobile app with advanced features and seamless user experience.",
-    image: "/api/placeholder/600/400",
-    tags: ["React Native", "Mobile", "UI/UX"],
-    results: [
-      {
-        icon: <Users className="w-4 h-4" />,
-        label: "App Downloads",
-        value: "100K+",
-      },
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "User Retention",
-        value: "85%",
-      },
-      {
-        icon: <Target className="w-4 h-4" />,
-        label: "App Store Rating",
-        value: "4.8/5",
-      },
-    ],
-  },
-  {
-    id: 7,
-    title: "Brand Identity Redesign",
-    category: "design",
-    client: "Healthcare Provider",
-    description:
-      "Complete brand overhaul with new visual identity and messaging.",
-    image: "/api/placeholder/600/400",
-    tags: ["Branding", "Logo Design", "Visual Identity"],
-    results: [
-      {
-        icon: <Users className="w-4 h-4" />,
-        label: "Brand Recognition",
-        value: "+150%",
-      },
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Customer Trust",
-        value: "+200%",
-      },
-      {
-        icon: <DollarSign className="w-4 h-4" />,
-        label: "Market Share",
-        value: "+25%",
-      },
-    ],
-  },
-  {
-    id: 8,
-    title: "Email Marketing Automation",
-    category: "content-marketing",
-    client: "E-commerce Store",
-    description:
-      "Automated email marketing funnel with personalized customer journeys.",
-    image: "/api/placeholder/600/400",
-    tags: ["Email Marketing", "Automation", "Personalization"],
-    results: [
-      {
-        icon: <TrendingUp className="w-4 h-4" />,
-        label: "Open Rate",
-        value: "45%",
-      },
-      {
-        icon: <Target className="w-4 h-4" />,
-        label: "Click-Through Rate",
-        value: "18%",
-      },
-      {
-        icon: <DollarSign className="w-4 h-4" />,
-        label: "Revenue Generated",
-        value: "$500K+",
-      },
-    ],
-  },
-];
-
-const categories = [
-  { id: "all", name: "All Projects" },
-  { id: "web-development", name: "Web Development" },
-  { id: "seo", name: "SEO" },
-  { id: "social-media", name: "Social Media" },
-  { id: "ppc", name: "PPC" },
-  { id: "content-marketing", name: "Content Marketing" },
-  { id: "design", name: "Design" },
-];
-
 export default function PortfolioPage() {
+  const [portfolioItems, setPortfolioItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+      if (data && Array.isArray(data.data)) {
+        setPortfolioItems(data.data);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const filteredItems =
     activeCategory === "all"
@@ -247,7 +35,15 @@ export default function PortfolioPage() {
       : portfolioItems.filter((item) => item.category === activeCategory);
 
   const displayItems = showAll ? filteredItems : filteredItems.slice(0, 6);
-
+  const categories = [
+    { id: "all", name: "All Projects" },
+    { id: "web-development", name: "Web Development" },
+    { id: "seo", name: "SEO" },
+    { id: "social-media", name: "Social Media" },
+    { id: "ppc", name: "PPC" },
+    { id: "content-marketing", name: "Content Marketing" },
+    { id: "design", name: "Design" },
+  ];
   return (
     <>
       {/* Hero Section */}

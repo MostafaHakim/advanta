@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,120 +13,30 @@ import {
 } from "lucide-react";
 import { BlogCard, NewsletterSection } from "@/components/blog";
 
-export const metadata = {
-  title: "Blog | Digital Marketing Insights & Tips",
-  description:
-    "Latest digital marketing trends, tips, and insights from industry experts.",
-};
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Future of SEO in 2024: Trends to Watch",
-    excerpt:
-      "Discover the latest SEO trends and strategies that will dominate search engine rankings in the coming year.",
-    category: "SEO",
-    author: "Sarah Johnson",
-    date: "Dec 15, 2023",
-    readTime: "8 min read",
-    image: "/api/placeholder/600/400",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "How AI is Transforming Digital Marketing",
-    excerpt:
-      "Explore how artificial intelligence is revolutionizing marketing strategies and customer experiences.",
-    category: "AI",
-    author: "Michael Chen",
-    date: "Dec 10, 2023",
-    readTime: "10 min read",
-    image: "/api/placeholder/600/400",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Social Media Algorithm Changes You Need to Know",
-    excerpt:
-      "Stay ahead of the curve with the latest social media algorithm updates and best practices.",
-    category: "Social Media",
-    author: "Emma Rodriguez",
-    date: "Dec 5, 2023",
-    readTime: "6 min read",
-    image: "/api/placeholder/600/400",
-  },
-  {
-    id: 4,
-    title: "Content Marketing Strategy for B2B Companies",
-    excerpt:
-      "Learn how to create a successful content marketing strategy for B2B lead generation.",
-    category: "Content Marketing",
-    author: "David Wilson",
-    date: "Nov 28, 2023",
-    readTime: "12 min read",
-    image: "/api/placeholder/600/400",
-  },
-  {
-    id: 5,
-    title: "PPC Campaign Optimization Techniques",
-    excerpt:
-      "Advanced strategies to optimize your PPC campaigns for maximum ROI.",
-    category: "PPC",
-    author: "Lisa Anderson",
-    date: "Nov 20, 2023",
-    readTime: "7 min read",
-    image: "/api/placeholder/600/400",
-  },
-  {
-    id: 6,
-    title: "Website Performance & Core Web Vitals",
-    excerpt:
-      "Understanding and optimizing Core Web Vitals for better SEO and user experience.",
-    category: "Web Development",
-    author: "Alex Turner",
-    date: "Nov 15, 2023",
-    readTime: "9 min read",
-    image: "/api/placeholder/600/400",
-  },
-  {
-    id: 7,
-    title: "Email Marketing Best Practices for 2024",
-    excerpt:
-      "Create effective email marketing campaigns that convert in the new year.",
-    category: "Email Marketing",
-    author: "Jessica Lee",
-    date: "Nov 10, 2023",
-    readTime: "5 min read",
-    image: "/api/placeholder/600/400",
-  },
-  {
-    id: 8,
-    title: "Building a Brand Voice That Connects",
-    excerpt:
-      "Develop a consistent brand voice that resonates with your target audience.",
-    category: "Branding",
-    author: "Robert Kim",
-    date: "Nov 5, 2023",
-    readTime: "11 min read",
-    image: "/api/placeholder/600/400",
-  },
-];
-
-const categories = [
-  { name: "All", count: 32 },
-  { name: "SEO", count: 12 },
-  { name: "Social Media", count: 8 },
-  { name: "Content Marketing", count: 10 },
-  { name: "PPC", count: 6 },
-  { name: "Web Development", count: 9 },
-  { name: "AI", count: 7 },
-  { name: "Email Marketing", count: 5 },
-];
-
 export default function BlogPage() {
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const res = await fetch("/api/blogs");
+      const data = await res.json();
+      setBlogPosts(data);
+    };
+    fetchBlogs();
+  }, []);
+
   const featuredPosts = blogPosts.filter((post) => post.featured);
   const recentPosts = blogPosts.slice(2);
-
+  const categories = [
+    { name: "All", count: 32 },
+    { name: "SEO", count: 12 },
+    { name: "Social Media", count: 8 },
+    { name: "Content Marketing", count: 10 },
+    { name: "PPC", count: 6 },
+    { name: "Web Development", count: 9 },
+    { name: "AI", count: 7 },
+    { name: "Email Marketing", count: 5 },
+  ];
   return (
     <>
       {/* Hero Section */}

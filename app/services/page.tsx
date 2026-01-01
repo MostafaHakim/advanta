@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import {
   Search,
   TrendingUp,
@@ -14,148 +17,20 @@ import { ServiceCard } from "@/components/services";
 
 import { FAQSection, ProcessSection } from "@/components/sections";
 
-export const metadata = {
-  title: "Services | Digital Marketing Solutions",
-  description:
-    "Comprehensive digital marketing services including SEO, PPC, Social Media, Web Development, and more.",
-};
-
-const services = [
-  {
-    id: "seo",
-    icon: <Search className="w-8 h-8" />,
-    title: "SEO Optimization",
-    description:
-      "Improve your search engine rankings and drive organic traffic with our comprehensive SEO strategies.",
-    features: [
-      "Keyword Research & Analysis",
-      "On-page SEO Optimization",
-      "Technical SEO Audit",
-      "Link Building Strategy",
-      "Local SEO Optimization",
-      "Content Optimization",
-    ],
-    benefits: [
-      "Increased Organic Traffic",
-      "Higher Search Rankings",
-      "Improved User Experience",
-      "Better Conversion Rates",
-    ],
-    color: "from-blue-500 to-blue-600",
-  },
-  {
-    id: "ppc",
-    icon: <TrendingUp className="w-8 h-8" />,
-    title: "PPC Advertising",
-    description:
-      "Drive immediate results with targeted pay-per-click campaigns across Google, Facebook, and more.",
-    features: [
-      "Google Ads Management",
-      "Facebook/Instagram Ads",
-      "LinkedIn Advertising",
-      "Display Network Campaigns",
-      "Remarketing Strategies",
-      "Conversion Tracking",
-    ],
-    benefits: [
-      "Immediate Traffic Boost",
-      "Targeted Audience Reach",
-      "Measurable ROI",
-      "Flexible Budget Control",
-    ],
-    color: "from-purple-500 to-purple-600",
-  },
-  {
-    id: "social-media",
-    icon: <MessageSquare className="w-8 h-8" />,
-    title: "Social Media Marketing",
-    description:
-      "Build brand awareness and engage your audience across all major social media platforms.",
-    features: [
-      "Social Media Strategy",
-      "Content Creation & Scheduling",
-      "Community Management",
-      "Influencer Marketing",
-      "Paid Social Advertising",
-      "Analytics & Reporting",
-    ],
-    benefits: [
-      "Increased Brand Awareness",
-      "Higher Engagement Rates",
-      "Community Building",
-      "Direct Customer Feedback",
-    ],
-    color: "from-pink-500 to-pink-600",
-  },
-  {
-    id: "web-development",
-    icon: <Code className="w-8 h-8" />,
-    title: "Web Development",
-    description:
-      "Build fast, responsive, and conversion-optimized websites that drive business growth.",
-    features: [
-      "Custom Website Development",
-      "E-commerce Solutions",
-      "WordPress Development",
-      "React/Next.js Applications",
-      "Performance Optimization",
-      "Ongoing Maintenance",
-    ],
-    benefits: [
-      "Improved User Experience",
-      "Faster Loading Speeds",
-      "Mobile Responsive",
-      "SEO Friendly Structure",
-    ],
-    color: "from-emerald-500 to-emerald-600",
-  },
-  {
-    id: "content-marketing",
-    icon: <PenTool className="w-8 h-8" />,
-    title: "Content Marketing",
-    description:
-      "Create compelling content that engages your audience and drives conversions.",
-    features: [
-      "Content Strategy Development",
-      "Blog Writing & Editing",
-      "Video Production",
-      "Infographic Design",
-      "Email Marketing",
-      "Content Distribution",
-    ],
-    benefits: [
-      "Increased Brand Authority",
-      "Better Search Rankings",
-      "Higher Engagement",
-      "Lead Generation",
-    ],
-    color: "from-orange-500 to-orange-600",
-  },
-  {
-    id: "analytics",
-    icon: <BarChart className="w-8 h-8" />,
-    title: "Analytics & Reporting",
-    description:
-      "Make data-driven decisions with comprehensive analytics and insightful reporting.",
-    features: [
-      "Google Analytics Setup",
-      "Custom Dashboard Creation",
-      "Conversion Tracking",
-      "Competitor Analysis",
-      "ROI Measurement",
-      "Monthly Performance Reports",
-    ],
-    benefits: [
-      "Data-Driven Decisions",
-      "Performance Insights",
-      "ROI Tracking",
-      "Strategy Optimization",
-    ],
-    color: "from-indigo-500 to-indigo-600",
-  },
-];
-
 export default function ServicesPage() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      const res = await fetch("/api/services");
+      const data = await res.json();
+      if (data && Array.isArray(data.data)) {
+        setServices(data.data);
+      }
+    };
+    fetchServices();
+  }, []);
+
   return (
     <>
       {/* Hero Section */}

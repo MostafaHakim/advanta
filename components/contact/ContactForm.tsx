@@ -78,17 +78,17 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
     setErrors({});
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // In real implementation, you would call your API here
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
-
-      // if (!response.ok) throw new Error('Failed to submit')
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
 
       onSuccess();
 
