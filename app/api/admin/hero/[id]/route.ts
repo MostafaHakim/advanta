@@ -4,12 +4,13 @@ import Hero from "@/models/heroModel";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   await dbConnect();
 
   try {
-    const hero = await Hero.findById(params.id);
+    const hero = await Hero.findById(id);
     if (!hero) {
       return NextResponse.json(
         { success: false, message: "Hero not found" },
@@ -27,18 +28,19 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   await dbConnect();
 
   console.log("--- ADMIN HERO PUT HANDLER ---");
-  console.log("Received ID from params:", params.id);
+  console.log("Received ID from params:", id);
 
   try {
     const body = await request.json();
     console.log("Received body:", body);
 
-    const hero = await Hero.findByIdAndUpdate(params.id, body, {
+    const hero = await Hero.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
@@ -46,7 +48,7 @@ export async function PUT(
     console.log("Result from findByIdAndUpdate:", hero);
 
     if (!hero) {
-      console.log("Hero not found in DB for ID:", params.id);
+      console.log("Hero not found in DB for ID:", id);
       return NextResponse.json(
         { success: false, message: "Hero not found" },
         { status: 404 }
@@ -66,12 +68,13 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   await dbConnect();
 
   try {
-    const deletedHero = await Hero.findByIdAndDelete(params.id);
+    const deletedHero = await Hero.findByIdAndDelete(id);
     if (!deletedHero) {
       return NextResponse.json(
         { success: false, message: "Hero not found" },
