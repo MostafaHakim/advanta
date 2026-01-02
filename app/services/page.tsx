@@ -13,14 +13,16 @@ interface Service {
   color: string;
 }
 
-import { getBaseUrl } from "@/lib/url";
-// ... (rest of the file)
 async function getServices() {
-  const res = await fetch(`/api/services`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services`, {
     cache: "no-store",
   });
-  const data = await res.json();
-  return data.data;
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch services");
+  }
+
+  return (await res.json()).data;
 }
 
 export const metadata: Metadata = {

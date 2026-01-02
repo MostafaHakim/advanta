@@ -30,7 +30,7 @@ const HeroSection = () => {
 
     fetchHeroData();
   }, []);
-  console.log("Hero Section Data:", data);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden mt-20 md:-mt-10">
       {/* Background Gradient */}
