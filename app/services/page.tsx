@@ -16,7 +16,7 @@ interface Service {
 import { getBaseUrl } from "@/lib/url";
 // ... (rest of the file)
 async function getServices() {
-  const res = await fetch(`${getBaseUrl()}/api/services`, {
+  const res = await fetch(`/api/services`, {
     cache: "no-store",
   });
   const data = await res.json();
