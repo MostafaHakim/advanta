@@ -1,4 +1,3 @@
-
 import { Metadata } from "next";
 import { PortfolioClientWrapper } from "@/components/portfolio";
 import { getBaseUrl } from "@/lib/url"; // Import getBaseUrl
@@ -22,11 +21,15 @@ interface PortfolioItem {
 }
 
 async function getProjects() {
-  const res = await fetch(`${getBaseUrl()}/api/projects`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`, {
     cache: "no-store",
   });
-  const data = await res.json();
-  return data.data;
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch services");
+  }
+
+  return (await res.json()).data;
 }
 
 export const metadata: Metadata = {
