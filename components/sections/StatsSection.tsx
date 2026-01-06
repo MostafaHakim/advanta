@@ -44,7 +44,7 @@ const StatsSection = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-[#0a3d62] to-[#3c6382]  overflow-hidden relative">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
-      <div className="container-custom">
+      <div className="container-custom z-10 relative">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
