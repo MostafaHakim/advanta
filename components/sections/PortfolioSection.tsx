@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ExternalLink, Github, Filter } from "lucide-react";
+import { ExternalLink, Github, Filter, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const portfolioItems = [
@@ -12,7 +12,7 @@ const portfolioItems = [
     title: "E-commerce Platform",
     category: "Web Development",
     description: "Full-featured e-commerce platform with advanced analytics",
-    image: "/api/placeholder/600/400",
+    image: "https://picsum.photos/id/1/600/400",
     tags: ["React", "Next.js", "Node.js", "MongoDB"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
@@ -23,7 +23,7 @@ const portfolioItems = [
     title: "SEO Campaign - Tech Startup",
     category: "SEO",
     description: "Increased organic traffic by 300% in 6 months",
-    image: "/api/placeholder/600/400",
+    image: "https://picsum.photos/id/2/600/400",
     tags: ["SEO", "Content Strategy", "Link Building"],
     results: [
       { label: "Traffic Growth", value: "300%" },
@@ -35,7 +35,7 @@ const portfolioItems = [
     title: "Social Media Strategy",
     category: "Social Media",
     description: "Comprehensive social media campaign for lifestyle brand",
-    image: "/api/placeholder/600/400",
+    image: "https://picsum.photos/id/3/600/400",
     tags: ["Instagram", "Facebook", "Influencer Marketing"],
     results: [
       { label: "Engagement", value: "150%" },
@@ -47,7 +47,7 @@ const portfolioItems = [
     title: "PPC Advertising",
     category: "PPC",
     description: "Google Ads campaign with 5x ROI",
-    image: "/api/placeholder/600/400",
+    image: `https://picsum.photos/id/4/600/400`,
     tags: ["Google Ads", "Conversion Tracking", "A/B Testing"],
     results: [
       { label: "ROI", value: "5x" },
@@ -59,7 +59,7 @@ const portfolioItems = [
     title: "Content Marketing",
     category: "Content",
     description: "Blog content strategy generating 10K monthly visitors",
-    image: "/api/placeholder/600/400",
+    image: "https://picsum.photos/id/5/600/400",
     tags: ["Blog Writing", "SEO", "Content Strategy"],
     results: [
       { label: "Monthly Visitors", value: "10K" },
@@ -71,7 +71,7 @@ const portfolioItems = [
     title: "Brand Redesign",
     category: "Design",
     description: "Complete brand identity and website redesign",
-    image: "/api/placeholder/600/400",
+    image: "https://picsum.photos/id/6/600/400",
     tags: ["UI/UX", "Branding", "Web Design"],
     results: [
       { label: "User Engagement", value: "+200%" },
@@ -100,25 +100,31 @@ const PortfolioSection = () => {
       : portfolioItems.filter((item) => item.category === activeCategory);
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-gradient-to-b from-[#0F0F0F] to-[#3D6D17] text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
       <div className="container-custom">
-        {/* Header */}
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 mb-4">
-            <span className="w-2 h-2 bg-blue-600 rounded-full mr-2" />
-            <span className="text-sm font-medium">Our Portfolio</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/20 mb-6">
+            <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-purple-300">
+              Our Portfolio
+            </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Success <span className="text-blue-600">Stories</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            Featured{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+              Projects
+            </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover how we've helped businesses achieve remarkable results
-            through innovative digital solutions.
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Showcasing our success stories and innovative solutions that drove
+            measurable results for clients across various industries.
           </p>
         </motion.div>
 
@@ -128,17 +134,20 @@ const PortfolioSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-16"
         >
-          <Filter className="w-5 h-5 text-gray-500 mr-2" />
+          <div className="flex items-center gap-2 text-gray-400 mb-4 w-full justify-center">
+            <Filter className="w-5 h-5" />
+            <span className="text-sm font-medium">Filter by category</span>
+          </div>
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/25"
+                  : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               {category}
@@ -159,18 +168,27 @@ const PortfolioSection = () => {
             {filteredItems.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onMouseEnter={() => setHoveredItem(item.id)}
                 onMouseLeave={() => setHoveredItem(null)}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/10 to-transparent border border-white/10 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10"
               >
                 {/* Image Container */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium">
+                <div className="relative h-64 overflow-hidden rounded-t-2xl">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1.5 bg-black/60 backdrop-blur-sm rounded-full text-sm font-medium text-white border border-white/10">
                       {item.category}
                     </span>
                   </div>
@@ -179,7 +197,7 @@ const PortfolioSection = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hoveredItem === item.id ? 1 : 0 }}
-                    className="absolute inset-0 bg-gradient-to-t from-blue-600/80 to-purple-600/80 z-20 flex items-center justify-center transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-t from-purple-900/80 via-purple-900/40 to-transparent z-20 flex items-center justify-center transition-opacity duration-300"
                   >
                     <div className="flex gap-4">
                       {item.liveUrl && (
@@ -187,9 +205,9 @@ const PortfolioSection = () => {
                           href={item.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-3 bg-white rounded-full hover:bg-blue-50 transition-colors"
+                          className="p-4 bg-white rounded-full hover:bg-purple-50 transition-all duration-300 hover:scale-110 shadow-lg"
                         >
-                          <ExternalLink className="w-5 h-5" />
+                          <ExternalLink className="w-5 h-5 text-purple-600" />
                         </a>
                       )}
                       {item.githubUrl && (
@@ -197,44 +215,56 @@ const PortfolioSection = () => {
                           href={item.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-3 bg-white rounded-full hover:bg-blue-50 transition-colors"
+                          className="p-4 bg-white rounded-full hover:bg-purple-50 transition-all duration-300 hover:scale-110 shadow-lg"
                         >
-                          <Github className="w-5 h-5" />
+                          <Github className="w-5 h-5 text-purple-600" />
                         </a>
                       )}
                     </div>
                   </motion.div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 bg-white">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
+                {/* Content Section */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-300">
+                      {item.title}
+                    </h3>
+                    {item.featured && (
+                      <span className="px-2 py-1 text-xs font-bold bg-gradient-to-r from-purple-500 to-blue-500 rounded">
+                        FEATURED
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-gray-400 mb-4 leading-relaxed">
+                    {item.description}
+                  </p>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                        className="px-3 py-1 bg-white/5 text-purple-300 rounded-lg text-sm font-medium border border-white/5"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  {/* Results */}
+                  {/* Results Section */}
                   {item.results && (
-                    <div className="pt-4 border-t border-gray-100">
+                    <div className="pt-6 border-t border-white/10">
                       <div className="grid grid-cols-2 gap-4">
                         {item.results.map((result, idx) => (
-                          <div key={idx} className="text-center">
-                            <div className="text-2xl font-bold text-blue-600">
+                          <div
+                            key={idx}
+                            className="text-center p-3 bg-gradient-to-br from-white/5 to-transparent rounded-xl border border-white/5"
+                          >
+                            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                               {result.value}
                             </div>
-                            <div className="text-sm text-gray-600">
+                            <div className="text-sm text-gray-400 mt-1">
                               {result.label}
                             </div>
                           </div>
@@ -248,33 +278,40 @@ const PortfolioSection = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* View More */}
+        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="text-center mt-12"
+          className="text-center mt-20"
         >
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-all duration-300 group"
-          >
-            View All Projects
-            <svg
-              className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Link>
+          <div className="inline-flex flex-col items-center gap-8">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-3">
+                Ready to start your project?
+              </h3>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Let's create something amazing together. Browse our complete
+                portfolio to see more of our work and results.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/portfolio"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-semibold hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+              >
+                View All Projects
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-300"
+              >
+                Get in Touch
+              </Link>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

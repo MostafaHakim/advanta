@@ -42,7 +42,8 @@ const StatsSection = () => {
   });
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-16 bg-gradient-to-b from-[#0a3d62] to-[#3c6382]  overflow-hidden relative">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
       <div className="container-custom">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
@@ -63,19 +64,19 @@ const StatsSection = () => {
                   initial={{ scale: 0 }}
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                  className="text-4xl md:text-5xl font-bold text-gray-900"
+                  className="text-4xl md:text-5xl font-bold text-white"
                 >
                   {stat.value}
                 </motion.span>
-                <span className="text-2xl font-bold text-blue-600">
+                <span className="text-2xl font-bold text-white">
                   {stat.suffix}
                 </span>
               </div>
 
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-blue-200 mb-2">
                 {stat.label}
               </h3>
-              <p className="text-gray-600">{stat.description}</p>
+              <p className="text-gray-200">{stat.description}</p>
             </motion.div>
           ))}
         </div>
@@ -87,7 +88,7 @@ const StatsSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16 pt-8 border-t border-gray-200"
         >
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center text-white mb-8">
             Trusted by leading brands worldwide
           </p>
 
@@ -96,7 +97,7 @@ const StatsSection = () => {
               (brand, index) => (
                 <div
                   key={brand}
-                  className="text-2xl font-bold text-gray-400 hover:text-gray-700 transition-colors cursor-pointer"
+                  className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors cursor-pointer"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {brand}

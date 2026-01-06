@@ -187,8 +187,8 @@ const Navbar = () => {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-100"
-            : "bg-white/90 backdrop-blur-lg"
+            ? "bg-linear-to-r from-[#020617]/5 to-indigo-900/95 backdrop-blur-xl shadow-2xl border-b border-gray-100 shadow-2xl"
+            : "bg-linear-to-r from-[#020617]/90 to-indigo-900/95 backdrop-blur-lg"
         }`}
       >
         <div className="container-custom">
@@ -196,7 +196,7 @@ const Navbar = () => {
             {/* Logo with Glow Effect */}
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur group-hover:blur-lg transition-all duration-300 opacity-70"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-600 rounded-full blur group-hover:blur-lg transition-all duration-300 opacity-70"></div>
                 <div className="relative w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
                   <Image
                     src={Logo}
@@ -208,11 +208,11 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
-                  DVANTA
-                </span>
-                <span className="text-xs font-bold text-gray-600 tracking-wider">
-                  SCALE
+                <span className="text-2xl font-bold bg-linear-to-r from-[#f5f6fa] to-[#dcdde1] bg-clip-text text-transparent animate-gradient">
+                  DVANTA{" "}
+                  <span className="text-xs font-bold text-white tracking-wider">
+                    SCALE
+                  </span>
                 </span>
               </div>
             </Link>
@@ -228,14 +228,11 @@ const Navbar = () => {
                         {/* Services Link with Mega Menu */}
                         <Link
                           href={item.href}
-                          className={`flex items-center px-5 py-2.5 rounded-xl transition-all duration-300 ${
-                            isServicesActive
-                              ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600"
-                              : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                          className={`flex items-center px-5 py-2.5 rounded-xl transition-all duration-300 text-white ${
+                            isServicesActive ? "" : ""
                           }`}
                           onMouseEnter={() => setMegaMenuOpen(true)}
                         >
-                          <Icon className="w-4 h-4 mr-2" />
                           {item.name}
                           <ChevronDown
                             className={`ml-2 w-4 h-4 transition-transform duration-300 ${
@@ -248,15 +245,15 @@ const Navbar = () => {
                         <AnimatePresence>
                           {megaMenuOpen && (
                             <motion.div
-                              className="absolute left-1/2 -translate-x-1/2 mt-3 w-[95vw] max-w-5xl mega-menu"
-                              initial={{ opacity: 0, y: -10 }}
+                              className="absolute left-1/2 -translate-x-1/2 mt-6 w-[95vw] max-w-6xl z-50"
+                              initial={{ opacity: 0, y: -12 }}
                               animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
+                              exit={{ opacity: 0, y: -12 }}
                               transition={{ duration: 0.2 }}
                               onMouseEnter={() => setMegaMenuOpen(true)}
                               onMouseLeave={() => setMegaMenuOpen(false)}
                             >
-                              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
+                              <div className="rounded-2xl bg-gradient-to-r from-[#020617]/95 via-indigo-900/95 to-indigo-800/95 shadow-2xl p-8 text-white">
                                 <div className="grid grid-cols-3 gap-8">
                                   {serviceCategories.map((category, index) => (
                                     <motion.div
@@ -266,26 +263,29 @@ const Navbar = () => {
                                       transition={{ delay: index * 0.1 }}
                                       className="space-y-6"
                                     >
-                                      <div className="flex items-center space-x-4">
+                                      {/* Category Header */}
+                                      <div className="flex items-center gap-4">
                                         <div
-                                          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-white shadow-lg`}
+                                          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-lg`}
                                         >
                                           {category.icon}
                                         </div>
                                         <div>
-                                          <h3 className="text-lg font-bold text-gray-900">
+                                          <h3 className="text-lg font-bold">
                                             {category.title}
                                           </h3>
-                                          <p className="text-sm text-gray-600">
+                                          <p className="text-sm text-gray-300">
                                             Expert solutions
                                           </p>
                                         </div>
                                       </div>
+
+                                      {/* Services */}
                                       <ul className="space-y-3">
                                         {category.services.map((service) => (
                                           <motion.li
                                             key={service.name}
-                                            whileHover={{ x: 5 }}
+                                            whileHover={{ x: 6 }}
                                             transition={{
                                               type: "spring",
                                               stiffness: 300,
@@ -293,25 +293,29 @@ const Navbar = () => {
                                           >
                                             <Link
                                               href={service.href}
-                                              className="group flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 border border-transparent hover:border-blue-100"
-                                              onClick={() =>
-                                                setMegaMenuOpen(false)
-                                              }
+                                              className="
+                              group flex items-center p-3 rounded-xl
+                              hover:bg-white
+                              transition-all duration-300
+                              hover:text-gray-800
+                            "
                                             >
                                               <div
                                                 className={`w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white mr-3 group-hover:scale-110 transition-transform`}
                                               >
                                                 {service.icon}
                                               </div>
+
                                               <div className="flex-1">
-                                                <div className="font-semibold text-gray-900 group-hover:text-blue-600">
+                                                <div className="font-semibold ">
                                                   {service.name}
                                                 </div>
-                                                <div className="text-xs text-gray-600 mt-1">
+                                                <div className="text-xs mt-1">
                                                   {service.description}
                                                 </div>
                                               </div>
-                                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+
+                                              <ArrowRight className="w-4 h-4 text-white group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                                             </Link>
                                           </motion.li>
                                         ))}
@@ -321,32 +325,23 @@ const Navbar = () => {
                                 </div>
 
                                 {/* Bottom CTA */}
-                                <motion.div
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  transition={{ delay: 0.3 }}
-                                  className="mt-8 pt-8 border-t border-gray-100"
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <div>
-                                      <h4 className="font-bold text-gray-900 text-lg">
-                                        Need a custom solution?
-                                      </h4>
-                                      <p className="text-gray-600 mt-1">
-                                        We tailor our services to your specific
-                                        business needs
-                                      </p>
-                                    </div>
-                                    <Link
-                                      href="/services"
-                                      className="btn-primary flex items-center group"
-                                      onClick={() => setMegaMenuOpen(false)}
-                                    >
-                                      Explore All Services
-                                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
+                                <div className="mt-8 pt-8 border-t border-white/20 flex items-center justify-between">
+                                  <div>
+                                    <h4 className="font-bold text-lg">
+                                      Need a custom solution?
+                                    </h4>
+                                    <p className="text-gray-300 text-sm mt-1">
+                                      Tailored services for your business
+                                    </p>
                                   </div>
-                                </motion.div>
+                                  <Link
+                                    href="/services"
+                                    className="flex items-center bg-white text-gray-900 px-5 py-3 rounded-xl font-semibold hover:bg-gray-100 transition"
+                                  >
+                                    Explore All Services
+                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                  </Link>
+                                </div>
                               </div>
                             </motion.div>
                           )}
@@ -355,13 +350,12 @@ const Navbar = () => {
                     ) : (
                       <Link
                         href={item.href}
-                        className={`flex items-center px-5 py-2.5 rounded-xl transition-all duration-300 ${
+                        className={`flex items-center px-8 py-2 rounded-xl transition-all duration-300 ${
                           pathname === item.href
-                            ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600"
-                            : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                            ? " ring-1  ring-gray-300 bg-white text-gray-900"
+                            : "text-white hover:ring-1 ring-gray-300 hover:text-white"
                         }`}
                       >
-                        <Icon className="w-4 h-4 mr-2" />
                         {item.name}
                       </Link>
                     )}
@@ -374,7 +368,7 @@ const Navbar = () => {
             <div className="hidden lg:block">
               <Link href="/contact" className="relative overflow-hidden group">
                 <div className="absolute inset-0 "></div>
-                <div className="relative px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
+                <div className="relative px-6 py-2.5 ring-2 ring-white text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
                   Get Started
                 </div>
               </Link>
@@ -397,7 +391,6 @@ const Navbar = () => {
                   }`}
                 />
               </div>
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full group-hover:w-8 transition-all duration-300"></span>
             </button>
           </div>
         </div>
@@ -433,21 +426,15 @@ const Navbar = () => {
                     className="flex items-center space-x-3"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                      <Image
-                        src={Logo}
-                        alt="DVANTA SCALE"
-                        width={20}
-                        height={20}
-                        className="object-contain invert"
-                      />
-                    </div>
                     <div className="flex flex-col">
                       <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        DVANTA
-                      </span>
-                      <span className="text-xs font-bold text-gray-600">
-                        DIGITAL
+                        <span className="p-2 mr-1 rounded-full text-gray-800 ring-1 ring-gray-800">
+                          A
+                        </span>
+                        DVANTA{" "}
+                        <span className="text-xs font-bold text-gray-600">
+                          SCALE
+                        </span>
                       </span>
                     </div>
                   </Link>

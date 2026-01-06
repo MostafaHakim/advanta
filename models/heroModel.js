@@ -20,6 +20,11 @@ const heroSchema = new mongoose.Schema({
       },
     },
   ],
+  marqueeLabel: [
+    {
+      type: String,
+    },
+  ],
 });
 
 export default mongoose.models.Hero || mongoose.model("Hero", heroSchema);

@@ -2,7 +2,16 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ArrowRight, CheckCircle, MessageCircle, Calendar } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle,
+  MessageCircle,
+  Calendar,
+  Sparkles,
+  Target,
+  Zap,
+  Globe,
+} from "lucide-react";
 import { useState } from "react";
 
 const CTASection = () => {
@@ -21,6 +30,7 @@ const CTASection = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [hoveredField, setHoveredField] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,12 +67,12 @@ const CTASection = () => {
   };
 
   const benefits = [
-    "Free consultation & strategy session",
-    "Customized marketing plan",
-    "30-day results guarantee",
-    "No long-term contracts required",
-    "Dedicated account manager",
-    "Monthly performance reports",
+    { text: "Free consultation & strategy session", icon: Sparkles },
+    { text: "Customized marketing plan", icon: Target },
+    { text: "30-day results guarantee", icon: Zap },
+    { text: "No long-term contracts required", icon: CheckCircle },
+    { text: "Dedicated account manager", icon: MessageCircle },
+    { text: "Monthly performance reports", icon: Globe },
   ];
 
   const services = [
@@ -77,242 +87,442 @@ const CTASection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-90" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#1a0b2e] via-[#2d1b45] to-[#1a0b2e]">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-[2px] h-[2px] bg-purple-300/30 rounded-full"
+            initial={{
+              x: Math.random() * 100 + "vw",
+              y: Math.random() * 100 + "vh",
+            }}
+            animate={{
+              y: [null, `-${Math.random() * 100}px`],
+              x: [null, `-${Math.random() * 50}px`],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
 
-      {/* Animated Elements */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-white/10 rounded-full mix-blend-overlay filter blur-3xl animate-float" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-white/10 rounded-full mix-blend-overlay filter blur-3xl animate-float delay-1000" />
+        {/* Gradient Orbs */}
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-full blur-3xl animate-pulse delay-1000" />
 
-      <div className="container-custom relative z-10 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+        {/* Geometric Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 25px 25px, #fff 2px, transparent 0)`,
+              backgroundSize: "50px 50px",
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Main Container */}
+      <div className="container-custom relative z-10 py-20 md:py-28">
+        {/* Decorative Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm mb-6">
+            <Sparkles className="w-4 h-4 text-purple-300" />
+            <span className="text-sm font-medium text-purple-300 tracking-wider">
+              LET'S CREATE MAGIC
+            </span>
+            <Sparkles className="w-4 h-4 text-purple-300" />
+          </div>
+
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300">
+              Transform
+            </span>
+            <br />
+            <span className="text-white">Your Digital Presence</span>
+          </h2>
+
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Let's craft a digital strategy that not only looks stunning but
+            <span className="text-purple-300 font-medium">
+              {" "}
+              delivers measurable results
+            </span>
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          {/* Left Content - Enhanced Benefits */}
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-white"
+            transition={{ duration: 0.8 }}
+            className="relative"
           >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium">Let's Talk</span>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Transform Your{" "}
-              <span className="text-yellow-300">Business?</span>
-            </h2>
-
-            <p className="text-xl mb-8 opacity-90">
-              Get a free consultation and discover how our digital marketing
-              expertise can drive your business growth.
-            </p>
-
-            {/* Benefits */}
-            <div className="space-y-4 mb-8">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={benefit}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex items-center"
-                >
-                  <CheckCircle className="w-5 h-5 text-green-300 mr-3 flex-shrink-0" />
-                  <span>{benefit}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Contact Info */}
-            <div className="flex flex-col sm:flex-row gap-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4">
-                  <Calendar className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-sm opacity-80">Schedule a Call</div>
-                  <div className="font-semibold">30-min Free Consultation</div>
-                </div>
+            {/* Floating Card Effect */}
+            <div className="relative bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm rounded-3xl p-8 border border-white/10 shadow-2xl shadow-purple-900/20">
+              <div className="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                <Target className="w-6 h-6 text-white" />
               </div>
 
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4">
-                  <MessageCircle className="w-6 h-6" />
+              <h3 className="text-2xl font-bold text-white mb-8">
+                Why Partner With Us?
+              </h3>
+
+              {/* Benefits Grid */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                {benefits.map((benefit, index) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <motion.div
+                      key={benefit.text}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      className="group flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br from-white/5 to-transparent hover:from-purple-500/10 hover:to-pink-500/10 transition-all duration-300 border border-white/5 hover:border-purple-500/30"
+                    >
+                      <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all">
+                        <Icon className="w-5 h-5 text-purple-300" />
+                      </div>
+                      <span className="text-gray-200 group-hover:text-white transition-colors">
+                        {benefit.text}
+                      </span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-white/10">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
+                    98%
+                  </div>
+                  <div className="text-sm text-gray-400">
+                    Client Satisfaction
+                  </div>
                 </div>
-                <div>
-                  <div className="text-sm opacity-80">Response Time</div>
-                  <div className="font-semibold">Within 24 Hours</div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
+                    150+
+                  </div>
+                  <div className="text-sm text-gray-400">
+                    Projects Delivered
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300">
+                    24h
+                  </div>
+                  <div className="text-sm text-gray-400">Response Time</div>
                 </div>
               </div>
             </div>
+
+            {/* Floating Elements */}
+            <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 backdrop-blur-sm animate-float" />
+            <div className="absolute -top-6 -right-6 w-16 h-16 rounded-lg bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/20 backdrop-blur-sm rotate-12 animate-float delay-1000" />
           </motion.div>
 
-          {/* Right Content - Contact Form */}
+          {/* Right Content - Enhanced Form */}
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
           >
-            <div className="bg-white rounded-2xl shadow-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Get Your Free Strategy Session
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Fill out the form and we'll get back to you within 24 hours.
-              </p>
+            {/* Form Container with Glow Effect */}
+            <div className="relative bg-gradient-to-br from-gray-900/60 via-gray-900/80 to-gray-900/60 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
+              {/* Glow Effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-3xl blur-xl opacity-20 animate-pulse" />
 
-              {submitSuccess ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12"
-                >
-                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle className="w-10 h-10 text-green-600" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
+                    <MessageCircle className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-2xl font-bold text-gray-900 mb-2">
-                    Thank You!
-                  </h4>
-                  <p className="text-gray-600">
-                    We've received your inquiry. Our team will contact you
-                    shortly.
-                  </p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                        placeholder="Mostafa"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                        placeholder="mostafa@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                        placeholder="+8801722440899"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Service Interested In *
-                      </label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                      >
-                        <option value="">Select a service</option>
-                        {services.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Your Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
-                      placeholder="Tell us about your project..."
-                    />
+                    <h3 className="text-2xl font-bold text-white">
+                      Start Your Journey
+                    </h3>
+                    <p className="text-purple-300 text-sm">
+                      Fill the form below and let's create something
+                      extraordinary
+                    </p>
                   </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                {submitSuccess ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-12"
                   >
-                    {isSubmitting ? (
-                      <span className="flex items-center justify-center">
-                        <svg
-                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
+                    <div className="relative w-24 h-24 mx-auto mb-6">
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full animate-ping opacity-20" />
+                      <div className="absolute inset-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-12 h-12 text-white" />
+                      </div>
+                    </div>
+                    <h4 className="text-2xl font-bold text-white mb-2">
+                      Success!
+                    </h4>
+                    <p className="text-gray-300">
+                      Our digital wizards will contact you within
+                      <span className="text-purple-300 font-medium">
+                        {" "}
+                        24 hours
+                      </span>
+                    </p>
+                    <div className="mt-6 inline-flex items-center gap-2 text-sm text-gray-400">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                      Preparing your personalized strategy
+                    </div>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {[
+                        {
+                          name: "name",
+                          label: "Your Name *",
+                          placeholder: "Mostafa",
+                          type: "text",
+                        },
+                        {
+                          name: "email",
+                          label: "Email Address *",
+                          placeholder: "mostafa@example.com",
+                          type: "email",
+                        },
+                      ].map((field) => (
+                        <motion.div
+                          key={field.name}
+                          whileHover={{ scale: 1.02 }}
+                          onHoverStart={() => setHoveredField(field.name)}
+                          onHoverEnd={() => setHoveredField(null)}
                         >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                        Processing...
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center">
-                        Get Free Consultation
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </span>
-                    )}
-                  </button>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            {field.label}
+                          </label>
+                          <input
+                            type={field.type}
+                            name={field.name}
+                            value={
+                              formData[field.name as keyof typeof formData]
+                            }
+                            onChange={handleChange}
+                            required
+                            className={`w-full px-5 py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border transition-all duration-300 ${
+                              hoveredField === field.name
+                                ? "border-purple-500 shadow-lg shadow-purple-500/20"
+                                : "border-gray-700 hover:border-purple-400"
+                            } text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50`}
+                            placeholder={field.placeholder}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
 
-                  <p className="text-sm text-gray-500 text-center mt-4">
-                    By submitting, you agree to our Privacy Policy. We'll never
-                    share your information.
-                  </p>
-                </form>
-              )}
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <motion.div whileHover={{ scale: 1.02 }}>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="w-full px-5 py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-400 transition-all duration-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                          placeholder="+8801722440899"
+                        />
+                      </motion.div>
+
+                      <motion.div whileHover={{ scale: 1.02 }}>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Service Interested In *
+                        </label>
+                        <div className="relative">
+                          <select
+                            name="service"
+                            value={formData.service}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-5 py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-400 transition-all duration-300 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                          >
+                            <option value="" className="bg-gray-900">
+                              Select a service
+                            </option>
+                            {services.map((service) => (
+                              <option
+                                key={service}
+                                value={service}
+                                className="bg-gray-900"
+                              >
+                                {service}
+                              </option>
+                            ))}
+                          </select>
+                          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <ArrowRight className="w-4 h-4 text-purple-400 rotate-90" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Your Project Details
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows={4}
+                        className="w-full px-5 py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-400 transition-all duration-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none"
+                        placeholder="Tell us about your vision, goals, and challenges..."
+                      />
+                    </motion.div>
+
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full group relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white py-4 px-8 rounded-xl font-bold text-lg transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/30 disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {/* Animated background */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      {isSubmitting ? (
+                        <span className="flex items-center justify-center relative z-10">
+                          <svg
+                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Creating Your Strategy...
+                        </span>
+                      ) : (
+                        <span className="flex items-center justify-center relative z-10">
+                          Begin Your Transformation
+                          <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                        </span>
+                      )}
+                    </motion.button>
+
+                    <p className="text-xs text-gray-500 text-center mt-6">
+                      <span className="text-gray-400">
+                        By submitting, you agree to our{" "}
+                      </span>
+                      <a
+                        href="#"
+                        className="text-purple-400 hover:text-purple-300 transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                      <span className="text-gray-400">
+                        . Your data is encrypted and secure.
+                      </span>
+                    </p>
+                  </form>
+                )}
+              </div>
             </div>
+
+            {/* Floating Elements */}
+            <motion.div
+              animate={{
+                rotate: 360,
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                scale: { duration: 2, repeat: Infinity },
+              }}
+              className="absolute -top-4 -right-4 w-12 h-12 rounded-full border border-purple-500/30"
+            />
+            <motion.div
+              animate={{
+                rotate: -360,
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                scale: { duration: 3, repeat: Infinity },
+              }}
+              className="absolute -bottom-4 -left-4 w-8 h-8 rounded-full border border-pink-500/30"
+            />
           </motion.div>
         </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mt-20 pt-12 border-t border-white/10"
+        >
+          <p className="text-gray-400 mb-6">
+            Not ready for a full consultation? Start with a quick chat
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 text-gray-300 hover:text-white hover:border-purple-500 transition-all duration-300">
+              Schedule 15-min Call
+            </button>
+            <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 text-gray-300 hover:text-white hover:border-pink-500 transition-all duration-300">
+              View Case Studies
+            </button>
+            <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 text-gray-300 hover:text-white hover:border-blue-500 transition-all duration-300">
+              Download Pricing
+            </button>
+          </div>
+        </motion.div>
       </div>
+
+      {/* CSS Animation */}
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(5deg);
+          }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };
