@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
@@ -16,9 +16,11 @@ export default function ClientLayoutWrapper({
 
   return (
     <>
-      {!isAdminRoute && <Navbar />}
-      <main className="min-h-screen">{children}</main>
-      {!isAdminRoute && <Footer />}
+      <main className="min-h-screen w-full left-0 right-0 overflow-x-hidden">
+        {!isAdminRoute && <Navbar />}
+        {children}
+        {!isAdminRoute && <Footer />}
+      </main>
       <Toaster
         position="top-right"
         toastOptions={{

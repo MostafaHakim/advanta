@@ -90,8 +90,8 @@ const CTASection = () => {
             key={i}
             className="absolute w-[2px] h-[2px] bg-purple-300/30 rounded-full"
             initial={{
-              x: Math.random() * 100 + "vw",
-              y: Math.random() * 100 + "vh",
+              x: Math.random() * 100 + "%",
+              y: Math.random() * 100 + "%",
             }}
             animate={{
               y: [null, `-${Math.random() * 100}px`],

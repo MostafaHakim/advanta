@@ -157,7 +157,7 @@ const PortfolioSection = () => {
               Projects
             </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Showcasing our success stories and innovative solutions that drove
             measurable results for clients across various industries.
           </p>
@@ -281,7 +281,7 @@ const PortfolioSection = () => {
                 {/* Content Section */}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-300">
+                    <h3 className="text-lg md:text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-300">
                       {item.title}
                     </h3>
                     {item.featured && (
@@ -309,7 +309,7 @@ const PortfolioSection = () => {
                   {/* Results Section */}
                   {item.results && (
                     <div className="pt-6 border-t border-white/10">
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {item.results.map((result, idx) => (
                           <motion.div
                             key={idx}
@@ -317,7 +317,7 @@ const PortfolioSection = () => {
                             transition={{ type: "spring", stiffness: 400 }}
                             className="text-center p-3 bg-gradient-to-br from-white/5 to-transparent rounded-xl border border-white/5"
                           >
-                            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                            <div className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                               {result.value}
                             </div>
                             <div className="text-sm text-gray-400 mt-1">

@@ -76,7 +76,7 @@ const values = [
 
 const ValuesSection = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-12 md:py-20 bg-gray-50">
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -92,7 +92,7 @@ const ValuesSection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
             What <span className="text-blue-600">Drives Us</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             Our core values define who we are and guide every decision we make
           </p>
         </motion.div>
@@ -111,13 +111,13 @@ const ValuesSection = () => {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-gray-100 group-hover:border-blue-200">
                 {/* Icon */}
                 <div
-                  className={`bg-gradient-to-br ${value.color} w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  className={`bg-gradient-to-br ${value.color} w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}
                 >
                   {value.icon}
                 </div>
 
                 {/* Content */}
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl md:text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors">
                   {value.title}
                 </h3>
                 <p className="text-gray-600 mb-6">{value.description}</p>
@@ -146,7 +146,7 @@ const ValuesSection = () => {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h3 className="text-3xl font-bold mb-6">Our Culture</h3>
+                <h3 className="text-2xl md:text-3xl font-bold mb-6">Our Culture</h3>
                 <p className="text-lg mb-8 opacity-90">
                   We foster a culture of learning, growth, and collaboration
                   where every team member is empowered to do their best work and
@@ -164,7 +164,7 @@ const ValuesSection = () => {
                       key={idx}
                       className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm"
                     >
-                      <div className="text-3xl font-bold mb-2">
+                      <div className="text-2xl md:text-3xl font-bold mb-2">
                         {stat.value}
                       </div>
                       <div className="text-sm opacity-90">{stat.label}</div>
@@ -200,7 +200,7 @@ const ValuesSection = () => {
           className="mt-20 text-center"
         >
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold mb-6">Our Commitment to You</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-6">Our Commitment to You</h3>
             <p className="text-gray-600 mb-8">
               We are committed to not just meeting but exceeding your
               expectations. Our values are not just words on a page - they are

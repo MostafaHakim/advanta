@@ -180,7 +180,7 @@ const TeamSection = () => {
             </span>
           </h2>
 
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
             A collective of passionate professionals dedicated to delivering
             exceptional results and driving digital success for our clients.
           </p>
@@ -194,12 +194,12 @@ const TeamSection = () => {
           transition={{ duration: 0.7 }}
           className="mb-24"
         >
-          <div className="relative bg-gradient-to-br from-white to-blue-50/50 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-100/50 border border-blue-100 overflow-hidden">
+          <div className="relative bg-gradient-to-br from-white to-blue-50/50 rounded-3xl p-6 md:p-12 shadow-2xl shadow-blue-100/50 border border-blue-100 overflow-hidden">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-bl-full" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/5 to-transparent rounded-tr-full" />
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
               {/* Image Section */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -210,7 +210,7 @@ const TeamSection = () => {
                 <div className="relative">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    className="relative w-full aspect-square max-w-md mx-auto"
+                    className="relative w-full aspect-square max-w-sm md:max-w-md mx-auto"
                   >
                     {/* Main Image Container */}
                     <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl">
@@ -233,11 +233,13 @@ const TeamSection = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.5 + idx * 0.1 }}
                         className={`absolute ${
-                          idx === 0 ? "top-6 -right-4" : "bottom-6 -left-4"
-                        } bg-white px-4 py-3 rounded-2xl shadow-xl border border-gray-100`}
+                          idx === 0
+                            ? "top-4 -right-2 sm:top-6 sm:-right-4"
+                            : "bottom-4 -left-2 sm:bottom-6 sm:-left-4"
+                        } bg-white px-3 py-2 sm:px-4 sm:py-3 rounded-2xl shadow-xl border border-gray-100`}
                       >
                         <div className="text-center">
-                          <div className="text-lg font-bold text-blue-600">
+                          <div className="text-base sm:text-lg font-bold text-blue-600">
                             {stat.value}
                           </div>
                           <div className="text-xs text-gray-600">
@@ -258,37 +260,37 @@ const TeamSection = () => {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="space-y-6"
+                className="space-y-6 text-center lg:text-left"
               >
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                   <Award className="w-4 h-4" />
                   <span className="text-sm font-medium">Leadership</span>
                 </div>
 
-                <h3 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                   {teamMembers[0].name}
                 </h3>
 
-                <p className="text-xl font-semibold text-blue-600">
+                <p className="text-lg md:text-xl font-semibold text-blue-600">
                   {teamMembers[0].position}
                 </p>
 
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                   {teamMembers[0].bio}
                 </p>
 
                 {/* Expertise */}
                 <div className="pt-4">
-                  <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2 justify-center lg:justify-start">
                     <Target className="w-5 h-5 text-blue-500" />
                     Areas of Expertise
                   </h4>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
                     {teamMembers[0].expertise.map((skill) => (
                       <motion.span
                         key={skill}
                         whileHover={{ scale: 1.05 }}
-                        className="px-5 py-2.5 bg-white rounded-full text-gray-700 shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+                        className="px-4 py-2 sm:px-5 sm:py-2.5 bg-white rounded-full text-gray-700 shadow-md hover:shadow-lg transition-shadow border border-gray-100"
                       >
                         {skill}
                       </motion.span>
@@ -297,7 +299,7 @@ const TeamSection = () => {
                 </div>
 
                 {/* Social Links */}
-                <div className="flex items-center gap-4 pt-6">
+                <div className="flex items-center gap-4 pt-6 justify-center lg:justify-start">
                   {[
                     {
                       icon: Linkedin,
@@ -357,7 +359,7 @@ const TeamSection = () => {
                 <div className="relative px-8 pt-8">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="relative mx-auto w-48 h-48"
+                    className="relative mx-auto w-36 h-36 sm:w-48 sm:h-48"
                   >
                     {/* Main Image */}
                     <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl">
@@ -377,10 +379,10 @@ const TeamSection = () => {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 }}
-                      className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg"
+                      className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg"
                     >
                       <div className="text-center">
-                        <div className="font-bold text-sm">
+                        <div className="font-bold text-xs sm:text-sm">
                           {member.stats?.[0]?.value}
                         </div>
                         <div className="text-xs opacity-90">
@@ -392,9 +394,9 @@ const TeamSection = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-8 pt-6">
+                <div className="p-6 md:p-8 pt-6">
                   <div className="text-center mb-4">
-                    <h3 className="text-2xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
                       {member.name}
                     </h3>
                     <p className="text-blue-600 font-semibold">
@@ -421,7 +423,7 @@ const TeamSection = () => {
                   </div>
 
                   {/* Social Links */}
-                  <div className="flex items-center justify-center gap-6 pt-6 border-t border-gray-100">
+                  <div className="flex items-center justify-center gap-4 md:gap-6 pt-6 border-t border-gray-100">
                     {[
                       {
                         icon: Linkedin,
@@ -493,7 +495,7 @@ const TeamSection = () => {
                 </span>
               </div>
 
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 Want to Join Our Team?
               </h3>
 
@@ -507,7 +509,7 @@ const TeamSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-white text-blue-600 rounded-xl font-bold hover:shadow-2xl hover:shadow-white/20 transition-all duration-300"
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 rounded-xl font-bold hover:shadow-2xl hover:shadow-white/20 transition-all duration-300"
                 >
                   View Open Positions
                 </motion.button>
@@ -515,7 +517,7 @@ const TeamSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 border-2 border-white text-white rounded-xl font-bold hover:bg-white/10 transition-all duration-300"
+                  className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-white text-white rounded-xl font-bold hover:bg-white/10 transition-all duration-300"
                 >
                   Contact Our HR
                 </motion.button>

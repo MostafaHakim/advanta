@@ -18,6 +18,10 @@
 
   body {
     @apply antialiased text-gray-900;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 }
 

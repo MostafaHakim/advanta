@@ -75,8 +75,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
-      <body className={`${inter.className} bg-white text-gray-900`}>
+    <html
+      lang="en"
+      className="scroll-smooth overflow-x-hidden"
+      suppressHydrationWarning={true}
+    >
+      <body
+        className={`${inter.className} bg-white text-gray-900 overflow-x-hidden w-screen`}
+      >
         <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
       </body>
     </html>
