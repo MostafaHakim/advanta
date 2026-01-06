@@ -78,6 +78,40 @@ const portfolioItems = [
       { label: "Bounce Rate", value: "-40%" },
     ],
   },
+  {
+    id: 7,
+    title: "Mobile App Development",
+    category: "Web Development",
+    description: "Cross-platform mobile app for fitness tracking",
+    image: "https://picsum.photos/id/7/600/400",
+    tags: ["React Native", "Firebase", "Redux"],
+    liveUrl: "https://example.com",
+    githubUrl: "https://github.com",
+  },
+  {
+    id: 8,
+    title: "Local SEO Optimization",
+    category: "SEO",
+    description: "Local SEO strategy for restaurant chain",
+    image: "https://picsum.photos/id/8/600/400",
+    tags: ["Local SEO", "Google My Business", "Reviews"],
+    results: [
+      { label: "Local Rankings", value: "+85%" },
+      { label: "Phone Calls", value: "+200%" },
+    ],
+  },
+  {
+    id: 9,
+    title: "Video Marketing Campaign",
+    category: "Content",
+    description: "YouTube video series for tech product launch",
+    image: "https://picsum.photos/id/9/600/400",
+    tags: ["Video Production", "YouTube SEO", "Social Media"],
+    results: [
+      { label: "Video Views", value: "2M+" },
+      { label: "Conversion Rate", value: "12%" },
+    ],
+  },
 ];
 
 const categories = [
@@ -102,12 +136,13 @@ const PortfolioSection = () => {
   return (
     <section className="section-padding bg-gradient-to-b from-[#0F0F0F] to-[#3D6D17] text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
-      <div className="container-custom">
+      <div className="container-custom relative z-10">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/20 mb-6">
@@ -132,48 +167,62 @@ const PortfolioSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ delay: 0.2, duration: 0.6 }}
           className="flex flex-wrap justify-center gap-3 mb-16"
         >
           <div className="flex items-center gap-2 text-gray-400 mb-4 w-full justify-center">
             <Filter className="w-5 h-5" />
             <span className="text-sm font-medium">Filter by category</span>
           </div>
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeCategory === category
-                  ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/25"
-                  : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/5"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeCategory === category
+                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/25"
+                    : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/5"
+                }`}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Portfolio Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+        {/* Portfolio Grid - FIXED VERSION */}
+        <motion.div
+          key={activeCategory}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                layout
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15,
+                  delay: index * 0.05,
+                }}
                 onMouseEnter={() => setHoveredItem(item.id)}
                 onMouseLeave={() => setHoveredItem(null)}
                 className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/10 to-transparent border border-white/10 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10"
+                style={{
+                  transformStyle: "preserve-3d",
+                  backfaceVisibility: "hidden",
+                }}
               >
                 {/* Image Container */}
                 <div className="relative h-64 overflow-hidden rounded-t-2xl">
@@ -183,6 +232,7 @@ const PortfolioSection = () => {
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index < 3}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
 
@@ -201,24 +251,28 @@ const PortfolioSection = () => {
                   >
                     <div className="flex gap-4">
                       {item.liveUrl && (
-                        <a
+                        <motion.a
                           href={item.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-4 bg-white rounded-full hover:bg-purple-50 transition-all duration-300 hover:scale-110 shadow-lg"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="p-4 bg-white rounded-full hover:bg-purple-50 transition-all duration-300 shadow-lg"
                         >
                           <ExternalLink className="w-5 h-5 text-purple-600" />
-                        </a>
+                        </motion.a>
                       )}
                       {item.githubUrl && (
-                        <a
+                        <motion.a
                           href={item.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-4 bg-white rounded-full hover:bg-purple-50 transition-all duration-300 hover:scale-110 shadow-lg"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="p-4 bg-white rounded-full hover:bg-purple-50 transition-all duration-300 shadow-lg"
                         >
                           <Github className="w-5 h-5 text-purple-600" />
-                        </a>
+                        </motion.a>
                       )}
                     </div>
                   </motion.div>
@@ -257,8 +311,10 @@ const PortfolioSection = () => {
                     <div className="pt-6 border-t border-white/10">
                       <div className="grid grid-cols-2 gap-4">
                         {item.results.map((result, idx) => (
-                          <div
+                          <motion.div
                             key={idx}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 400 }}
                             className="text-center p-3 bg-gradient-to-br from-white/5 to-transparent rounded-xl border border-white/5"
                           >
                             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
@@ -267,23 +323,60 @@ const PortfolioSection = () => {
                             <div className="text-sm text-gray-400 mt-1">
                               {result.label}
                             </div>
-                          </div>
+                          </motion.div>
                         ))}
                       </div>
                     </div>
                   )}
+
+                  {/* View Details Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{
+                      opacity: hoveredItem === item.id ? 1 : 0,
+                      y: hoveredItem === item.id ? 0 : 10,
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className="mt-6"
+                  >
+                    <button className="w-full py-3 bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-300 rounded-xl font-medium border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                      View Case Study
+                    </button>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Empty State */}
+        {filteredItems.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring" }}
+            className="text-center py-20"
+          >
+            <div className="text-gray-400 text-lg mb-4">
+              No projects found in this category
+            </div>
+            <motion.button
+              onClick={() => setActiveCategory("All")}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+            >
+              View All Projects
+            </motion.button>
           </motion.div>
-        </AnimatePresence>
+        )}
 
         {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
+          initial={{ opacity: 0, x: 200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ delay: 0.4, duration: 0.6 }}
           className="text-center mt-20"
         >
           <div className="inline-flex flex-col items-center gap-8">
