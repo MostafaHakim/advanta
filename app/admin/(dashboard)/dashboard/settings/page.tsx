@@ -1,6 +1,6 @@
 "use client";
 
-import HeroSettings from "@/components/sections/heroSettings";
+import HeroSettings from "@/components/sections/HeroSetting";
 import React, { useState, useEffect } from "react";
 
 export default function Settings() {
@@ -31,6 +31,24 @@ export default function Settings() {
       ),
     },
     {
+      id: "Hero",
+      name: "Hero",
+      icon: "👥",
+      content: (
+        <div className="p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4">
+            Hero Settings
+          </h2>
+          <div className="space-y-4">
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <HeroSettings />
+            </div>
+            {/* Add more client settings components here */}
+          </div>
+        </div>
+      ),
+    },
+    {
       id: "project",
       name: "Project",
       icon: "📁",
@@ -52,23 +70,7 @@ export default function Settings() {
         </div>
       ),
     },
-    {
-      id: "hero",
-      name: "Hero",
-      icon: "⭐",
-      content: (
-        <div className="p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            Hero Settings
-          </h2>
-          <div className="space-y-4">
-            <div className="p-4 bg-gray-50 rounded-lg">
-              <HeroSettings />
-            </div>
-          </div>
-        </div>
-      ),
-    },
+
     {
       id: "rule",
       name: "Rule",
