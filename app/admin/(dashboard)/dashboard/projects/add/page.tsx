@@ -22,12 +22,17 @@ export default function AddProjectPage() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
     setForm({
       ...form,
-      [name]: type === "checkbox" ? (e.target as any).checked : value,
+      [name]:
+        type === "checkbox"
+          ? (e.target as HTMLInputElement).checked
+          : value,
     });
   };
 
