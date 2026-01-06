@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -11,6 +11,24 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const stored = localStorage.getItem("bis_data");
+
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        // If user data with an ID exists, they are likely logged in.
+        if (parsed?.id) {
+          router.replace("/admin/dashboard");
+        }
+      } catch (err) {
+        console.error("Invalid user data in storage");
+        // Clear bad data
+        localStorage.removeItem("bis_data");
+      }
+    }
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

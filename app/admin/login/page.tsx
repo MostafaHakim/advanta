@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -10,6 +10,24 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const stored = localStorage.getItem("bis_data");
+
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+
+        // 🔐 minimal validation
+        if (parsed?.id) {
+          router.replace("/admin/dashboard");
+        }
+      } catch (err) {
+        console.error("Invalid token data");
+        localStorage.removeItem("bis_data");
+      }
+    }
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +44,9 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
+        // ✅ SAVE token
+        localStorage.setItem("bis_data", JSON.stringify(data));
+
         router.push("/admin/dashboard");
       } else {
         setError(data.message || "Login failed.");

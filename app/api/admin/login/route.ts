@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { SignJWT } from "jose";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-very-secure-secret-key";
+// Use the same secret and encoding as the middleware
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || "your-secret-key-change-in-production"
+);
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,7 +31,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" },
@@ -44,14 +47,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create JWT token
-    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    // Create JWT token with jose
+    const token = await new SignJWT({ id: user._id, email: user.email })
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime("7d")
+      .sign(JWT_SECRET);
 
     const response = NextResponse.json({
       success: true,
       message: "Login successful",
+      // Return user data for the client
+      id: user._id,
+      email: user.email,
+      username: user.username,
     });
 
     response.cookies.set({

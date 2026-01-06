@@ -7,30 +7,43 @@ const JWT_SECRET = new TextEncoder().encode(
 );
 
 // Public routes that don't require authentication
-const publicRoutes = ["/admin/login", "/api/admin/login", "/admin/register", "/api/admin/register"];
+const publicRoutes = [
+  "/admin/login",
+  "/admin/register",
+  "/api/admin/login",
+  "/api/admin/register",
+  "/api/admin/verify",
+];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check if the route is public
+  // Let public routes pass
   if (publicRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.next();
   }
 
-  // Check for admin routes
-  if (pathname.startsWith("/admin")) {
+  // Protect all other admin routes
+  if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
     const token = request.cookies.get("admin_token")?.value;
 
     if (!token) {
+      if (pathname.startsWith("/api/admin")) {
+        return NextResponse.json(
+          { message: "Authentication required" },
+          { status: 401 }
+        );
+      }
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
 
     try {
-      // Verify JWT token
       await jwtVerify(token, JWT_SECRET);
       return NextResponse.next();
     } catch (error) {
-      // Invalid token, redirect to login
+      if (pathname.startsWith("/api/admin")) {
+        return NextResponse.json({ message: "Invalid token" }, { status: 401 });
+      }
       const response = NextResponse.redirect(
         new URL("/admin/login", request.url)
       );
@@ -43,15 +56,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * 1. /api/auth routes (if any)
-     * 2. /_next/ (Next.js internals)
-     * 3. /_static (inside /public)
-     * 4. /_vercel (Vercel internals)
-     * 5. /favicon.ico, /sitemap.xml, /robots.txt (static files)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-  ],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };

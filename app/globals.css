@@ -171,3 +171,8 @@
   box-shadow: 0 8px 15px rgba(59, 130, 246, 0.35);
   background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
 }
+
+/* global.css তে */
+.container-custom {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl w-full;
+}
