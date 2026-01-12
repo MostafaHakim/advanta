@@ -77,7 +77,7 @@ const FooterPremium = () => {
                   />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">DVANTA SCALE</div>
+                  <div className="text-2xl font-bold">ADVANTA SCALE</div>
                   <div className="text-blue-400 text-sm">
                     Digital Transformation Agency
                   </div>
@@ -228,7 +228,7 @@ const FooterPremium = () => {
         <div className="py-8 flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Copyright */}
           <div className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} DVANTA SCALE. All rights reserved.
+            © {new Date().getFullYear()} ADVANTA SCALE. All rights reserved.
           </div>
 
           {/* Social Links */}
@@ -269,13 +269,6 @@ const FooterPremium = () => {
               Cookies
             </Link>
           </div>
-        </div>
-
-        {/* Made With Love */}
-        <div className="border-t border-white/10 py-6 text-center">
-          <p className="text-gray-500 text-sm">
-            Made with ❤️ in Bangladesh • Building digital futures since 2024
-          </p>
         </div>
       </div>
     </footer>

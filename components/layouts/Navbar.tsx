@@ -211,7 +211,7 @@ const Navbar = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl sm:text-2xl font-bold text-gray-900">
-                  DVANTA{" "}
+                  ADVANTA{" "}
                   <span className="text-xs font-bold text-blue-600 tracking-wider">
                     SCALE
                   </span>
@@ -270,7 +270,7 @@ const Navbar = () => {
                                       {/* Category Header */}
                                       <div className="flex items-center gap-3 lg:gap-4">
                                         <div
-                                          className={`w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-sm`}
+                                          className={`w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br ${category.color} text-white flex items-center justify-center shadow-sm`}
                                         >
                                           {category.icon}
                                         </div>
@@ -433,7 +433,7 @@ const Navbar = () => {
                       <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-200">
                         <Image
                           src={Logo}
-                          alt="DVANTA SCALE"
+                          alt="ADVANTA SCALE"
                           width={16}
                           height={16}
                           className="w-4 h-4 sm:w-5 sm:h-5 object-contain"
@@ -442,7 +442,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-lg sm:text-xl font-bold text-gray-900">
-                        DVANTA{" "}
+                        ADVANTA{" "}
                         <span className="text-xs font-bold text-blue-600">
                           SCALE
                         </span>
