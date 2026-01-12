@@ -532,7 +532,7 @@ const FooterPremium = () => {
       {/* Middle Section - Links */}
       <div className="border-b border-white/10">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 py-16">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-12 py-16 ">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
                 <h4 className="font-semibold text-white mb-6">{category}</h4>
