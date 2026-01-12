@@ -126,32 +126,14 @@ const teamMembers = [
 
 const TeamSection = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-[#2c2c54] via-[#706fd3] to-[#40407a]/50">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-      <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-full blur-3xl" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-100/30 to-purple-100/30 rounded-full blur-3xl" />
+    <section className="relative py-24 overflow-hidden bg-linear-to-r bg- from-violet-300 via-white to-violet-300">
+      {/* Light Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-100 to-transparent" />
+      <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-50/60 to-blue-50/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-50/60 to-blue-50/20 rounded-full blur-3xl" />
 
-      {/* Floating Orbs */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
-          style={{
-            left: `${20 + i * 30}%`,
-            top: `${10 + i * 20}%`,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 3 + i,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
+      {/* Light Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:80px_80px] opacity-20" />
 
       <div className="container-custom relative z-10">
         {/* Header */}
@@ -165,7 +147,7 @@ const TeamSection = () => {
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-100 mb-6"
           >
             <Users className="w-5 h-5 text-blue-600" />
             <span className="text-sm font-semibold text-blue-700">
@@ -173,14 +155,11 @@ const TeamSection = () => {
             </span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white">
-            Meet Our{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Expert Team
-            </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-gray-900">
+            Meet Our <span className="text-blue-600">Expert Team</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             A collective of passionate professionals dedicated to delivering
             exceptional results and driving digital success for our clients.
           </p>
@@ -194,10 +173,10 @@ const TeamSection = () => {
           transition={{ duration: 0.7 }}
           className="mb-24"
         >
-          <div className="relative bg-gradient-to-br from-white to-blue-50/50 rounded-3xl p-6 md:p-12 shadow-2xl shadow-blue-100/50 border border-blue-100 overflow-hidden">
+          <div className="relative bg-white rounded-2xl p-6 md:p-12 shadow-lg border border-gray-200 overflow-hidden">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-bl-full" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/5 to-transparent rounded-tr-full" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-50/30 to-transparent rounded-bl-full" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-50/30 to-transparent rounded-tr-full" />
 
             <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
               {/* Image Section */}
@@ -213,7 +192,7 @@ const TeamSection = () => {
                     className="relative w-full aspect-square max-w-sm md:max-w-md mx-auto"
                   >
                     {/* Main Image Container */}
-                    <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                    <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white shadow-xl">
                       <Image
                         src={teamMembers[0].image}
                         alt={teamMembers[0].name}
@@ -236,7 +215,7 @@ const TeamSection = () => {
                           idx === 0
                             ? "top-4 -right-2 sm:top-6 sm:-right-4"
                             : "bottom-4 -left-2 sm:bottom-6 sm:-left-4"
-                        } bg-white px-3 py-2 sm:px-4 sm:py-3 rounded-2xl shadow-xl border border-gray-100`}
+                        } bg-white px-3 py-2 sm:px-4 sm:py-3 rounded-xl shadow-lg border border-gray-200`}
                       >
                         <div className="text-center">
                           <div className="text-base sm:text-lg font-bold text-blue-600">
@@ -251,7 +230,7 @@ const TeamSection = () => {
                   </motion.div>
 
                   {/* Decorative Ring */}
-                  <div className="absolute inset-0 -m-4 rounded-full border-2 border-blue-200/50" />
+                  <div className="absolute inset-0 -m-4 rounded-full border-2 border-blue-100/50" />
                 </div>
               </motion.div>
 
@@ -262,12 +241,12 @@ const TeamSection = () => {
                 viewport={{ once: true }}
                 className="space-y-6 text-center lg:text-left"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-800">
                   <Award className="w-4 h-4" />
                   <span className="text-sm font-medium">Leadership</span>
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <h3 className="text-3xl md:text-4xl font-bold text-gray-900">
                   {teamMembers[0].name}
                 </h3>
 
@@ -290,7 +269,7 @@ const TeamSection = () => {
                       <motion.span
                         key={skill}
                         whileHover={{ scale: 1.05 }}
-                        className="px-4 py-2 sm:px-5 sm:py-2.5 bg-white rounded-full text-gray-700 shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+                        className="px-4 py-2 sm:px-5 sm:py-2.5 bg-gray-50 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all border border-gray-200"
                       >
                         {skill}
                       </motion.span>
@@ -322,10 +301,10 @@ const TeamSection = () => {
                       href={social.href}
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="p-3 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group"
+                      className="p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-200 group"
                       aria-label={social.label}
                     >
-                      <social.icon className="w-5 h-5 text-gray-700 group-hover:text-blue-600 transition-colors" />
+                      <social.icon className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition-colors" />
                     </motion.a>
                   ))}
                 </div>
@@ -351,9 +330,9 @@ const TeamSection = () => {
               whileHover={{ y: -8 }}
               className="group"
             >
-              <div className="relative h-full bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100">
+              <div className="relative h-full bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-500 overflow-hidden border border-gray-200">
                 {/* Background Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Image Section */}
                 <div className="relative px-8 pt-8">
@@ -362,7 +341,7 @@ const TeamSection = () => {
                     className="relative mx-auto w-36 h-36 sm:w-48 sm:h-48"
                   >
                     {/* Main Image */}
-                    <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl">
+                    <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
                       <Image
                         src={member.image}
                         alt={member.name}
@@ -379,7 +358,7 @@ const TeamSection = () => {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 }}
-                      className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg"
+                      className="absolute -bottom-2 -right-2 bg-blue-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-md"
                     >
                       <div className="text-center">
                         <div className="font-bold text-xs sm:text-sm">
@@ -396,7 +375,7 @@ const TeamSection = () => {
                 {/* Content */}
                 <div className="p-6 md:p-8 pt-6">
                   <div className="text-center mb-4">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                       {member.name}
                     </h3>
                     <p className="text-blue-600 font-semibold">
@@ -414,7 +393,7 @@ const TeamSection = () => {
                       {member.expertise.map((skill) => (
                         <span
                           key={skill}
-                          className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                          className="px-3 py-1.5 bg-gray-50 text-gray-700 rounded-lg text-sm font-medium hover:bg-blue-50 hover:text-blue-700 transition-colors border border-gray-200"
                         >
                           {skill}
                         </span>
@@ -423,7 +402,7 @@ const TeamSection = () => {
                   </div>
 
                   {/* Social Links */}
-                  <div className="flex items-center justify-center gap-4 md:gap-6 pt-6 border-t border-gray-100">
+                  <div className="flex items-center justify-center gap-4 md:gap-6 pt-6 border-t border-gray-200">
                     {[
                       {
                         icon: Linkedin,
@@ -462,7 +441,7 @@ const TeamSection = () => {
                   viewport={{ once: true }}
                   className="p-6 pt-0"
                 >
-                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 font-semibold hover:from-blue-100 hover:to-purple-100 transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                  <button className="w-full py-3 rounded-lg bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition-all duration-300 flex items-center justify-center gap-2 group/btn border border-blue-100">
                     View Full Profile
                     <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
@@ -478,28 +457,28 @@ const TeamSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 100 }}
-          className="text-center mt-20"
+          className="text-center mt-20 shadow-2xl"
         >
-          <div className="relative bg-gradient-to-r from-[#2c2c54] to-[#40407a]/90 rounded-3xl p-8 md:p-12 overflow-hidden">
+          <div className="relative bg-blue-50 rounded-xl p-8 md:p-12 overflow-hidden border border-blue-100 ">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 left-0 w-32 h-32 border-2 border-white rounded-full -translate-x-16 -translate-y-16" />
-              <div className="absolute bottom-0 right-0 w-32 h-32 border-2 border-white rounded-full translate-x-16 translate-y-16" />
+              <div className="absolute top-0 left-0 w-32 h-32 border-2 border-blue-200 rounded-full -translate-x-16 -translate-y-16" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 border-2 border-blue-200 rounded-full translate-x-16 translate-y-16" />
             </div>
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-                <Users className="w-5 h-5 text-white" />
-                <span className="text-white text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-lg mb-6 border border-blue-200">
+                <Users className="w-5 h-5 text-blue-600" />
+                <span className="text-blue-700 text-sm font-medium">
                   We're Growing
                 </span>
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                 Want to Join Our Team?
               </h3>
 
-              <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
                 We're always looking for talented and passionate individuals to
                 join our mission of transforming businesses through digital
                 excellence.
@@ -509,7 +488,8 @@ const TeamSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 rounded-xl font-bold hover:shadow-2xl hover:shadow-white/20 transition-all duration-300"
+                  className="px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md"
+                  style={{ borderRadius: "8px" }}
                 >
                   View Open Positions
                 </motion.button>
@@ -517,7 +497,8 @@ const TeamSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-white text-white rounded-xl font-bold hover:bg-white/10 transition-all duration-300"
+                  className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
+                  style={{ borderRadius: "8px" }}
                 >
                   Contact Our HR
                 </motion.button>

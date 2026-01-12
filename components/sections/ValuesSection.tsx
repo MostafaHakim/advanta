@@ -146,7 +146,9 @@ const ValuesSection = () => {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-6">Our Culture</h3>
+                <h3 className="text-2xl md:text-3xl font-bold mb-6">
+                  Our Culture
+                </h3>
                 <p className="text-lg mb-8 opacity-90">
                   We foster a culture of learning, growth, and collaboration
                   where every team member is empowered to do their best work and
@@ -200,7 +202,9 @@ const ValuesSection = () => {
           className="mt-20 text-center"
         >
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold mb-6">Our Commitment to You</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-6">
+              Our Commitment to You
+            </h3>
             <p className="text-gray-600 mb-8">
               We are committed to not just meeting but exceeding your
               expectations. Our values are not just words on a page - they are

@@ -58,7 +58,7 @@ const Navbar = () => {
     {
       title: "Digital Marketing",
       icon: <Zap className="w-6 h-6" />,
-      color: "from-blue-500 to-cyan-500",
+      color: "from-blue-500 to-blue-600",
       services: [
         {
           name: "SEO Optimization",
@@ -89,7 +89,7 @@ const Navbar = () => {
     {
       title: "Tech Solutions",
       icon: <Code className="w-6 h-6" />,
-      color: "from-purple-500 to-pink-500",
+      color: "from-blue-600 to-blue-700",
       services: [
         {
           name: "Web Development",
@@ -120,7 +120,7 @@ const Navbar = () => {
     {
       title: "Analytics & Strategy",
       icon: <Target className="w-6 h-6" />,
-      color: "from-emerald-500 to-green-500",
+      color: "from-blue-700 to-blue-800",
       services: [
         {
           name: "Analytics & Reporting",
@@ -187,20 +187,19 @@ const Navbar = () => {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-linear-to-r from-[#020617]/50 via-[#130f40]/95 to-[#020617]/50 backdrop-blur-xl shadow-2xl border-b border-gray-100"
-            : "bg-linear-to-r from-[#020617]/90 via-[#130f40]/95 to-[#020617]/90 backdrop-blur-lg"
+            ? "bg-white shadow-lg border-b border-gray-200 backdrop-blur-sm"
+            : "bg-white border-b border-gray-100"
         }`}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo with Glow Effect */}
+            {/* Logo */}
             <Link
               href="/"
               className="flex items-center space-x-2 sm:space-x-3 group"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-600 rounded-full blur group-hover:blur-lg transition-all duration-300 opacity-70"></div>
-                <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+                <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow ring-1  ring-black/20 border border-gray-200">
                   <Image
                     src={Logo}
                     alt="DVANTA SCALE"
@@ -211,9 +210,9 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-bold bg-linear-to-r from-[#f5f6fa] to-[#dcdde1] bg-clip-text text-transparent animate-gradient">
+                <span className="text-xl sm:text-2xl font-bold text-gray-900">
                   DVANTA{" "}
-                  <span className="text-xs font-bold text-white tracking-wider">
+                  <span className="text-xs font-bold text-blue-600 tracking-wider">
                     SCALE
                   </span>
                 </span>
@@ -231,8 +230,10 @@ const Navbar = () => {
                         {/* Services Link with Mega Menu */}
                         <Link
                           href={item.href}
-                          className={`flex items-center px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl transition-all duration-300 text-sm lg:text-base text-white ${
-                            isServicesActive ? "" : ""
+                          className={`flex items-center px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-lg transition-all duration-300 text-sm lg:text-base ${
+                            isServicesActive
+                              ? "text-blue-600 bg-blue-50"
+                              : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                           }`}
                           onMouseEnter={() => setMegaMenuOpen(true)}
                         >
@@ -248,7 +249,7 @@ const Navbar = () => {
                         <AnimatePresence>
                           {megaMenuOpen && (
                             <motion.div
-                              className="absolute left-1/2 -translate-x-1/2 mt-6 w-[95vw] max-w-6xl z-50"
+                              className="absolute left-1/2 -translate-x-1/2 mt-2 w-[95vw] max-w-6xl z-50"
                               initial={{ opacity: 0, y: -12 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -12 }}
@@ -256,7 +257,7 @@ const Navbar = () => {
                               onMouseEnter={() => setMegaMenuOpen(true)}
                               onMouseLeave={() => setMegaMenuOpen(false)}
                             >
-                              <div className="rounded-2xl bg-gradient-to-r from-[#020617]/95 via-indigo-900/95 to-indigo-800/95 shadow-2xl p-6 lg:p-8 text-white">
+                              <div className="rounded-xl bg-white shadow-2xl border border-gray-200 p-6 lg:p-8">
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                                   {serviceCategories.map((category, index) => (
                                     <motion.div
@@ -269,15 +270,15 @@ const Navbar = () => {
                                       {/* Category Header */}
                                       <div className="flex items-center gap-3 lg:gap-4">
                                         <div
-                                          className={`w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-lg`}
+                                          className={`w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-sm`}
                                         >
                                           {category.icon}
                                         </div>
                                         <div>
-                                          <h3 className="text-base lg:text-lg font-bold">
+                                          <h3 className="text-base lg:text-lg font-bold text-gray-900">
                                             {category.title}
                                           </h3>
-                                          <p className="text-xs lg:text-sm text-gray-300">
+                                          <p className="text-xs lg:text-sm text-gray-500">
                                             Expert solutions
                                           </p>
                                         </div>
@@ -296,12 +297,7 @@ const Navbar = () => {
                                           >
                                             <Link
                                               href={service.href}
-                                              className="
-                              group flex items-center p-2 lg:p-3 rounded-xl
-                              hover:bg-white/10
-                              transition-all duration-300
-                              hover:text-white
-                            "
+                                              className="group flex items-center p-2 lg:p-3 rounded-lg hover:bg-blue-50 transition-all duration-300"
                                             >
                                               <div
                                                 className={`w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white mr-3 group-hover:scale-110 transition-transform`}
@@ -310,15 +306,15 @@ const Navbar = () => {
                                               </div>
 
                                               <div className="flex-1">
-                                                <div className="font-semibold text-sm lg:text-base">
+                                                <div className="font-semibold text-sm lg:text-base text-gray-900 group-hover:text-blue-600">
                                                   {service.name}
                                                 </div>
-                                                <div className="text-xs mt-1">
+                                                <div className="text-xs mt-1 text-gray-600">
                                                   {service.description}
                                                 </div>
                                               </div>
 
-                                              <ArrowRight className="w-4 h-4 text-white group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                                             </Link>
                                           </motion.li>
                                         ))}
@@ -328,18 +324,19 @@ const Navbar = () => {
                                 </div>
 
                                 {/* Bottom CTA */}
-                                <div className="mt-6 lg:mt-8 pt-6 lg:pt-8 border-t border-white/20 flex flex-col lg:flex-row items-center justify-between gap-4">
+                                <div className="mt-6 lg:mt-8 pt-6 lg:pt-8 border-t border-gray-200 flex flex-col lg:flex-row items-center justify-between gap-4">
                                   <div>
-                                    <h4 className="font-bold text-base lg:text-lg">
+                                    <h4 className="font-bold text-base lg:text-lg text-gray-900">
                                       Need a custom solution?
                                     </h4>
-                                    <p className="text-gray-300 text-xs lg:text-sm mt-1">
+                                    <p className="text-gray-600 text-xs lg:text-sm mt-1">
                                       Tailored services for your business
                                     </p>
                                   </div>
                                   <Link
                                     href="/services"
-                                    className="flex items-center justify-center bg-white text-gray-900 px-4 py-2 lg:px-5 lg:py-3 rounded-xl font-semibold hover:bg-gray-100 transition w-full lg:w-auto"
+                                    className="flex items-center justify-center bg-blue-600 text-white px-4 py-2 lg:px-5 lg:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 w-full lg:w-auto shadow-sm hover:shadow-md"
+                                    style={{ borderRadius: "8px" }}
                                   >
                                     Explore All Services
                                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -353,10 +350,10 @@ const Navbar = () => {
                     ) : (
                       <Link
                         href={item.href}
-                        className={`flex items-center px-4 sm:px-6 lg:px-8 py-2 rounded-xl transition-all duration-300 text-sm lg:text-base ${
+                        className={`flex items-center px-4 sm:px-6 lg:px-8 py-2 rounded-lg transition-all duration-300 text-sm lg:text-base ${
                           pathname === item.href
-                            ? "ring-1 ring-gray-300 bg-white text-gray-900"
-                            : "text-white hover:ring-1 ring-gray-300 hover:text-white"
+                            ? "text-blue-600 bg-blue-50 font-medium"
+                            : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                         }`}
                       >
                         {item.name}
@@ -370,7 +367,10 @@ const Navbar = () => {
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
               <Link href="/contact" className="relative overflow-hidden group">
-                <div className="relative px-6 py-2.5 ring-2 ring-white text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5 text-sm lg:text-base">
+                <div
+                  className="px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md"
+                  style={{ borderRadius: "8px" }}
+                >
                   Get Started
                 </div>
               </Link>
@@ -379,7 +379,8 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all duration-300 group"
+              className="lg:hidden relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300 group border border-gray-200"
+              style={{ borderRadius: "8px" }}
             >
               <div className="relative">
                 <Menu
@@ -407,7 +408,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -418,10 +419,10 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-full sm:max-w-sm bg-gradient-to-b from-white to-gray-50 shadow-2xl z-50 lg:hidden overflow-y-auto"
+              className="fixed top-0 right-0 h-full w-full sm:max-w-sm bg-white shadow-2xl z-50 lg:hidden overflow-y-auto"
             >
               {/* Mobile Header */}
-              <div className="p-4 sm:p-6 border-b border-gray-100">
+              <div className="p-4 sm:p-6 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <Link
                     href="/"
@@ -429,7 +430,7 @@ const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <div className="relative">
-                      <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-lg ring-1 ring-gray-200">
+                      <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-200">
                         <Image
                           src={Logo}
                           alt="DVANTA SCALE"
@@ -440,9 +441,9 @@ const Navbar = () => {
                       </div>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      <span className="text-lg sm:text-xl font-bold text-gray-900">
                         DVANTA{" "}
-                        <span className="text-xs font-bold text-gray-600">
+                        <span className="text-xs font-bold text-blue-600">
                           SCALE
                         </span>
                       </span>
@@ -450,7 +451,8 @@ const Navbar = () => {
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors border border-gray-200"
+                    style={{ borderRadius: "8px" }}
                   >
                     <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
                   </button>
@@ -464,7 +466,7 @@ const Navbar = () => {
                   return (
                     <div
                       key={item.name}
-                      className="border-b border-gray-100 last:border-0 pb-2 last:pb-0"
+                      className="border-b border-gray-200 last:border-0 pb-2 last:pb-0"
                     >
                       {item.hasMegaMenu ? (
                         <div>
@@ -474,10 +476,11 @@ const Navbar = () => {
                                 activeService === item.name ? null : item.name
                               )
                             }
-                            className="flex items-center justify-between w-full py-3 sm:py-4 px-3 sm:px-4 rounded-xl hover:bg-gray-50 transition-colors group"
+                            className="flex items-center justify-between w-full py-3 sm:py-4 px-3 sm:px-4 rounded-lg hover:bg-gray-50 transition-colors group"
+                            style={{ borderRadius: "8px" }}
                           >
                             <div className="flex items-center">
-                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center mr-3">
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-50 flex items-center justify-center mr-3 border border-blue-100">
                                 <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                               </div>
                               <div className="text-left">
@@ -524,6 +527,7 @@ const Navbar = () => {
                                         onClick={() =>
                                           setIsMobileMenuOpen(false)
                                         }
+                                        style={{ borderRadius: "8px" }}
                                       >
                                         <div
                                           className={`w-8 h-8 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white mr-3`}
@@ -548,8 +552,9 @@ const Navbar = () => {
                               {/* View All Mobile Button */}
                               <Link
                                 href="/services"
-                                className="flex items-center justify-center py-3 mt-4 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 font-semibold hover:from-blue-100 hover:to-purple-100 transition-all text-sm"
+                                className="flex items-center justify-center py-3 mt-4 rounded-lg bg-blue-50 text-blue-600 font-semibold hover:bg-blue-100 transition-all text-sm border border-blue-100"
                                 onClick={() => setIsMobileMenuOpen(false)}
+                                style={{ borderRadius: "8px" }}
                               >
                                 View All Services
                                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -560,10 +565,11 @@ const Navbar = () => {
                       ) : (
                         <Link
                           href={item.href}
-                          className="flex items-center py-3 sm:py-4 px-3 sm:px-4 rounded-xl hover:bg-gray-50 transition-colors group"
+                          className="flex items-center py-3 sm:py-4 px-3 sm:px-4 rounded-lg hover:bg-gray-50 transition-colors group"
                           onClick={() => setIsMobileMenuOpen(false)}
+                          style={{ borderRadius: "8px" }}
                         >
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center mr-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gray-50 flex items-center justify-center mr-3 border border-gray-200">
                             <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 group-hover:text-blue-600" />
                           </div>
                           <div className="font-semibold text-gray-900 text-sm sm:text-base group-hover:text-blue-600">
@@ -577,12 +583,13 @@ const Navbar = () => {
               </div>
 
               {/* Mobile CTA Section */}
-              <div className="p-4 sm:p-6 border-t border-gray-100">
+              <div className="p-4 sm:p-6 border-t border-gray-200">
                 <div className="space-y-4">
                   <Link
                     href="/contact"
-                    className="block w-full py-3 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5 text-sm sm:text-base"
+                    className="block w-full py-3 text-center bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md text-sm sm:text-base"
                     onClick={() => setIsMobileMenuOpen(false)}
+                    style={{ borderRadius: "8px" }}
                   >
                     Get Free Consultation
                   </Link>
@@ -600,7 +607,7 @@ const Navbar = () => {
               </div>
 
               {/* Social Links */}
-              <div className="p-4 sm:p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50">
+              <div className="p-4 sm:p-6 bg-gray-50">
                 <div className="text-center">
                   <p className="text-xs sm:text-sm text-gray-600 mb-3">
                     Follow us
@@ -611,7 +618,8 @@ const Navbar = () => {
                         <a
                           key={social}
                           href="#"
-                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-md transition-all text-xs sm:text-sm"
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-md transition-all text-xs sm:text-sm border border-gray-200"
+                          style={{ borderRadius: "8px" }}
                         >
                           {social.charAt(0)}
                         </a>

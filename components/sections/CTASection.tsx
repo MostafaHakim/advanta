@@ -81,46 +81,13 @@ const CTASection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#1a0b2e] via-[#2d1b45] to-[#1a0b2e] min-h-screen flex flex-col justify-center">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-[2px] h-[2px] bg-purple-300/30 rounded-full"
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-            }}
-            animate={{
-              y: [null, `-${Math.random() * 100}px`],
-              x: [null, `-${Math.random() * 50}px`],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-center">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-30" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-20" />
 
-        {/* Gradient Orbs */}
-        <div className="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-full blur-3xl animate-pulse delay-1000" />
-
-        {/* Geometric Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 25px 25px, #fff 2px, transparent 0)`,
-              backgroundSize: "50px 50px",
-            }}
-          />
-        </div>
-      </div>
+      {/* Light Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:60px_60px] opacity-10" />
 
       {/* Main Container */}
       <div className="container-custom relative z-10 py-12 md:py-20 lg:py-28">
@@ -129,27 +96,25 @@ const CTASection = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-12 md:mb-16 px-4"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 backdrop-blur-sm mb-4 md:mb-6">
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-purple-300" />
-            <span className="text-xs md:text-sm font-medium text-purple-300 tracking-wider">
+          <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-lg bg-blue-50 border border-blue-100 mb-4 md:mb-6">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
+            <span className="text-xs md:text-sm font-medium text-blue-700 tracking-wider">
               LET'S CREATE MAGIC
             </span>
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-purple-300" />
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
           </div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 px-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300">
-              Transform
-            </span>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6">
+            <span className="text-blue-600">Transform</span>
             <br />
-            <span className="text-white">Your Digital Presence</span>
+            <span className="text-gray-900">Your Digital Presence</span>
           </h2>
 
-          <p className="text-base md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Let's craft a digital strategy that not only looks stunning but
-            <span className="text-purple-300 font-medium">
+            <span className="text-blue-600 font-medium">
               {" "}
               delivers measurable results
             </span>
@@ -166,12 +131,12 @@ const CTASection = () => {
             className="relative"
           >
             {/* Floating Card Effect */}
-            <div className="relative bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl shadow-purple-900/20">
-              <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="relative bg-white rounded-xl md:rounded-2xl p-6 md:p-8 border border-gray-200 shadow-lg">
+              <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-8 h-8 md:w-12 md:h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-md">
                 <Target className="w-4 h-4 md:w-6 md:h-6 text-white" />
               </div>
 
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-6 md:mb-8">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8">
                 Why Partner With Us?
               </h3>
 
@@ -187,12 +152,12 @@ const CTASection = () => {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                       whileHover={{ scale: 1.05 }}
-                      className="group flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-gradient-to-br from-white/5 to-transparent hover:from-purple-500/10 hover:to-pink-500/10 transition-all duration-300 border border-white/5 hover:border-purple-500/30"
+                      className="group flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-all duration-300 border border-gray-200 hover:border-blue-200"
                     >
-                      <div className="p-1.5 md:p-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all flex-shrink-0">
-                        <Icon className="w-4 h-4 md:w-5 md:h-5 text-purple-300" />
+                      <div className="p-1.5 md:p-2 rounded-lg bg-blue-100 group-hover:bg-blue-200 transition-all flex-shrink-0">
+                        <Icon className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                       </div>
-                      <span className="text-sm md:text-base text-gray-200 group-hover:text-white transition-colors">
+                      <span className="text-sm md:text-base text-gray-700 group-hover:text-gray-900 transition-colors">
                         {benefit.text}
                       </span>
                     </motion.div>
@@ -201,37 +166,33 @@ const CTASection = () => {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 md:gap-4 mt-8 md:mt-10 pt-6 md:pt-8 border-t border-white/10">
+              <div className="grid grid-cols-3 gap-4 md:gap-4 mt-8 md:mt-10 pt-6 md:pt-8 border-t border-gray-200">
                 <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
+                  <div className="text-2xl md:text-3xl font-bold text-blue-600">
                     98%
                   </div>
-                  <div className="text-xs md:text-sm text-gray-400">
+                  <div className="text-xs md:text-sm text-gray-600">
                     Client Satisfaction
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
+                  <div className="text-2xl md:text-3xl font-bold text-blue-600">
                     150+
                   </div>
-                  <div className="text-xs md:text-sm text-gray-400">
+                  <div className="text-xs md:text-sm text-gray-600">
                     Projects Delivered
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300">
+                  <div className="text-2xl md:text-3xl font-bold text-blue-600">
                     24h
                   </div>
-                  <div className="text-xs md:text-sm text-gray-400">
+                  <div className="text-xs md:text-sm text-gray-600">
                     Response Time
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Floating Elements */}
-            <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 backdrop-blur-sm animate-float" />
-            <div className="absolute -top-4 -right-4 md:-top-6 md:-right-6 w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/20 backdrop-blur-sm rotate-12 animate-float delay-1000" />
           </motion.div>
 
           {/* Right Content - Enhanced Form */}
@@ -242,21 +203,18 @@ const CTASection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative mt-8 md:mt-0"
           >
-            {/* Form Container with Glow Effect */}
-            <div className="relative bg-gradient-to-br from-gray-900/60 via-gray-900/80 to-gray-900/60 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20 shadow-2xl">
-              {/* Glow Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl md:rounded-3xl blur-xl opacity-20 animate-pulse" />
-
+            {/* Form Container */}
+            <div className="relative bg-white rounded-xl md:rounded-2xl p-6 md:p-8 border border-gray-200 shadow-lg">
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-1.5 md:p-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex-shrink-0">
+                  <div className="p-1.5 md:p-2 rounded-full bg-blue-600 flex-shrink-0">
                     <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                       Start Your Journey
                     </h3>
-                    <p className="text-purple-300 text-xs md:text-sm">
+                    <p className="text-blue-600 text-xs md:text-sm">
                       Fill the form below and let's create something
                       extraordinary
                     </p>
@@ -270,22 +228,22 @@ const CTASection = () => {
                     className="text-center py-8 md:py-12"
                   >
                     <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 md:mb-6">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full animate-ping opacity-20" />
-                      <div className="absolute inset-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                      <div className="absolute inset-0 bg-green-100 rounded-full animate-ping opacity-20" />
+                      <div className="absolute inset-2 bg-green-500 rounded-full flex items-center justify-center">
                         <CheckCircle className="w-8 h-8 md:w-12 md:h-12 text-white" />
                       </div>
                     </div>
-                    <h4 className="text-xl md:text-2xl font-bold text-white mb-2">
+                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                       Success!
                     </h4>
-                    <p className="text-gray-300 text-sm md:text-base">
+                    <p className="text-gray-600 text-sm md:text-base">
                       Our digital wizards will contact you within
-                      <span className="text-purple-300 font-medium">
+                      <span className="text-blue-600 font-medium">
                         {" "}
                         24 hours
                       </span>
                     </p>
-                    <div className="mt-4 md:mt-6 inline-flex items-center gap-2 text-xs md:text-sm text-gray-400">
+                    <div className="mt-4 md:mt-6 inline-flex items-center gap-2 text-xs md:text-sm text-gray-500">
                       <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-pulse" />
                       Preparing your personalized strategy
                     </div>
@@ -316,7 +274,7 @@ const CTASection = () => {
                           onHoverStart={() => setHoveredField(field.name)}
                           onHoverEnd={() => setHoveredField(null)}
                         >
-                          <label className="block text-xs md:text-sm font-medium text-gray-300 mb-1.5 md:mb-2">
+                          <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1.5 md:mb-2">
                             {field.label}
                           </label>
                           <input
@@ -327,11 +285,11 @@ const CTASection = () => {
                             }
                             onChange={handleChange}
                             required
-                            className={`w-full px-4 py-3 md:px-5 md:py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border transition-all duration-300 text-sm md:text-base ${
+                            className={`w-full px-4 py-3 md:px-5 md:py-4 rounded-lg bg-gray-50 border transition-all duration-300 text-sm md:text-base ${
                               hoveredField === field.name
-                                ? "border-purple-500 shadow-lg shadow-purple-500/20"
-                                : "border-gray-700 hover:border-purple-400"
-                            } text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50`}
+                                ? "border-blue-500 shadow-sm"
+                                : "border-gray-300 hover:border-blue-400"
+                            } text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500`}
                             placeholder={field.placeholder}
                           />
                         </motion.div>
@@ -340,7 +298,7 @@ const CTASection = () => {
 
                     <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                       <motion.div whileHover={{ scale: 1.02 }}>
-                        <label className="block text-xs md:text-sm font-medium text-gray-300 mb-1.5 md:mb-2">
+                        <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1.5 md:mb-2">
                           Phone Number
                         </label>
                         <input
@@ -348,13 +306,13 @@ const CTASection = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 md:px-5 md:py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-400 transition-all duration-300 text-sm md:text-base text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                          className="w-full px-4 py-3 md:px-5 md:py-4 rounded-lg bg-gray-50 border border-gray-300 hover:border-blue-400 transition-all duration-300 text-sm md:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
                           placeholder="+8801722440899"
                         />
                       </motion.div>
 
                       <motion.div whileHover={{ scale: 1.02 }}>
-                        <label className="block text-xs md:text-sm font-medium text-gray-300 mb-1.5 md:mb-2">
+                        <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1.5 md:mb-2">
                           Service Interested In *
                         </label>
                         <div className="relative">
@@ -363,30 +321,30 @@ const CTASection = () => {
                             value={formData.service}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 md:px-5 md:py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-400 transition-all duration-300 text-sm md:text-base text-white appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500/50 pr-10"
+                            className="w-full px-4 py-3 md:px-5 md:py-4 rounded-lg bg-gray-50 border border-gray-300 hover:border-blue-400 transition-all duration-300 text-sm md:text-base text-gray-900 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 pr-10"
                           >
-                            <option value="" className="bg-gray-900">
+                            <option value="" className="bg-white">
                               Select a service
                             </option>
                             {services.map((service) => (
                               <option
                                 key={service}
                                 value={service}
-                                className="bg-gray-900"
+                                className="bg-white"
                               >
                                 {service}
                               </option>
                             ))}
                           </select>
                           <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                            <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-purple-400 rotate-90" />
+                            <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-blue-500 rotate-90" />
                           </div>
                         </div>
                       </motion.div>
                     </div>
 
                     <motion.div whileHover={{ scale: 1.02 }}>
-                      <label className="block text-xs md:text-sm font-medium text-gray-300 mb-1.5 md:mb-2">
+                      <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1.5 md:mb-2">
                         Your Project Details
                       </label>
                       <textarea
@@ -394,7 +352,7 @@ const CTASection = () => {
                         value={formData.message}
                         onChange={handleChange}
                         rows={3}
-                        className="w-full px-4 py-3 md:px-5 md:py-4 rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-400 transition-all duration-300 text-sm md:text-base text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none"
+                        className="w-full px-4 py-3 md:px-5 md:py-4 rounded-lg bg-gray-50 border border-gray-300 hover:border-blue-400 transition-all duration-300 text-sm md:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 resize-none"
                         placeholder="Tell us about your vision, goals, and challenges..."
                       />
                     </motion.div>
@@ -404,11 +362,9 @@ const CTASection = () => {
                       disabled={isSubmitting}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full group relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-base md:text-lg transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/30 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full group relative overflow-hidden bg-blue-600 text-white py-3 md:py-4 px-6 md:px-8 rounded-lg font-bold text-base md:text-lg transition-all duration-300 hover:bg-blue-700 shadow-sm hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                      style={{ borderRadius: "8px" }}
                     >
-                      {/* Animated background */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
                       {isSubmitting ? (
                         <span className="flex items-center justify-center relative z-10">
                           <svg
@@ -442,16 +398,16 @@ const CTASection = () => {
                     </motion.button>
 
                     <p className="text-xs text-gray-500 text-center mt-4 md:mt-6">
-                      <span className="text-gray-400">
+                      <span className="text-gray-600">
                         By submitting, you agree to our{" "}
                       </span>
                       <a
                         href="#"
-                        className="text-purple-400 hover:text-purple-300 transition-colors"
+                        className="text-blue-600 hover:text-blue-700 transition-colors"
                       >
                         Privacy Policy
                       </a>
-                      <span className="text-gray-400">
+                      <span className="text-gray-600">
                         . Your data is encrypted and secure.
                       </span>
                     </p>
@@ -459,30 +415,6 @@ const CTASection = () => {
                 )}
               </div>
             </div>
-
-            {/* Floating Elements */}
-            <motion.div
-              animate={{
-                rotate: 360,
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                scale: { duration: 2, repeat: Infinity },
-              }}
-              className="absolute -top-3 -right-3 md:-top-4 md:-right-4 w-8 h-8 md:w-12 md:h-12 rounded-full border border-purple-500/30"
-            />
-            <motion.div
-              animate={{
-                rotate: -360,
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-                scale: { duration: 3, repeat: Infinity },
-              }}
-              className="absolute -bottom-3 -left-3 md:-bottom-4 md:-left-4 w-6 h-6 md:w-8 md:h-8 rounded-full border border-pink-500/30"
-            />
           </motion.div>
         </div>
 
@@ -491,79 +423,39 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mt-12 md:mt-20 pt-8 md:pt-12 border-t border-white/10 px-4"
+          className="text-center mt-12 md:mt-20 pt-8 md:pt-12 border-t border-gray-200 px-4"
         >
-          <p className="text-gray-400 text-sm md:text-base mb-4 md:mb-6">
+          <p className="text-gray-600 text-sm md:text-base mb-4 md:mb-6">
             Not ready for a full consultation? Start with a quick chat
           </p>
           <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 md:px-6 md:py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 text-gray-300 hover:text-white hover:border-purple-500 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+              className="px-4 py-2 md:px-6 md:py-3 rounded-lg bg-gray-100 border border-gray-300 text-gray-700 hover:text-gray-900 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+              style={{ borderRadius: "8px" }}
             >
               Schedule 15-min Call
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 md:px-6 md:py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 text-gray-300 hover:text-white hover:border-pink-500 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+              className="px-4 py-2 md:px-6 md:py-3 rounded-lg bg-gray-100 border border-gray-300 text-gray-700 hover:text-gray-900 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+              style={{ borderRadius: "8px" }}
             >
               View Case Studies
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 md:px-6 md:py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 text-gray-300 hover:text-white hover:border-blue-500 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+              className="px-4 py-2 md:px-6 md:py-3 rounded-lg bg-gray-100 border border-gray-300 text-gray-700 hover:text-gray-900 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 text-sm md:text-base whitespace-nowrap"
+              style={{ borderRadius: "8px" }}
             >
               Download Pricing
             </motion.button>
           </div>
         </motion.div>
       </div>
-
-      {/* CSS Animation */}
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-20px) rotate(5deg);
-          }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-          .container-custom {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-          }
-
-          section {
-            min-height: auto;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .grid-cols-2 {
-            grid-template-columns: 1fr;
-          }
-
-          .text-3xl {
-            font-size: 2rem;
-          }
-
-          .px-4 {
-            padding-left: 1rem;
-            padding-right: 1rem;
-          }
-        }
-      `}</style>
     </section>
   );
 };

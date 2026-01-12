@@ -38,13 +38,17 @@ const stats = [
 const StatsSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.15, // mobile friendly
+    threshold: 0.15,
   });
 
   return (
-    <section className="relative py-16 bg-gradient-to-b from-[#0a3d62] to-[#3c6382] overflow-hidden">
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
+    <section className="relative py-16 bg-linear-to-r from-blue-100 via-white to-blue-100 overflow-hidden">
+      {/* Light Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
+
+      {/* Decorative Elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-40" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-30" />
 
       {/* ✅ Parent container observed */}
       <div ref={ref} className="container-custom relative z-10">
@@ -58,7 +62,7 @@ const StatsSection = () => {
               className="text-center group"
             >
               {/* Icon */}
-              <div className="mx-auto mb-6 inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
+              <div className="mx-auto mb-6 inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:border-blue-200">
                 <div className="text-blue-600">{stat.icon}</div>
               </div>
 
@@ -72,49 +76,53 @@ const StatsSection = () => {
                     stiffness: 120,
                     delay: index * 0.1 + 0.2,
                   }}
-                  className="text-4xl font-bold text-white md:text-5xl"
+                  className="text-4xl font-bold text-gray-900 md:text-5xl"
                 >
                   {stat.value}
                 </motion.span>
-                <span className="ml-1 text-xl md:text-2xl font-bold text-white">
+                <span className="ml-1 text-xl md:text-2xl font-bold text-blue-600">
                   {stat.suffix}
                 </span>
               </div>
 
               {/* Label */}
-              <h3 className="mb-2 text-lg md:text-xl font-semibold text-blue-200">
+              <h3 className="mb-2 text-lg md:text-xl font-semibold text-gray-800">
                 {stat.label}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-200">{stat.description}</p>
+              <p className="text-gray-600">{stat.description}</p>
             </motion.div>
           ))}
         </div>
+
         {/* Trusted Brands */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 border-t border-white/20 pt-8"
+          className="mt-16 border-t border-gray-200 pt-12"
         >
-          <p className="mb-8 text-center text-white">
+          <p className="mb-10 text-center text-gray-600 text-lg">
             Trusted by leading brands worldwide
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 opacity-70 md:gap-12">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
             {["Brand A", "Brand B", "Brand C", "Brand D", "Brand E"].map(
               (brand) => (
-                <span
+                <div
                   key={brand}
-                  className="cursor-pointer text-base md:text-lg font-semibold text-white transition-colors hover:text-blue-300"
+                  className="cursor-pointer p-4 rounded-lg hover:bg-gray-50 transition-all duration-300 group"
                 >
-                  {brand}
-                </span>
+                  <span className="text-base md:text-lg font-semibold text-gray-700 transition-colors group-hover:text-blue-600">
+                    {brand}
+                  </span>
+                  <div className="h-0.5 w-0 group-hover:w-full bg-blue-600 transition-all duration-300 mx-auto mt-1"></div>
+                </div>
               )
             )}
           </div>
-        </motion.div>{" "}
+        </motion.div>
       </div>
     </section>
   );
