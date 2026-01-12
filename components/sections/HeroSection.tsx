@@ -173,7 +173,7 @@ export default function HeroSectionUnique() {
           </motion.div>
         )}
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -199,7 +199,7 @@ export default function HeroSectionUnique() {
               />
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
