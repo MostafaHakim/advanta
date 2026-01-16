@@ -65,61 +65,64 @@ const FooterPremium = () => {
       {/* Top Section */}
       <div className="border-b border-white/10">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 py-6 lg:py-16">
             {/* Brand Info */}
-            <div>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center p-2">
-                  <Image
-                    src={Logo}
-                    alt="DVANTA SCALE"
-                    className="text-white font-bold text-xl"
-                  />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">ADVANTA SCALE</div>
-                  <div className="text-blue-400 text-sm">
-                    Digital Transformation Agency
-                  </div>
-                </div>
+
+            <div className="flex items-center gap-2 lg:gap-4 mb-2 lg:mb-8">
+              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center p-2">
+                <Image
+                  src={Logo}
+                  alt="DVANTA SCALE"
+                  className="text-white font-bold text-xl"
+                />
               </div>
-
-              <p className="text-gray-400 mb-8 max-w-md leading-relaxed">
-                We transform businesses through innovative digital strategies,
-                delivering measurable results and sustainable growth.
-              </p>
-
-              {/* Newsletter */}
-              <div className="mb-8 text-white">
-                <div className="flex items-center gap-2 mb-4">
-                  <Mail className="w-5 h-5 text-blue-400" />
-                  <h4 className="font-semibold text-white">Stay Updated</h4>
+              <div>
+                <div className="text-lg lg:text-2xl font-bold">
+                  ADVANTA SCALE
                 </div>
-                <form className="flex gap-2">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-gray-500"
-                  />
-                  <button
-                    type="submit"
-                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors flex items-center gap-2"
-                  >
-                    Subscribe
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </form>
-                <p className="text-gray-500 text-xs mt-2">
-                  No spam. Unsubscribe anytime.
-                </p>
+                <div className="text-blue-400 text-xs">
+                  Digital Transformation Agency
+                </div>
               </div>
             </div>
 
+            <p className="text-gray-400 mb-2 lg:mb-8 max-w-md leading-relaxed text-sm">
+              We transform businesses through innovative digital strategies,
+              delivering measurable results and sustainable growth.
+            </p>
+
+            {/* Newsletter */}
+            <div className="mb-2 lg:mb-8 text-white">
+              <div className="flex items-center gap-2 mb-2 lg:mb-4">
+                <Mail className="w-5 h-5 text-blue-400" />
+                <h4 className="font-semibold text-white">Stay Updated</h4>
+              </div>
+              <form className="flex flex-col lg:flex-row gap-2">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 text-white placeholder-gray-500"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors flex items-center gap-2"
+                >
+                  Subscribe
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+              <p className="text-gray-500 text-xs mt-2">
+                No spam. Unsubscribe anytime.
+              </p>
+            </div>
+
             {/* Contact Info */}
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-4 lg:gap-8">
               <div>
-                <h4 className="font-semibold text-white mb-6">Get in Touch</h4>
-                <div className="space-y-6">
+                <h4 className="font-semibold text-white mb-2 lg:mb-6">
+                  Get in Touch
+                </h4>
+                <div className="space-y-2 lg:space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
                       <Phone className="w-5 h-5 text-blue-400" />
@@ -158,10 +161,10 @@ const FooterPremium = () => {
 
               {/* Business Hours */}
               <div>
-                <h4 className="font-semibold text-white mb-6">
+                <h4 className="font-semibold text-white mb-2 lg:mb-6">
                   Business Hours
                 </h4>
-                <div className="space-y-3">
+                <div className="space-y-2 lg:space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-400">Monday - Friday</span>
                     <span className="text-white">9:00 AM - 6:00 PM</span>
@@ -184,11 +187,13 @@ const FooterPremium = () => {
       {/* Middle Section - Links */}
       <div className="border-b border-white/10">
         <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-12 py-16 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-12 py-6 lg:py-16 ">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
-                <h4 className="font-semibold text-white mb-6">{category}</h4>
-                <ul className="space-y-4">
+                <h4 className="font-semibold text-white mb-2 lg:mb-6">
+                  {category}
+                </h4>
+                <ul className=" lg:space-y-4">
                   {links.map((link) => (
                     <li key={link.name}>
                       <Link
@@ -207,7 +212,7 @@ const FooterPremium = () => {
             {/* Certifications */}
             <div>
               <h4 className="font-semibold text-white mb-6">Certifications</h4>
-              <div className="space-y-4">
+              <div className="space-y-2 lg:space-y-4">
                 {certifications.map((cert) => {
                   const Icon = cert.icon;
                   return (
@@ -225,7 +230,7 @@ const FooterPremium = () => {
 
       {/* Bottom Section */}
       <div className="container-custom">
-        <div className="py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="py-4 lg:py-8 flex flex-col md:flex-row justify-between items-center gap-3 lg:gap-6">
           {/* Copyright */}
           <div className="text-gray-500 text-sm">
             © {new Date().getFullYear()} ADVANTA SCALE. All rights reserved.

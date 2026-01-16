@@ -123,7 +123,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
+    <section className="relative py-8 lg:py-24 bg-white overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-blue-50/50 to-transparent" />
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-blue-50/50 to-transparent" />
@@ -143,7 +143,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-20"
+          className="text-center mb-6 lg:mb-20"
         >
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
@@ -156,20 +156,20 @@ const ServicesSection = () => {
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold pb-4 lg:mb-6">
             <span className="text-gray-900">Comprehensive</span>
             <br />
             <span className="text-blue-600">Digital Solutions</span>
           </h2>
 
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-md lg:text-xl text-gray-600 max-w-3xl mx-auto leading-none lg:leading-relaxed">
             End-to-end digital marketing services designed to drive measurable
             results and sustainable growth for your business.
           </p>
         </motion.div>
 
         {/* Services Grid with Enhanced Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-4 lg:mb-20">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -191,7 +191,7 @@ const ServicesSection = () => {
                 />
 
                 {/* Icon */}
-                <div className="relative mb-6">
+                <div className="relative mb-2 lg:mb-6">
                   <div className="text-4xl mb-4">{service.icon}</div>
                   <div className="absolute -top-2 -right-2 w-12 h-12 bg-blue-50 rounded-full blur-xl opacity-50" />
                 </div>
@@ -267,7 +267,7 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-12 border border-blue-100"
         >
-          <div className="text-center mb-12">
+          <div className="text-center mb-4 lg:mb-12">
             <h3 className="text-3xl font-bold text-gray-900 mb-4">
               Our Proven Process
             </h3>
@@ -312,7 +312,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-20"
+          className="text-center mt-4 lg:mt-20"
         >
           <Link
             href="/services"

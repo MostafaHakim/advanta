@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink, Github, Filter, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 
 const portfolioItems = [
   {
@@ -149,18 +150,18 @@ const PortfolioSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-4 lg:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-100 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-100 mb-2 lg:mb-6">
             <span className="w-2 h-2 bg-blue-500 rounded-full" />
             <span className="text-sm font-medium text-blue-700">
               Our Portfolio
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-gray-900">
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold mb-2 lg:mb-6 tracking-tight text-gray-900">
             Featured <span className="text-blue-600">Projects</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-md md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Showcasing our success stories and innovative solutions that drove
             measurable results for clients across various industries.
           </p>
@@ -172,7 +173,7 @@ const PortfolioSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
+          className="flex flex-wrap justify-center gap-3 mb-6 lg:mb-16"
         >
           <div className="flex items-center gap-2 text-gray-600 mb-4 w-full justify-center">
             <Filter className="w-5 h-5" />
@@ -204,7 +205,7 @@ const PortfolioSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => (
@@ -277,7 +278,7 @@ const PortfolioSection = () => {
                           className="p-4 bg-white rounded-lg hover:bg-blue-50 transition-all duration-300 shadow-md"
                           style={{ borderRadius: "8px" }}
                         >
-                          <Github className="w-5 h-5 text-blue-600" />
+                          <FaGithub className="w-5 h-5 text-blue-600" />
                         </motion.a>
                       )}
                     </div>
@@ -314,7 +315,7 @@ const PortfolioSection = () => {
 
                   {/* Results Section */}
                   {item.results && (
-                    <div className="pt-6 border-t border-gray-200">
+                    <div className="lg:pt-6 border-t border-gray-200">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {item.results.map((result, idx) => (
                           <motion.div
@@ -336,19 +337,11 @@ const PortfolioSection = () => {
                   )}
 
                   {/* View Details Button */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{
-                      opacity: hoveredItem === item.id ? 1 : 0,
-                      y: hoveredItem === item.id ? 0 : 10,
-                    }}
-                    transition={{ duration: 0.2 }}
-                    className="mt-6"
-                  >
-                    <button className="w-full py-3 bg-blue-50 text-blue-600 rounded-lg font-medium border border-blue-200 hover:border-blue-300 hover:bg-blue-100 transition-all duration-300">
+                  <div className="mt-6">
+                    <button className="w-full  py-3 bg-blue-50 text-blue-600 rounded-lg font-medium border border-blue-200 hover:border-blue-300 hover:bg-blue-100 transition-all duration-300">
                       View Case Study
                     </button>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -361,7 +354,7 @@ const PortfolioSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: "spring" }}
-            className="text-center py-20"
+            className="text-center py-4 lg:py-20"
           >
             <div className="text-gray-600 text-lg mb-4">
               No projects found in this category
@@ -384,7 +377,7 @@ const PortfolioSection = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-center mt-20"
+          className="text-center mt-6 lg:mt-20"
         >
           <div className="inline-flex flex-col items-center gap-8">
             <div className="text-center">

@@ -126,7 +126,7 @@ const teamMembers = [
 
 const TeamSection = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-linear-to-r bg- from-violet-300 via-white to-violet-300">
+    <section className="relative py-6 lg:py-24 overflow-hidden bg-linear-to-r bg- from-violet-300 via-white to-violet-300">
       {/* Light Background Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-100 to-transparent" />
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-50/60 to-blue-50/20 rounded-full blur-3xl" />
@@ -141,13 +141,13 @@ const TeamSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
+          className="text-center mb-4 lg:mb-20"
         >
           <motion.div
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-100 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-100 mb-4 lg:mb-6"
           >
             <Users className="w-5 h-5 text-blue-600" />
             <span className="text-sm font-semibold text-blue-700">
@@ -155,11 +155,11 @@ const TeamSection = () => {
             </span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-gray-900">
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold mb-2 lg:mb-6 tracking-tight text-gray-900">
             Meet Our <span className="text-blue-600">Expert Team</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             A collective of passionate professionals dedicated to delivering
             exceptional results and driving digital success for our clients.
           </p>
@@ -171,7 +171,7 @@ const TeamSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-24"
+          className="mb-6 lg:mb-24"
         >
           <div className="relative bg-white rounded-2xl p-6 md:p-12 shadow-lg border border-gray-200 overflow-hidden">
             {/* Decorative Elements */}
@@ -239,7 +239,7 @@ const TeamSection = () => {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="space-y-6 text-center lg:text-left"
+                className="space-y-4 lg:space-y-6 text-center lg:text-left"
               >
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-800">
                   <Award className="w-4 h-4" />
@@ -457,7 +457,7 @@ const TeamSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 100 }}
-          className="text-center mt-20 shadow-2xl"
+          className="text-center mt-4 lg:mt-20 shadow-2xl"
         >
           <div className="relative bg-blue-50 rounded-xl p-8 md:p-12 overflow-hidden border border-blue-100 ">
             {/* Background Pattern */}

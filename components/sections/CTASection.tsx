@@ -90,13 +90,13 @@ const CTASection = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:60px_60px] opacity-10" />
 
       {/* Main Container */}
-      <div className="container-custom relative z-10 py-12 md:py-20 lg:py-28">
+      <div className="container-custom relative z-10 py-6 md:py-20 lg:py-28">
         {/* Decorative Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-12 md:mb-16 px-4"
+          className="text-center mb-6 md:mb-16 px-4"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-lg bg-blue-50 border border-blue-100 mb-4 md:mb-6">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
@@ -106,7 +106,7 @@ const CTASection = () => {
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
           </div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6">
+          <h2 className="text-xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6">
             <span className="text-blue-600">Transform</span>
             <br />
             <span className="text-gray-900">Your Digital Presence</span>
@@ -201,7 +201,7 @@ const CTASection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mt-8 md:mt-0"
+            className="relative mt-2 lg:mt-8 md:mt-0"
           >
             {/* Form Container */}
             <div className="relative bg-white rounded-xl md:rounded-2xl p-6 md:p-8 border border-gray-200 shadow-lg">
@@ -211,7 +211,7 @@ const CTASection = () => {
                     <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">
+                    <h3 className="text-lg md:text-2xl font-bold text-gray-900">
                       Start Your Journey
                     </h3>
                     <p className="text-blue-600 text-xs md:text-sm">
@@ -423,7 +423,7 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mt-12 md:mt-20 pt-8 md:pt-12 border-t border-gray-200 px-4"
+          className="text-center mt-6 lg:mt-12 md:mt-20 pt-6 md:pt-12 border-t border-gray-200 px-4"
         >
           <p className="text-gray-600 text-sm md:text-base mb-4 md:mb-6">
             Not ready for a full consultation? Start with a quick chat
