@@ -8,41 +8,7 @@ import CTASection from "@/components/sections/CTASection";
 import StatsSection from "@/components/sections/StatsSection";
 import { TeamSection } from "@/components/sections";
 import { motion, Variants } from "framer-motion";
-
-// Reusable animation variants with proper typing
-export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
-export const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
-
-export const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-};
+import { fadeInUp, fadeIn, staggerContainer } from "@/lib/utils";
 
 // Type for variant options
 type VariantType = "fadeInUp" | "fadeIn";

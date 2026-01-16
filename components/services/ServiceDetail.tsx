@@ -91,9 +91,12 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
 
               <div className="flex flex-wrap gap-4">
                 <button className="btn-primary">Get Started</button>
-                <button className="px-6 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
+                <a
+                  href="#pricing"
+                  className="px-6 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors"
+                >
                   View Pricing
-                </button>
+                </a>
               </div>
             </motion.div>
 
@@ -280,7 +283,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-white">
+      <section id="pricing" className="py-20 bg-white">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
