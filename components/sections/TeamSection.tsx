@@ -126,7 +126,7 @@ const teamMembers = [
 
 const TeamSection = () => {
   return (
-    <section className="relative py-6 lg:py-24 overflow-hidden bg-linear-to-r bg- from-violet-300 via-white to-violet-300">
+    <section className="relative py-6 lg:py-24 overflow-hidden bg-linear-to-tr bg- from-blue-100 via-gray-100 to-blue-100">
       {/* Light Background Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-100 to-transparent" />
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-50/60 to-blue-50/20 rounded-full blur-3xl" />
@@ -433,19 +433,6 @@ const TeamSection = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* View Profile Button */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="p-6 pt-0"
-                >
-                  <button className="w-full py-3 rounded-lg bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition-all duration-300 flex items-center justify-center gap-2 group/btn border border-blue-100">
-                    View Full Profile
-                    <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </motion.div>
               </div>
             </motion.div>
           ))}
