@@ -106,7 +106,7 @@ export default async function PortfolioItemPage({
   }
 
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto lg:mt-16 py-12">
       <h1 className="text-4xl font-bold mb-4">{item.title}</h1>
       <p className="text-gray-600 mb-6">{item.description}</p>
       {item.image && (

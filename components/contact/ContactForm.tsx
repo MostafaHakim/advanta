@@ -78,16 +78,16 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
     setErrors({});
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit');
+        throw new Error("Failed to submit");
       }
 
       onSuccess();
@@ -112,7 +112,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -132,6 +132,26 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       onSubmit={handleSubmit}
       className="space-y-6"
     >
+      {/* Message */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Your Message *
+        </label>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          rows={5}
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none ${
+            errors.message ? "border-red-500" : "border-gray-300"
+          }`}
+          placeholder="Tell us about your project, goals, and timeline..."
+        />
+        {errors.message && (
+          <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+        )}
+      </div>
+
       {/* Name & Email */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
@@ -251,26 +271,6 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
             ))}
           </select>
         </div>
-      </div>
-
-      {/* Message */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Your Message *
-        </label>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={5}
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none ${
-            errors.message ? "border-red-500" : "border-gray-300"
-          }`}
-          placeholder="Tell us about your project, goals, and timeline..."
-        />
-        {errors.message && (
-          <p className="mt-1 text-sm text-red-500">{errors.message}</p>
-        )}
       </div>
 
       {/* Submit Error */}

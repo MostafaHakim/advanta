@@ -65,10 +65,10 @@ const FooterPremium = () => {
       {/* Top Section */}
       <div className="border-b border-white/10">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 py-6 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2  lg:gap-12 py-6">
             {/* Brand Info */}
 
-            <div className="flex items-center gap-2 lg:gap-4 mb-2 lg:mb-8">
+            <div className="flex items-center gap-2 lg:gap-4 ">
               <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center p-2">
                 <Image
                   src={Logo}
@@ -86,7 +86,7 @@ const FooterPremium = () => {
               </div>
             </div>
 
-            <p className="text-gray-400 mb-2 lg:mb-8 max-w-md leading-relaxed text-sm">
+            <p className="text-gray-400 mb-2 max-w-md leading-relaxed text-sm">
               We transform businesses through innovative digital strategies,
               delivering measurable results and sustainable growth.
             </p>
@@ -119,10 +119,8 @@ const FooterPremium = () => {
             {/* Contact Info */}
             <div className="grid md:grid-cols-2 gap-4 lg:gap-8">
               <div>
-                <h4 className="font-semibold text-white mb-2 lg:mb-6">
-                  Get in Touch
-                </h4>
-                <div className="space-y-2 lg:space-y-6">
+                <h4 className="font-semibold text-white mb-2">Get in Touch</h4>
+                <div className="space-y-2 ">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
                       <Phone className="w-5 h-5 text-blue-400" />
@@ -187,13 +185,11 @@ const FooterPremium = () => {
       {/* Middle Section - Links */}
       <div className="border-b border-white/10">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-12 py-6 lg:py-16 ">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-12 py-6 ">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
-                <h4 className="font-semibold text-white mb-2 lg:mb-6">
-                  {category}
-                </h4>
-                <ul className=" lg:space-y-4">
+                <h4 className="font-semibold text-white mb-2 ">{category}</h4>
+                <ul className=" lg:space-y-2">
                   {links.map((link) => (
                     <li key={link.name}>
                       <Link
@@ -230,7 +226,7 @@ const FooterPremium = () => {
 
       {/* Bottom Section */}
       <div className="container-custom">
-        <div className="py-4 lg:py-8 flex flex-col md:flex-row justify-between items-center gap-3 lg:gap-6">
+        <div className="py-4  flex flex-col md:flex-row justify-between items-center gap-3 lg:gap-6">
           {/* Copyright */}
           <div className="text-gray-500 text-sm">
             © {new Date().getFullYear()} ADVANTA SCALE. All rights reserved.

@@ -52,7 +52,7 @@ const CTASection = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData({
       ...formData,
@@ -90,13 +90,13 @@ const CTASection = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:60px_60px] opacity-10" />
 
       {/* Main Container */}
-      <div className="container-custom relative z-10 py-6 md:py-20 lg:py-28">
+      <div className="container-custom relative z-10 md:py-8 lg:py-10">
         {/* Decorative Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-6 md:mb-16 px-4"
+          className="text-center mb-6 md:mb-6 px-4"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-lg bg-blue-50 border border-blue-100 mb-4 md:mb-6">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
@@ -201,7 +201,7 @@ const CTASection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mt-2 lg:mt-8 md:mt-0"
+            className="relative  "
           >
             {/* Form Container */}
             <div className="relative bg-white rounded-xl md:rounded-2xl p-6 md:p-8 border border-gray-200 shadow-lg">

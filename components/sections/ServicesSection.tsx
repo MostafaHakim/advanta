@@ -123,7 +123,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="relative py-8 lg:py-24 bg-white overflow-hidden">
+    <section className="relative py-8 lg:py-10 bg-white overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-blue-50/50 to-transparent" />
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-blue-50/50 to-transparent" />
@@ -143,7 +143,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-6 lg:mb-20"
+          className="text-center mb-6 lg:mb-10"
         >
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />

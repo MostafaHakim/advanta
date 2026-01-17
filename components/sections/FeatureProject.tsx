@@ -9,41 +9,6 @@ import { FaGithub } from "react-icons/fa";
 
 const portfolioItems = [
   {
-    id: 1,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    description: "Full-featured e-commerce platform with advanced analytics",
-    image: "https://picsum.photos/id/1/600/400",
-    tags: ["React", "Next.js", "Node.js", "MongoDB"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "SEO Campaign - Tech Startup",
-    category: "SEO",
-    description: "Increased organic traffic by 300% in 6 months",
-    image: "https://picsum.photos/id/2/600/400",
-    tags: ["SEO", "Content Strategy", "Link Building"],
-    results: [
-      { label: "Traffic Growth", value: "300%" },
-      { label: "Keyword Rankings", value: "+150" },
-    ],
-  },
-  {
-    id: 3,
-    title: "Social Media Strategy",
-    category: "Social Media",
-    description: "Comprehensive social media campaign for lifestyle brand",
-    image: "https://picsum.photos/id/3/600/400",
-    tags: ["Instagram", "Facebook", "Influencer Marketing"],
-    results: [
-      { label: "Engagement", value: "150%" },
-      { label: "Followers", value: "+50K" },
-    ],
-  },
-  {
     id: 4,
     title: "PPC Advertising",
     category: "PPC",
@@ -79,53 +44,9 @@ const portfolioItems = [
       { label: "Bounce Rate", value: "-40%" },
     ],
   },
-  {
-    id: 7,
-    title: "Mobile App Development",
-    category: "Web Development",
-    description: "Cross-platform mobile app for fitness tracking",
-    image: "https://picsum.photos/id/7/600/400",
-    tags: ["React Native", "Firebase", "Redux"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-  },
-  {
-    id: 8,
-    title: "Local SEO Optimization",
-    category: "SEO",
-    description: "Local SEO strategy for restaurant chain",
-    image: "https://picsum.photos/id/8/600/400",
-    tags: ["Local SEO", "Google My Business", "Reviews"],
-    results: [
-      { label: "Local Rankings", value: "+85%" },
-      { label: "Phone Calls", value: "+200%" },
-    ],
-  },
-  {
-    id: 9,
-    title: "Video Marketing Campaign",
-    category: "Content",
-    description: "YouTube video series for tech product launch",
-    image: "https://picsum.photos/id/9/600/400",
-    tags: ["Video Production", "YouTube SEO", "Social Media"],
-    results: [
-      { label: "Video Views", value: "2M+" },
-      { label: "Conversion Rate", value: "12%" },
-    ],
-  },
 ];
 
-const categories = [
-  "All",
-  "Web Development",
-  "SEO",
-  "Social Media",
-  "PPC",
-  "Content",
-  "Design",
-];
-
-const PortfolioSection = () => {
+const FeatureProject = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
@@ -167,38 +88,6 @@ const PortfolioSection = () => {
           </p>
         </motion.div>
 
-        {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-3 mb-6 lg:mb-16"
-        >
-          <div className="flex items-center gap-2 text-gray-600 mb-4 w-full justify-center">
-            <Filter className="w-5 h-5" />
-            <span className="text-sm font-medium">Filter by category</span>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                  activeCategory === category
-                    ? "bg-blue-600 text-white shadow-md hover:shadow-lg"
-                    : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-300"
-                }`}
-                style={{ borderRadius: "8px" }}
-              >
-                {category}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Portfolio Grid */}
         <motion.div
           key={activeCategory}
@@ -208,7 +97,7 @@ const PortfolioSection = () => {
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
+            {portfolioItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout
@@ -373,15 +262,6 @@ const PortfolioSection = () => {
           className="text-center mt-6 lg:mt-10"
         >
           <div className="inline-flex flex-col items-center gap-8">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-3 text-gray-900">
-                Ready to start your project?
-              </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Let's create something amazing together. Browse our complete
-                portfolio to see more of our work and results.
-              </p>
-            </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/portfolio"
@@ -391,13 +271,6 @@ const PortfolioSection = () => {
                 View All Projects
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
-                style={{ borderRadius: "8px" }}
-              >
-                Get in Touch
-              </Link>
             </div>
           </div>
         </motion.div>
@@ -406,4 +279,4 @@ const PortfolioSection = () => {
   );
 };
 
-export default PortfolioSection;
+export default FeatureProject;

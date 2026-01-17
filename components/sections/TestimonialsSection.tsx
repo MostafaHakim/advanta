@@ -49,7 +49,7 @@ const TestimonialsSectionPremium = () => {
   const prevTestimonial = () => {
     setDirection(-1);
     setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 
@@ -73,7 +73,7 @@ const TestimonialsSectionPremium = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="relative py-8 lg:py-24 bg-linear-to-tr from-blue-200 via-white to-blue-200 overflow-hidden">
+    <section className="relative py-4 lg:py-10 bg-linear-to-tr from-blue-200 via-white to-blue-200 overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-100/40 to-transparent rounded-full blur-3xl" />
@@ -87,7 +87,7 @@ const TestimonialsSectionPremium = () => {
 
       <div className="container-custom relative z-10">
         {/* Header with Stats */}
-        <div className="text-center mb-6 lg:mb-20">
+        <div className="text-center mb-6 lg:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const TestimonialsSectionPremium = () => {
             </span>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-2 lg:gap-8 mb-4 lg:mb-12">
+          <div className="grid md:grid-cols-3 gap-2 lg:gap-8 mb-4 lg:mb-8">
             {[
               { value: "98%", label: "Client Retention Rate" },
               { value: "4.9/5", label: "Average Client Rating" },
@@ -135,7 +135,7 @@ const TestimonialsSectionPremium = () => {
         </div>
 
         {/* Main Carousel */}
-        <div className="max-w-6xl mx-auto mb-6 lg:mb-20">
+        <div className="max-w-6xl mx-auto mb-6 lg:mb-10">
           <div
             className="relative bg-white rounded-3xl shadow-xl border border-gray-200 p-8 md:p-12"
             onMouseEnter={() => setIsHovering(true)}
@@ -309,8 +309,8 @@ const TestimonialsSectionPremium = () => {
                               item.status === "completed"
                                 ? "bg-green-500"
                                 : item.status === "current"
-                                ? "bg-blue-500"
-                                : "bg-gray-300"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
                             }`}
                           />
                           <div className="flex-1">
@@ -390,7 +390,7 @@ const TestimonialsSectionPremium = () => {
         </div>
 
         {/* Client Logos */}
-        <div className="mb-6 lg:mb-20">
+        <div className="mb-6 lg:mb-10">
           <p className="text-center text-gray-600 mb-4 lg:mb-8">
             Trusted by industry leaders
           </p>

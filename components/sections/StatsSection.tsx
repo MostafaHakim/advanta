@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Users, TrendingUp, Target, Globe } from "lucide-react";
+import Image from "next/image";
 
 const stats = [
   {
@@ -40,6 +41,14 @@ const StatsSection = () => {
     triggerOnce: true,
     threshold: 0.15,
   });
+
+  const brands = [
+    "https://picsum.photos/300/200",
+    "https://picsum.photos/300/200",
+    "https://picsum.photos/300/200",
+    "https://picsum.photos/300/200",
+    "https://picsum.photos/300/200",
+  ];
 
   return (
     <section className="relative py-6 lg:py-16 bg-linear-to-r from-blue-100 via-white to-blue-100 overflow-hidden">
@@ -105,23 +114,25 @@ const StatsSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-6 lg:mt-16 border-t border-gray-200 pt-6 lg:pt-12"
         >
-          <p className="pb-6 lg:mb-10 text-center text-gray-600 text-sm lg:text-lg">
+          <p className="pb-6 text-center text-gray-600 text-sm lg:text-lg">
             Trusted by leading brands worldwide
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-8 md:gap-16">
-            {["Brand A", "Brand B", "Brand C", "Brand D", "Brand E"].map(
-              (brand) => (
-                <div
-                  key={brand}
-                  className="cursor-pointer p-4 rounded-lg hover:bg-gray-50 transition-all duration-300 group border border-gray-200"
-                >
-                  <span className="text-base md:text-lg font-semibold text-gray-700 transition-colors group-hover:text-blue-600">
-                    {brand}
-                  </span>
-                </div>
-              )
-            )}
+            {brands.map((brand) => (
+              <div
+                key={brand}
+                className="cursor-pointer p-4 rounded-lg hover:bg-gray-50 transition-all duration-300 group "
+              >
+                <Image
+                  src={brand}
+                  alt={brand}
+                  width={150}
+                  height={200}
+                  className="text-base md:text-lg font-semibold text-gray-700 transition-colors group-hover:text-blue-600"
+                />
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

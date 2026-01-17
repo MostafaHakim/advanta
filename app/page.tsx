@@ -9,6 +9,7 @@ import StatsSection from "@/components/sections/StatsSection";
 import { TeamSection } from "@/components/sections";
 import { motion, Variants } from "framer-motion";
 import { fadeInUp, fadeIn, staggerContainer } from "@/lib/utils";
+import FeatureProject from "@/components/sections/FeatureProject";
 
 // Type for variant options
 type VariantType = "fadeInUp" | "fadeIn";
@@ -72,7 +73,7 @@ export default function Home() {
 
       {/* Portfolio with fadeInUp */}
       <AnimatedSection delay={0.4}>
-        <PortfolioSection />
+        <FeatureProject />
       </AnimatedSection>
 
       {/* Testimonials with fadeIn */}

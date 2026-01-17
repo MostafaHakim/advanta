@@ -126,7 +126,7 @@ const teamMembers = [
 
 const TeamSection = () => {
   return (
-    <section className="relative py-6 lg:py-24 overflow-hidden bg-linear-to-tr bg- from-blue-100 via-gray-100 to-blue-100">
+    <section className="relative py-6 lg:py-10 overflow-hidden bg-linear-to-tr bg- from-blue-100 via-gray-100 to-blue-100">
       {/* Light Background Elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-100 to-transparent" />
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-50/60 to-blue-50/20 rounded-full blur-3xl" />
@@ -141,7 +141,7 @@ const TeamSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-4 lg:mb-20"
+          className="text-center mb-4 lg:mb-10"
         >
           <motion.div
             initial={{ scale: 0.9 }}
@@ -171,7 +171,7 @@ const TeamSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-6 lg:mb-24"
+          className="mb-6 lg:mb-12"
         >
           <div className="relative bg-white rounded-2xl p-6 md:p-12 shadow-lg border border-gray-200 overflow-hidden">
             {/* Decorative Elements */}
@@ -437,62 +437,6 @@ const TeamSection = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 100 }}
-          className="text-center mt-4 lg:mt-20 shadow-2xl"
-        >
-          <div className="relative bg-blue-50 rounded-xl p-8 md:p-12 overflow-hidden border border-blue-100 ">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 left-0 w-32 h-32 border-2 border-blue-200 rounded-full -translate-x-16 -translate-y-16" />
-              <div className="absolute bottom-0 right-0 w-32 h-32 border-2 border-blue-200 rounded-full translate-x-16 translate-y-16" />
-            </div>
-
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-lg mb-6 border border-blue-200">
-                <Users className="w-5 h-5 text-blue-600" />
-                <span className="text-blue-700 text-sm font-medium">
-                  We're Growing
-                </span>
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Want to Join Our Team?
-              </h3>
-
-              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                We're always looking for talented and passionate individuals to
-                join our mission of transforming businesses through digital
-                excellence.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md"
-                  style={{ borderRadius: "8px" }}
-                >
-                  View Open Positions
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
-                  style={{ borderRadius: "8px" }}
-                >
-                  Contact Our HR
-                </motion.button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
