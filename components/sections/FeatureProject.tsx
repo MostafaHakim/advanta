@@ -19,6 +19,9 @@ const portfolioItems = [
       { label: "ROI", value: "5x" },
       { label: "Cost per Lead", value: "-60%" },
     ],
+    liveUrl: "#",
+    githubUrl: "#",
+    featured: true,
   },
   {
     id: 5,
@@ -31,6 +34,9 @@ const portfolioItems = [
       { label: "Monthly Visitors", value: "10K" },
       { label: "Conversion Rate", value: "8%" },
     ],
+    liveUrl: "#",
+    githubUrl: "#",
+    featured: false,
   },
   {
     id: 6,
@@ -43,6 +49,9 @@ const portfolioItems = [
       { label: "User Engagement", value: "+200%" },
       { label: "Bounce Rate", value: "-40%" },
     ],
+    liveUrl: "#",
+    githubUrl: "#",
+    featured: true,
   },
 ];
 
