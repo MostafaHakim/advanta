@@ -1,68 +1,108 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink, Github, Filter, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
-const portfolioItems = [
-  {
-    id: 4,
-    title: "PPC Advertising",
-    category: "PPC",
-    description: "Google Ads campaign with 5x ROI",
-    image: `https://picsum.photos/id/4/600/400`,
-    tags: ["Google Ads", "Conversion Tracking", "A/B Testing"],
-    results: [
-      { label: "ROI", value: "5x" },
-      { label: "Cost per Lead", value: "-60%" },
-    ],
-    liveUrl: "#",
-    githubUrl: "#",
-    featured: true,
-  },
-  {
-    id: 5,
-    title: "Content Marketing",
-    category: "Content",
-    description: "Blog content strategy generating 10K monthly visitors",
-    image: "https://picsum.photos/id/5/600/400",
-    tags: ["Blog Writing", "SEO", "Content Strategy"],
-    results: [
-      { label: "Monthly Visitors", value: "10K" },
-      { label: "Conversion Rate", value: "8%" },
-    ],
-    liveUrl: "#",
-    githubUrl: "#",
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "Brand Redesign",
-    category: "Design",
-    description: "Complete brand identity and website redesign",
-    image: "https://picsum.photos/id/6/600/400",
-    tags: ["UI/UX", "Branding", "Web Design"],
-    results: [
-      { label: "User Engagement", value: "+200%" },
-      { label: "Bounce Rate", value: "-40%" },
-    ],
-    liveUrl: "#",
-    githubUrl: "#",
-    featured: true,
-  },
-];
+interface Project {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  image: string;
+  category: string;
+  client: string;
+  featured: boolean;
+  tags: string[];
+  liveUrl: string;
+  githubUrl: string;
+  results: Result[];
+  createdAt: string;
+}
+
+// const portfolioItems = [
+//   {
+//     id: 4,
+//     title: "PPC Advertising",
+//     category: "PPC",
+//     description: "Google Ads campaign with 5x ROI",
+//     image: `https://picsum.photos/id/4/600/400`,
+//     tags: ["Google Ads", "Conversion Tracking", "A/B Testing"],
+//     results: [
+//       { label: "ROI", value: "5x" },
+//       { label: "Cost per Lead", value: "-60%" },
+//     ],
+//     liveUrl: "#",
+//     githubUrl: "#",
+//     featured: true,
+//   },
+//   {
+//     id: 5,
+//     title: "Content Marketing",
+//     category: "Content",
+//     description: "Blog content strategy generating 10K monthly visitors",
+//     image: "https://picsum.photos/id/5/600/400",
+//     tags: ["Blog Writing", "SEO", "Content Strategy"],
+//     results: [
+//       { label: "Monthly Visitors", value: "10K" },
+//       { label: "Conversion Rate", value: "8%" },
+//     ],
+//     liveUrl: "#",
+//     githubUrl: "#",
+//     featured: false,
+//   },
+//   {
+//     id: 6,
+//     title: "Brand Redesign",
+//     category: "Design",
+//     description: "Complete brand identity and website redesign",
+//     image: "https://picsum.photos/id/6/600/400",
+//     tags: ["UI/UX", "Branding", "Web Design"],
+//     results: [
+//       { label: "User Engagement", value: "+200%" },
+//       { label: "Bounce Rate", value: "-40%" },
+//     ],
+//     liveUrl: "#",
+//     githubUrl: "#",
+//     featured: true,
+//   },
+// ];
 
 const FeatureProject = () => {
+  const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  // Fetch projects
+  const fetchProjects = async () => {
+    setFetchLoading(true);
+    try {
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+      if (data.success && data.data) {
+        setProjects(data.data);
+      } else {
+        setProjects([]);
+      }
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    } finally {
+      setFetchLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   const filteredItems =
     activeCategory === "All"
-      ? portfolioItems
-      : portfolioItems.filter((item) => item.category === activeCategory);
+      ? projects
+      : projects.filter((item) => item.category === activeCategory);
 
   return (
     <section className="section-padding bg-white text-gray-900 relative overflow-hidden">
@@ -106,9 +146,9 @@ const FeatureProject = () => {
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {portfolioItems.map((item, index) => (
+            {filteredItems.map((item, index) => (
               <motion.div
-                key={item.id}
+                key={item._id}
                 layout
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -119,7 +159,7 @@ const FeatureProject = () => {
                   damping: 15,
                   delay: index * 0.05,
                 }}
-                onMouseEnter={() => setHoveredItem(item.id)}
+                onMouseEnter={() => setHoveredItem(item._id)}
                 onMouseLeave={() => setHoveredItem(null)}
                 className="group relative overflow-hidden rounded-xl bg-white border border-gray-200 hover:border-blue-300 transition-all duration-500 hover:shadow-lg shadow-sm"
                 style={{
