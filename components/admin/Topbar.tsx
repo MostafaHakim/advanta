@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { Search, Bell, HelpCircle, Menu, X } from "lucide-react";
+import Logo from "@/assets/logo.svg";
 
+import Image from "next/image";
 interface TopbarProps {
   onMenuClick: () => void;
 }
@@ -24,18 +26,15 @@ const Topbar = ({ onMenuClick }: TopbarProps) => {
               <Menu className="w-5 h-5 text-gray-700" />
             </button>
 
-            {/* Search */}
-            <div className="relative hidden md:block">
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                <Search className="w-5 h-5 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search clients, projects, settings..."
-                className="w-64 lg:w-80 pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            {/* Left */}
+            <div className="hidden md:flex flex-row items-end space-x-2">
+              <Image
+                className="w-10 p-2 border border-gray-100 rounded-lg "
+                src={Logo}
+                alt="Logo"
               />
+              <h2>ADVANTA</h2>
+              <span className="text-sm">Scale</span>
             </div>
           </div>
 

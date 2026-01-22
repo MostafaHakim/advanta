@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Users, TrendingUp, Target, Globe } from "lucide-react";
 import Image from "next/image";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const stats = [
   {
@@ -36,19 +38,27 @@ const stats = [
   },
 ];
 
+type Brand = {
+  _id: string;
+  name: string;
+  image: string;
+};
+
 const StatsSection = () => {
+  const [brands, setBrands] = useState<Brand[]>([]);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.15,
   });
 
-  const brands = [
-    "https://picsum.photos/300/200",
-    "https://picsum.photos/300/200",
-    "https://picsum.photos/300/200",
-    "https://picsum.photos/300/200",
-    "https://picsum.photos/300/200",
-  ];
+  const fetchBrands = async () => {
+    const res = await axios.get("/api/brand");
+    setBrands(res.data.data);
+  };
+
+  useEffect(() => {
+    fetchBrands();
+  }, []);
 
   return (
     <section className="relative py-6 lg:py-16 bg-linear-to-r from-blue-100 via-white to-blue-100 overflow-hidden">
@@ -121,12 +131,12 @@ const StatsSection = () => {
           <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-8 md:gap-16">
             {brands.map((brand) => (
               <div
-                key={brand}
+                key={brand._id}
                 className="cursor-pointer p-4 rounded-lg hover:bg-gray-50 transition-all duration-300 group "
               >
                 <Image
-                  src={brand}
-                  alt={brand}
+                  src={brand.image}
+                  alt={brand.name}
                   width={150}
                   height={200}
                   className="text-base md:text-lg font-semibold text-gray-700 transition-colors group-hover:text-blue-600"

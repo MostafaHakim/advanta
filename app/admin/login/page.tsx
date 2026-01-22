@@ -18,7 +18,6 @@ export default function LoginPage() {
       try {
         const parsed = JSON.parse(stored);
 
-        // 🔐 minimal validation
         if (parsed?.id) {
           router.replace("/admin/dashboard");
         }

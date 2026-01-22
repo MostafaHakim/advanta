@@ -50,7 +50,7 @@ const Navbar = () => {
       hasMegaMenu: true,
     },
     { name: "Portfolio", href: "/portfolio", icon: FileText },
-    { name: "Pricing", href: "/pricing", icon: DollarSign },
+    { name: "Blog", href: "/blog", icon: DollarSign },
     { name: "Contact", href: "/contact", icon: Headphones },
   ];
 
@@ -474,7 +474,7 @@ const Navbar = () => {
                           <button
                             onClick={() =>
                               setActiveService(
-                                activeService === item.name ? null : item.name
+                                activeService === item.name ? null : item.name,
                               )
                             }
                             className="flex items-center justify-between w-full py-3 sm:py-4 px-3 sm:px-4 rounded-lg hover:bg-gray-50 transition-colors group"
@@ -624,7 +624,7 @@ const Navbar = () => {
                         >
                           {social.charAt(0)}
                         </a>
-                      )
+                      ),
                     )}
                   </div>
                 </div>

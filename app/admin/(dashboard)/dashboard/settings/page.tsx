@@ -1,5 +1,6 @@
 "use client";
 
+import BrandSetting from "@/components/sections/BrandSetting";
 import HeroSettings from "@/components/sections/HeroSetting";
 import React, { useState, useEffect } from "react";
 
@@ -93,10 +94,28 @@ export default function Settings() {
         </div>
       ),
     },
+    {
+      id: "brands",
+      name: "Brands",
+      icon: "🌐",
+      content: (
+        <div className="p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-4">
+            Brands Settings
+          </h2>
+          <div className="space-y-4">
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <BrandSetting />
+            </div>
+            {/* Add more client settings components here */}
+          </div>
+        </div>
+      ),
+    },
   ];
 
   const activeTabContent = settingsTabs.find(
-    (tab) => tab.id === activeTab
+    (tab) => tab.id === activeTab,
   )?.content;
 
   return (

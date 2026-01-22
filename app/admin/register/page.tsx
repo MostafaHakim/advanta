@@ -18,7 +18,7 @@ export default function RegisterPage() {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        // If user data with an ID exists, they are likely logged in.
+
         if (parsed?.id) {
           router.replace("/admin/dashboard");
         }

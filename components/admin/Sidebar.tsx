@@ -87,7 +87,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 z-40 lg:hidden "
           onClick={onClose}
         />
       )}
@@ -97,7 +97,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         className={`
           h-auto fixed
         bottom-0 top-0 left-0  bg-white text-gray-800
-        transform transition-all duration-300 ease-in-out z-50 shadow-lg
+        transform transition-all duration-300 ease-in-out z-50 shadow-lg min-h-screen pb-10
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0 lg:static lg:z-auto
         ${collapsed ? "w-20" : "w-64"}
@@ -105,39 +105,6 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div
-            className={`flex items-center p-4 border-b border-gray-200 ${
-              collapsed ? "justify-center" : "justify-between"
-            }`}
-          >
-            {!collapsed && (
-              <Link
-                href="/admin/dashboard"
-                className="flex items-center space-x-2"
-              >
-                <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-                  <Image
-                    src={Logo}
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                    className="invert"
-                  />
-                </div>
-                <span className="font-bold text-lg">Admin</span>
-              </Link>
-            )}
-            <button
-              onClick={() => setCollapsed(!collapsed)}
-              className="hidden lg:flex w-8 h-8 items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-            >
-              {collapsed ? (
-                <ChevronRight className="w-4 h-4" />
-              ) : (
-                <ChevronLeft className="w-4 h-4" />
-              )}
-            </button>
-          </div>
 
           {/* Navigation */}
           <nav className="flex-1 p-4 space-y-2">

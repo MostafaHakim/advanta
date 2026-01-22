@@ -1,6 +1,12 @@
 "use client";
 
-import { DollarSign, Briefcase, Users, Target } from "lucide-react";
+import {
+  DollarSign,
+  Briefcase,
+  Users,
+  Target,
+  MessageCircle,
+} from "lucide-react";
 import StatCard from "@/components/admin/StatCard";
 
 export default function AdminDashboard() {
@@ -9,9 +15,11 @@ export default function AdminDashboard() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600 mt-2">
-            Welcome back! You have successfully logged in.
+          <h1 className="text-3xl font-bold text-gray-900">
+            Advanta Dashboard
+          </h1>
+          <p className="text-gray-600 mt-2 capitalize">
+            You Can Find the Summery of your business!
           </p>
         </div>
       </div>
@@ -19,10 +27,10 @@ export default function AdminDashboard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title="Total Revenue"
-          value="$0"
+          title="Total Massage"
+          value="10"
           change={0}
-          icon={<DollarSign className="w-6 h-6" />}
+          icon={<MessageCircle className="w-6 h-6" />}
           color="from-green-500 to-emerald-600"
         />
         <StatCard
