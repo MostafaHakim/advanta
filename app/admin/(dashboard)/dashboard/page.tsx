@@ -73,28 +73,28 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Total Massage"
-          value={data.length}
+          value={`${data.length}`}
           change={0}
           icon={<MessageCircle className="w-6 h-6" />}
           color="from-green-500 to-emerald-600"
         />
         <StatCard
           title="Active Projects"
-          value={0}
+          value="0"
           change={0}
           icon={<Briefcase className="w-6 h-6" />}
           color="from-blue-500 to-cyan-600"
         />
         <StatCard
           title="New Clients"
-          value={0}
+          value="0"
           change={0}
           icon={<Users className="w-6 h-6" />}
           color="from-purple-500 to-pink-600"
         />
         <StatCard
           title="Conversion Rate"
-          value={0}
+          value="0"
           change={0}
           icon={<Target className="w-6 h-6" />}
           color="from-orange-500 to-red-600"

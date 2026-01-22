@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"; // Assuming you have a utility for classnames
 
 interface StatCardProps {
   title: string;
-  value: String;
+  value: string;
   change: number;
   icon: React.ReactNode;
   color?: string;

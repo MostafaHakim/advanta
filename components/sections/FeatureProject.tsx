@@ -71,12 +71,17 @@ interface Project {
 //   },
 // ];
 
+interface Result {
+  label: string;
+  value: string;
+}
+
 const FeatureProject = () => {
   const [loading, setLoading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   // Fetch projects
   const fetchProjects = async () => {
     setFetchLoading(true);
@@ -189,7 +194,7 @@ const FeatureProject = () => {
                   {/* Hover Overlay */}
                   <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredItem === item.id ? 1 : 0 }}
+                    animate={{ opacity: hoveredItem === item._id ? 1 : 0 }}
                     className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-blue-900/30 to-transparent z-20 flex items-center justify-center transition-opacity duration-300"
                   >
                     <div className="flex gap-4">
