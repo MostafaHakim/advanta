@@ -65,9 +65,7 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     await dbConnect();
-    const blogs = await Blog.find().sort({ publishedAt: -1 }).lean(); // Use lean for performance
-
-    console.log("Number of blogs found:", blogs.length);
+    const blogs = await Blog.find().sort().lean();
     return NextResponse.json(blogs);
   } catch (error) {
     console.error("BLOG_GET_ERROR", error);
