@@ -78,7 +78,7 @@ export default function EditTeamMemberPage() {
 
   useEffect(() => {
     fetchMemberData();
-  }, [id]);
+  }, [fetchMemberData]);
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
