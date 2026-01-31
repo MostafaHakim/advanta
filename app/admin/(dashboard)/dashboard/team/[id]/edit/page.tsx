@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -51,11 +51,12 @@ export default function EditTeamMemberPage() {
     ],
   });
 
-  const fetchMemberData = async () => {
+  const fetchMemberData = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`/api/team/${id}`);
       if (!res.ok) throw new Error("Failed to fetch member data");
+
       const data = await res.json();
 
       setForm({
@@ -74,7 +75,7 @@ export default function EditTeamMemberPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchMemberData();
