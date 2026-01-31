@@ -37,6 +37,11 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       icon: <LayoutDashboard className="w-5 h-5" />,
     },
     {
+      name: "Team",
+      href: "/admin/dashboard/team",
+      icon: <Users className="w-5 h-5" />,
+    },
+    {
       name: "Clients",
       href: "/admin/dashboard/clients",
       icon: <Users className="w-5 h-5" />,
