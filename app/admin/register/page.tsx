@@ -35,6 +35,12 @@ export default function RegisterPage() {
     setIsLoading(true);
     setError("");
 
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/admin/register", {
         method: "POST",
@@ -42,23 +48,19 @@ export default function RegisterPage() {
         body: JSON.stringify({ username, email, password }),
       });
 
-      let data: any = {};
-      try {
-        data = await res.json();
-      } catch {
-        data = {};
-      }
+      const data = await res.json();
 
       if (res.ok) {
-        // Registration successful → redirect to login
-        router.push("/admin/login");
+        // ✅ Registration successful
+        // Redirect to login page with a success message
+        router.push("/admin/login?registered=true");
       } else {
-        // Show error message from server or fallback
-        setError(data.message || "Registration failed.");
+        // ❌ Registration failed
+        setError(data.message || "An unknown error occurred.");
       }
     } catch (err) {
-      console.error("Registration error:", err);
-      setError("Server error. Try again later.");
+      console.error("Registration submission error:", err);
+      setError("Failed to connect to the server. Please try again later.");
     } finally {
       setIsLoading(false);
     }

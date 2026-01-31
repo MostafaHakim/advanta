@@ -10,13 +10,15 @@ const JWT_SECRET = new TextEncoder().encode(
 );
 
 export async function POST(request: NextRequest) {
+  console.log("Login request received");
   try {
     await dbConnect();
 
     let body: { email?: string; password?: string };
     try {
       body = await request.json();
-    } catch {
+    } catch (error) {
+      console.error("Error parsing request body:", error);
       return NextResponse.json(
         { success: false, message: "Invalid JSON body" },
         { status: 400 }
@@ -73,11 +75,12 @@ export async function POST(request: NextRequest) {
       path: "/",
     });
 
+    console.log("Login successful, returning response");
     return response;
   } catch (err: any) {
-    console.error("Login error:", err);
+    console.error("An unexpected error occurred during login:", err);
     return NextResponse.json(
-      { success: false, message: err.message || "Server error" },
+      { success: false, message: "An unexpected server error occurred" },
       { status: 500 }
     );
   }

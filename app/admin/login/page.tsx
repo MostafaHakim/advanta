@@ -1,23 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const stored = localStorage.getItem("bis_data");
+    // Check for registration success message
+    if (searchParams.get("registered") === "true") {
+      setSuccess("Registration successful! You can now log in.");
+      // Optional: remove the query param from URL without reloading
+      router.replace("/admin/login", { scroll: false });
+    }
 
+    const stored = localStorage.getItem("bis_data");
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-
         if (parsed?.id) {
           router.replace("/admin/dashboard");
         }
@@ -26,12 +33,13 @@ export default function LoginPage() {
         localStorage.removeItem("bis_data");
       }
     }
-  }, [router]);
+  }, [router, searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    setSuccess("");
 
     try {
       const res = await fetch("/api/admin/login", {
@@ -43,9 +51,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ SAVE token
         localStorage.setItem("bis_data", JSON.stringify(data));
-
         router.push("/admin/dashboard");
       } else {
         setError(data.message || "Login failed.");
@@ -64,6 +70,16 @@ export default function LoginPage() {
         <h1 className="text-3xl font-bold text-center text-gray-900">
           Admin Login
         </h1>
+
+        {success && (
+          <div
+            className="px-4 py-3 text-sm text-green-700 bg-green-100 border border-green-200 rounded-lg"
+            role="alert"
+          >
+            {success}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700">
