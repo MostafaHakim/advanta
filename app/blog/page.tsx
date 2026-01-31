@@ -268,7 +268,7 @@ export default async function BlogPage() {
                           href={`/blog/${post.slug}`}
                           className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
                         >
-                          Read More
+                          Read More...
                           <ChevronRight className="w-4 h-4" />
                         </Link>
                       </div>
