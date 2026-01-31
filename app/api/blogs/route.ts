@@ -65,16 +65,15 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     await dbConnect();
-    const blogs = await Blog.find({ published: true })
-      .sort({ publishedAt: -1 })
-      .lean(); // Use lean for performance
+    const blogs = await Blog.find().sort({ publishedAt: -1 }).lean(); // Use lean for performance
 
+    console.log("Number of blogs found:", blogs.length);
     return NextResponse.json(blogs);
   } catch (error) {
     console.error("BLOG_GET_ERROR", error);
     return NextResponse.json(
       { success: false, message: "Failed to fetch blogs" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

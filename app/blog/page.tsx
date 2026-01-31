@@ -34,11 +34,12 @@ interface BlogPost {
 }
 
 async function getBlogs() {
+  console.log("Fetching blogs...");
   const res = await fetch(`${getBaseUrl()}/api/blogs`, {
     cache: "no-store",
   });
   const data = await res.json();
-
+  console.log(data);
   return data || [];
 }
 
