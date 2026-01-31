@@ -64,6 +64,6 @@ export async function POST(req: Request) {
 
 export async function GET() {
   await dbConnect();
-  const blog = await Blog.find().sort({ order: 1 });
+  const blog = await Blog.find().sort({ createdAt: -1 });
   return NextResponse.json(blog);
 }

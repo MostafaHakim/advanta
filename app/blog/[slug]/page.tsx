@@ -19,12 +19,12 @@ interface BlogPost {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
   await dbConnect();
-  const { id } = await params;
+  const { slug } = params;
 
-  const post = await blogModel.findById(id).lean();
+  const post = await blogModel.findOne({ slug }).lean();
 
   if (!post) {
     return {
@@ -64,7 +64,7 @@ export async function generateMetadata({
       images: [post.image],
     },
     alternates: {
-      canonical: `${getBaseUrl()}/blog/${id}`,
+      canonical: `${getBaseUrl()}/blog/${post.slug}`,
     },
   };
 }
@@ -73,12 +73,12 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { slug: string };
 }) {
   await dbConnect();
-  const { id } = await params;
+  const { slug } = params;
 
-  const post = await blogModel.findById(id).lean();
+  const post = await blogModel.findOne({ slug }).lean();
 
   if (!post) {
     notFound();
@@ -92,7 +92,7 @@ export default async function BlogPostPage({
   });
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
+    <div className="container mx-auto px-4 py-12 max-w-4xl lg:mt-20">
       <article>
         <h1 className="text-4xl font-bold mb-4 text-gray-900">{post.title}</h1>
 

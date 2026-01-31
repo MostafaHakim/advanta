@@ -225,10 +225,11 @@ export default function CreateBlogPage() {
     type: "success" | "error";
     text: string;
   } | null>(null);
+
+  type TabType = "basic" | "content" | "meta";
+
   const [isGeneratingSlug, setIsGeneratingSlug] = useState(false);
-  const [activeTab, setActiveTab] = useState<"basic" | "content" | "meta">(
-    "basic",
-  );
+  const [activeTab, setActiveTab] = useState<TabType>("basic");
 
   const categories = [
     "SEO & Marketing",
@@ -324,7 +325,7 @@ export default function CreateBlogPage() {
     }
   };
 
-  const tabs = [
+  const tabs: { id: TabType; label: string; icon: any }[] = [
     { id: "basic", label: "Basic Info", icon: Type },
     { id: "content", label: "Content", icon: FileText },
     { id: "meta", label: "Meta Data", icon: Tag },
