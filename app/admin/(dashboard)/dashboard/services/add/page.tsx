@@ -22,6 +22,12 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+type ServiceListMap = {
+  features: FeatureDetail;
+  process: ProcessStep;
+  faqs: Faq;
+};
+
 interface PricePlan {
   price: string;
   features: string[];
@@ -172,20 +178,22 @@ const CreateServiceForm = () => {
     });
   };
 
-  const handleDynamicChange = <T extends FeatureDetail | ProcessStep | Faq>(
-    list: keyof Service,
+  const handleDynamicChange = <K extends keyof ServiceListMap>(
+    list: K,
     index: number,
-    field: keyof T,
+    field: keyof ServiceListMap[K],
     value: string,
   ) => {
-    const newList = [...(service[list] as T[])];
-    if (field === "items" && typeof value === "string") {
-      (newList[index] as any)[field] = value
+    const newList = [...(service[list] as ServiceListMap[K][])];
+
+    if (field === "items") {
+      (newList[index] as FeatureDetail).items = value
         .split(",")
         .map((item) => item.trim());
     } else {
       (newList[index] as any)[field] = value;
     }
+
     setService({ ...service, [list]: newList });
   };
 

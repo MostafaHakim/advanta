@@ -51,32 +51,32 @@ export default function EditTeamMemberPage() {
     ],
   });
 
+  const fetchMemberData = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/team/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch member data");
+      const data = await res.json();
+
+      setForm({
+        ...data,
+        expertise: data.expertise?.join(", ") || "",
+        linkedin: data.social?.linkedin || "",
+        twitter: data.social?.twitter || "",
+        email: data.social?.email || "",
+        stats: data.stats || [
+          { label: "", value: "" },
+          { label: "", value: "" },
+        ],
+      });
+    } catch (err) {
+      setError("Failed to load team member data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchMemberData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(`/api/team/${id}`);
-        if (!res.ok) throw new Error("Failed to fetch member data");
-        const data = await res.json();
-
-        setForm({
-          ...data,
-          expertise: data.expertise?.join(", ") || "",
-          linkedin: data.social?.linkedin || "",
-          twitter: data.social?.twitter || "",
-          email: data.social?.email || "",
-          stats: data.stats || [
-            { label: "", value: "" },
-            { label: "", value: "" },
-          ],
-        });
-      } catch (err) {
-        setError("Failed to load team member data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchMemberData();
   }, [id]);
 
