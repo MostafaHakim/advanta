@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -32,11 +32,33 @@ import Image from "next/image";
 import Logo from "../../public/logo.svg";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface Service {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  icon: string;
+  category: string;
+}
+
+interface ServiceCategory {
+  title: string;
+  icon: JSX.Element;
+  color: string;
+  services: {
+    name: string;
+    href: string;
+    description: string;
+    icon: JSX.Element;
+  }[];
+}
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeService, setActiveService] = useState<string | null>(null);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -54,101 +76,73 @@ const Navbar = () => {
     { name: "Contact", href: "/contact", icon: Headphones },
   ];
 
-  const serviceCategories = [
-    {
-      title: "Digital Marketing",
-      icon: <Zap className="w-6 h-6" />,
-      color: "from-blue-500 to-blue-600",
-      services: [
-        {
-          name: "SEO Optimization",
-          href: "/services/seo-optimization",
-          description: "Boost search rankings & organic traffic",
-          icon: <Search className="w-5 h-5" />,
-        },
-        {
-          name: "PPC Advertising",
-          href: "/services/ppc-advertising",
-          description: "Maximize ROI with targeted ads",
-          icon: <TrendingUp className="w-5 h-5" />,
-        },
-        {
-          name: "Social Media Marketing",
-          href: "/services/social-media-marketing",
-          description: "Build brand presence & engagement",
-          icon: <MessageSquare className="w-5 h-5" />,
-        },
-        {
-          name: "Content Marketing",
-          href: "/services/content-marketing",
-          description: "Create compelling content that converts",
-          icon: <PenTool className="w-5 h-5" />,
-        },
-      ],
-    },
-    {
-      title: "Tech Solutions",
-      icon: <Code className="w-6 h-6" />,
-      color: "from-blue-600 to-blue-700",
-      services: [
-        {
-          name: "Web Development",
-          href: "/services/web-development",
-          description: "High-performance custom websites",
-          icon: <Monitor className="w-5 h-5" />,
-        },
-        {
-          name: "Mobile App Development",
-          href: "/services/mobile-app",
-          description: "iOS & Android applications",
-          icon: <Smartphone className="w-5 h-5" />,
-        },
-        {
-          name: "E-commerce Solutions",
-          href: "/services/ecommerce",
-          description: "Scalable online stores",
-          icon: <Globe className="w-5 h-5" />,
-        },
-        {
-          name: "UI/UX Design",
-          href: "/services/ui-ux",
-          description: "User-centered design experiences",
-          icon: <Sparkles className="w-5 h-5" />,
-        },
-      ],
-    },
-    {
-      title: "Analytics & Strategy",
-      icon: <Target className="w-6 h-6" />,
-      color: "from-blue-700 to-blue-800",
-      services: [
-        {
-          name: "Analytics & Reporting",
-          href: "/services/analytics",
-          description: "Data-driven insights & tracking",
-          icon: <BarChart className="w-5 h-5" />,
-        },
-        {
-          name: "Conversion Optimization",
-          href: "/services/conversion",
-          description: "Increase conversions & revenue",
-          icon: <TrendingUp className="w-5 h-5" />,
-        },
-        {
-          name: "Marketing Automation",
-          href: "/services/automation",
-          description: "Streamline marketing workflows",
-          icon: <Zap className="w-5 h-5" />,
-        },
-        {
-          name: "Brand Strategy",
-          href: "/services/strategy",
-          description: "Complete brand positioning",
-          icon: <Shield className="w-5 h-5" />,
-        },
-      ],
-    },
-  ];
+  const iconMap: { [key: string]: JSX.Element } = useMemo(() => ({
+    search: <Search className="w-5 h-5" />,
+    trendingup: <TrendingUp className="w-5 h-5" />,
+    messagesquare: <MessageSquare className="w-5 h-5" />,
+    pentool: <PenTool className="w-5 h-5" />,
+    monitor: <Monitor className="w-5 h-5" />,
+    smartphone: <Smartphone className="w-5 h-5" />,
+    globe: <Globe className="w-5 h-5" />,
+    sparkles: <Sparkles className="w-5 h-5" />,
+    barchart: <BarChart className="w-5 h-5" />,
+    zap: <Zap className="w-5 h-5" />,
+    shield: <Shield className="w-5 h-5" />,
+    code: <Code className="w-6 h-6" />,
+    target: <Target className="w-6 h-6" />,
+  }), []);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await fetch("/api/services");
+        const services: Service[] = await res.json();
+
+        const categories: { [key: string]: Service[] } = services.reduce(
+          (acc, service) => {
+            const category = service.category || "Other";
+            if (!acc[category]) {
+              acc[category] = [];
+            }
+            acc[category].push(service);
+            return acc;
+          },
+          {} as { [key: string]: Service[] },
+        );
+
+        const categoryColors: { [key: string]: string } = {
+          "Digital Marketing": "from-blue-500 to-blue-600",
+          "Tech Solutions": "from-blue-600 to-blue-700",
+          "Analytics & Strategy": "from-blue-700 to-blue-800",
+        };
+        
+        const categoryIcons: { [key: string]: JSX.Element } = {
+          "Digital Marketing": <Zap className="w-6 h-6" />,
+          "Tech Solutions": <Code className="w-6 h-6" />,
+          "Analytics & Strategy": <Target className="w-6 h-6" />,
+        };
+
+        const formattedCategories: ServiceCategory[] = Object.keys(
+          categories,
+        ).map((categoryTitle) => ({
+          title: categoryTitle,
+          icon: categoryIcons[categoryTitle] || <Sparkles className="w-6 h-6" />,
+          color: categoryColors[categoryTitle] || "from-gray-500 to-gray-600",
+          services: categories[categoryTitle].map((service) => ({
+            name: service.title,
+            href: `/services/${service.slug}`,
+            description: service.description,
+            icon: iconMap[service.icon.toLowerCase()] || <Sparkles className="w-5 h-5" />,
+          })),
+        }));
+        setServiceCategories(formattedCategories);
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      }
+    };
+
+    fetchServices();
+  }, [iconMap]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -231,7 +225,7 @@ const Navbar = () => {
                         {/* Services Link with Mega Menu */}
                         <Link
                           href={item.href}
-                          className={`flex items-center px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-lg transition-all duration-300 text-sm lg:text-base ${
+                          className={`flex items-center px-2  py-2 sm:py-2.5 rounded-lg transition-all duration-300 text-sm lg:text-base ${
                             isServicesActive
                               ? "text-blue-600 bg-blue-50"
                               : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -351,7 +345,7 @@ const Navbar = () => {
                     ) : (
                       <Link
                         href={item.href}
-                        className={`flex items-center px-4 sm:px-6 lg:px-8 py-2 rounded-lg transition-all duration-300 text-sm lg:text-base ${
+                        className={`flex items-center px-4  py-2 rounded-lg transition-all duration-300 text-sm lg:text-base ${
                           pathname === item.href
                             ? "text-blue-600 bg-blue-50 font-medium"
                             : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"

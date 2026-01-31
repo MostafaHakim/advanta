@@ -1,32 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import Service from "@/models/serviceModel";
 
 export async function GET() {
   await dbConnect();
-
-  try {
-    const services = await Service.find({});
-    return NextResponse.json({ success: true, data: services });
-  } catch (error) {
-    return NextResponse.json(
-      { success: false, message: "Server error" },
-      { status: 500 }
-    );
-  }
+  const services = await Service.find().sort({ order: 1 });
+  return NextResponse.json(services);
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(req: Request) {
   await dbConnect();
+  const body = await req.json();
 
-  try {
-    const body = await request.json();
-    const service = await Service.create(body);
-    return NextResponse.json({ success: true, data: service }, { status: 201 });
-  } catch (error) {
-    return NextResponse.json(
-      { success: false, message: "Server error" },
-      { status: 500 }
-    );
-  }
+  const service = await Service.create(body);
+  return NextResponse.json(service, { status: 201 });
 }

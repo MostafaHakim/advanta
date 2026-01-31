@@ -378,7 +378,7 @@ const PortfolioSection = () => {
                 Ready to start your project?
               </h3>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Let's create something amazing together. Browse our complete
+                Let&apos;s create something amazing together. Browse our complete
                 portfolio to see more of our work and results.
               </p>
             </div>

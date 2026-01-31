@@ -110,7 +110,7 @@ export default function LoginPage() {
             href="/admin/register"
             className="text-blue-600 hover:underline"
           >
-            Don't have an account? Register
+            Don&apos;t have an account? Register
           </Link>
         </p>
       </div>

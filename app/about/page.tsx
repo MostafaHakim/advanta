@@ -17,11 +17,11 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                We're More Than Just a{" "}
+                We&apos;re More Than Just a{" "}
                 <span className="text-blue-600">Marketing Agency</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                We're a team of passionate digital strategists, creative minds,
+                We&apos;re a team of passionate digital strategists, creative minds,
                 and tech experts dedicated to transforming businesses through
                 innovative marketing solutions.
               </p>
@@ -90,7 +90,7 @@ export default function AboutPage() {
               <Globe className="w-12 h-12 mb-6" />
               <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
               <p className="mb-4 opacity-90">
-                To become the world's most trusted digital marketing partner,
+                To become the world&apos;s most trusted digital marketing partner,
                 recognized for transforming businesses and setting new standards
                 in marketing excellence.
               </p>

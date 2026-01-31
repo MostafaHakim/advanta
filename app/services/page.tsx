@@ -1,16 +1,23 @@
 import { Zap, Users, Target, Rocket } from "lucide-react";
-import { Metadata } from "next";
 import { ServiceCard } from "@/components/services";
 import { FAQSection, ProcessSection } from "@/components/sections";
 
 interface Service {
-  id: string;
-  slug: string;
+  _id: string;
   title: string;
+  slug: string;
   description: string;
-  features: string[];
-  benefits: string[];
-  color: string;
+  icon?: string;
+  category: string;
+  features: {
+    title: string;
+    description: string;
+    items: string[];
+  }[];
+  metrics: { label: string; value: string }[];
+  featured: boolean;
+  order: number;
+  color?: string;
 }
 
 async function getServices() {
@@ -22,14 +29,8 @@ async function getServices() {
     throw new Error("Failed to fetch services");
   }
 
-  return (await res.json()).data;
+  return res.json();
 }
-
-export const metadata: Metadata = {
-  title: "Our Services | Comprehensive Digital Marketing Solutions",
-  description:
-    "Discover our comprehensive digital marketing services designed to grow your business. From SEO and content marketing to social media and PPC, we have the expertise to deliver results.",
-};
 
 export default async function ServicesPage() {
   const services: Service[] = await getServices();
@@ -46,7 +47,7 @@ export default async function ServicesPage() {
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               We offer end-to-end digital marketing solutions tailored to your
-              business goals. From SEO to social media, we've got you covered.
+              business goals. From SEO to social media, we&apos;ve got you covered.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <button className="btn-primary">Get Free Consultation</button>
@@ -62,8 +63,11 @@ export default async function ServicesPage() {
       <section className="py-20 bg-white">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {services?.map((service) => (
+              <ServiceCard
+                key={service._id}
+                service={service}
+              />
             ))}
           </div>
         </div>
@@ -83,8 +87,7 @@ export default async function ServicesPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
+            {[{
                 icon: <Zap className="w-8 h-8" />,
                 title: "Fast Results",
                 description: "Quick implementation and rapid results delivery",
@@ -135,7 +138,7 @@ export default async function ServicesPage() {
             Ready to Transform Your Digital Presence?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Let's discuss how our services can help you achieve your business
+            Let&apos;s discuss how our services can help you achieve your business
             goals
           </p>
           <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">

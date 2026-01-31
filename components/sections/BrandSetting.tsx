@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaTrash, FaUpload } from "react-icons/fa";
+import Image from "next/image";
 
 type Brand = {
   _id: string;
@@ -102,10 +103,12 @@ export default function BrandSetting() {
             key={brand._id}
             className="border rounded-lg p-4 flex flex-col items-center gap-3"
           >
-            <img
+            <Image
               src={brand.image}
               alt={brand.name}
-              className="h-20 object-contain"
+              width={120}
+              height={80}
+              className="object-contain"
             />
             <p className="font-semibold">{brand.name}</p>
             <button

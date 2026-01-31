@@ -326,7 +326,7 @@ const FAQSection = () => {
               Still Have Questions?
             </h3>
             <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Can't find the answer you're looking for? Our team is here to
+              Can&apos;t find the answer you&apos;re looking for? Our team is here to
               help.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

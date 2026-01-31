@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services | Digital Marketing Solutions",
+  title: "Our Services | Comprehensive Digital Marketing Solutions",
   description:
-    "Comprehensive digital marketing services including SEO, PPC, Social Media, Web Development, and more.",
+    "Discover our comprehensive digital marketing services designed to grow your business. From SEO and content marketing to social media and PPC, we have the expertise to deliver results.",
 };
-
 export default function ServicesLayout({
   children,
 }: {

@@ -63,7 +63,7 @@ export default function ContactPage() {
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Let's <span className="text-blue-600">Connect</span>
+              Let&apos;s <span className="text-blue-600">Connect</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Ready to transform your digital presence? Get in touch with our
@@ -227,7 +227,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-3xl font-bold mb-6">Visit Our Office</h2>
               <p className="text-gray-600 mb-8">
-                Located in the heart of San Francisco's tech district, our
+                Located in the heart of San Francisco&apos;s tech district, our
                 office is designed for collaboration and innovation. Come visit
                 us to discuss your project in person.
               </p>

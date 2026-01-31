@@ -101,7 +101,7 @@ const CTASection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-lg bg-blue-50 border border-blue-100 mb-4 md:mb-6">
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
             <span className="text-xs md:text-sm font-medium text-blue-700 tracking-wider">
-              LET'S CREATE MAGIC
+              LET&apos;S CREATE MAGIC
             </span>
             <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
           </div>
@@ -113,7 +113,7 @@ const CTASection = () => {
           </h2>
 
           <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Let's craft a digital strategy that not only looks stunning but
+            Let&apos;s craft a digital strategy that not only looks stunning but
             <span className="text-blue-600 font-medium">
               {" "}
               delivers measurable results
@@ -215,7 +215,7 @@ const CTASection = () => {
                       Start Your Journey
                     </h3>
                     <p className="text-blue-600 text-xs md:text-sm">
-                      Fill the form below and let's create something
+                      Fill the form below and let&apos;s create something
                       extraordinary
                     </p>
                   </div>

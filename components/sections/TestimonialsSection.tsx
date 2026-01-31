@@ -129,7 +129,7 @@ const TestimonialsSectionPremium = () => {
           </h2>
 
           <p className="text-sm text-gray-600 max-w-3xl mx-auto">
-            See how we've helped businesses achieve remarkable growth and
+            See how we&apos;ve helped businesses achieve remarkable growth and
             transform their digital presence.
           </p>
         </div>
@@ -203,7 +203,7 @@ const TestimonialsSectionPremium = () => {
                   </div>
 
                   <blockquote className="lg:text-xl text-gray-700 italic mb-4 lg:mb-10 leading-relaxed border-l-4 border-blue-500 pl-6">
-                    "{currentTestimonial.content}"
+                    &quot;{currentTestimonial.content}&quot;
                   </blockquote>
 
                   {/* Results */}

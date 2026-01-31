@@ -22,6 +22,7 @@ interface PortfolioItem {
 import { getBaseUrl } from "@/lib/url";
 import dbConnect from "@/lib/db";
 import projectModel from "@/models/projectModel";
+import Image from "next/image";
 // ... (rest of the file)
 async function getPortfolioItems(): Promise<PortfolioItem[]> {
   const res = await fetch(`${getBaseUrl()}/api/projects`, {
@@ -110,11 +111,15 @@ export default async function PortfolioItemPage({
       <h1 className="text-4xl font-bold mb-4">{item.title}</h1>
       <p className="text-gray-600 mb-6">{item.description}</p>
       {item.image && (
-        <img
+        <div className="relative w-full h-96 rounded-lg overflow-hidden mb-8">
+        <Image
           src={item.image}
           alt={item.title}
-          className="w-full h-96 object-cover rounded-lg mb-8"
+          layout="fill"
+          objectFit="cover"
+          priority
         />
+      </div>
       )}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-2">Client:</h2>

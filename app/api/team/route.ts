@@ -1,35 +1,34 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
-import Team from "@/models/teamModel";
+import TeamMember from "@/models/teamModel";
 
-export async function GET() {
-  await dbConnect();
-
+export async function POST(req: Request) {
   try {
-    const team = await Team.find({});
-    return NextResponse.json({ success: true, data: team });
+    await dbConnect();
+    const body = await req.json();
+
+    const member = await TeamMember.create(body);
+    return NextResponse.json(member, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: "Server error" },
-      { status: 500 }
+      { message: "Failed to create team member" },
+      { status: 500 },
     );
   }
 }
 
-export async function POST(request: NextRequest) {
-  await dbConnect();
-
+export async function GET() {
   try {
-    const body = await request.json();
-    const teamMember = await Team.create(body);
-    return NextResponse.json(
-      { success: true, data: teamMember },
-      { status: 201 }
-    );
+    await dbConnect();
+    const members = await TeamMember.find().sort({
+      featured: -1,
+      createdAt: -1,
+    });
+    return NextResponse.json(members);
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: "Server error" },
-      { status: 500 }
+      { message: "Failed to fetch team members" },
+      { status: 500 },
     );
   }
 }

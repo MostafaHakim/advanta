@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import NextImage from "next/image";
 
 interface Result {
   value: string;
@@ -285,10 +286,12 @@ export default function Project() {
                       className="input"
                     />
                     {form.image && (
-                      <img
+                      <NextImage
                         src={form.image}
                         alt="Preview"
-                        className="h-20 w-20 object-cover rounded mt-2"
+                        width={80}
+                        height={80}
+                        className="object-cover rounded mt-2"
                       />
                     )}
                   </div>
@@ -424,10 +427,11 @@ export default function Project() {
                       className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
                     >
                       <div className="h-48 overflow-hidden relative">
-                        <img
+                        <NextImage
                           src={project.image || "/placeholder-project.jpg"}
                           alt={project.title}
-                          className="w-full h-full object-cover"
+                          layout="fill"
+                          objectFit="cover"
                         />
                         {project.featured && (
                           <div className="absolute top-3 left-3 px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full">
@@ -484,7 +488,7 @@ export default function Project() {
                     Project Uploaded Successfully!
                   </h3>
                   <p className="text-green-100 mt-1">
-                    "{uploadedData.title}" has been published.
+                    &quot;{uploadedData.title}&quot; has been published.
                   </p>
                   <div className="mt-3 flex gap-2">
                     <button
