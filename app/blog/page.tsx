@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { BlogCard, NewsletterSection } from "@/components/blog";
-import { getBaseUrl } from "@/lib/url";
+
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -34,11 +34,11 @@ interface BlogPost {
 }
 
 async function getBlogs() {
-  const res = await fetch(`${getBaseUrl()}/api/blogs`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`, {
     cache: "no-store",
   });
   const data = await res.json();
-  return data || [];
+  return data;
 }
 
 export const metadata: Metadata = {
