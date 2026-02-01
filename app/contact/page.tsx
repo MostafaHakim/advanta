@@ -15,8 +15,29 @@ import {
 import { ContactForm } from "@/components/contact";
 
 export default function ContactPage() {
+  type ContactInfo = {
+    icon: IconName;
+    title: string;
+    details: string[];
+    description?: string;
+  };
+
+  type Department = {
+    icon: IconName;
+    name: string;
+    email: string;
+  };
+
+  type ContactSettingsType = {
+    data: {
+      contactInfo: ContactInfo[];
+      departments: Department[];
+    };
+  };
+
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [contactSetting, setContactSettings] = useState({});
+  const [contactSetting, setContactSettings] =
+    useState<ContactSettingsType | null>(null);
 
   useEffect(() => {
     fetch("/api/admin/contact")
@@ -42,8 +63,18 @@ export default function ContactPage() {
     },
   ];
 
-  const getIconComponent = (iconName) => {
-    const iconMap = {
+  type IconName =
+    | "Phone"
+    | "Mail"
+    | "MapPin"
+    | "Clock"
+    | "MessageSquare"
+    | "CheckCircle"
+    | "Users"
+    | "Headphones";
+
+  const getIconComponent = (iconName: IconName) => {
+    const iconMap: Record<IconName, JSX.Element> = {
       Phone: <Phone className="w-6 h-6" />,
       Mail: <Mail className="w-6 h-6" />,
       MapPin: <MapPin className="w-6 h-6" />,
