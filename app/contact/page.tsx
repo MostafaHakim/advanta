@@ -59,13 +59,13 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+      <section className=" pt-20 lg:pt-32 lg:pb-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 lg:mb-6">
               Let&apos;s <span className="text-blue-600">Connect</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-md lg:text-xl text-gray-600 mb-2 lg:mb-8">
               Ready to transform your digital presence? Get in touch with our
               team for a free consultation and discover how we can help your
               business grow.
@@ -81,9 +81,9 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info */}
-      <section className="py-20 bg-white">
+      <section className="py-4 lg:py-20 bg-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-3 gap-8 mb-20">
+          <div className="grid md:grid-cols-3 gap-4 lg:gap-8 mb-4 lg:mb-20">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={info.title}
@@ -109,10 +109,12 @@ export default function ContactPage() {
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className=" grid lg:grid-cols-2 gap-4 lg:gap-8">
             {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold mb-8">Send us a Message</h2>
+            <div className="col-span-1">
+              <h2 className="text-xl lg:text-3xl font-bold  lg:mb-8">
+                Send us a Message
+              </h2>
 
               {formSubmitted ? (
                 <motion.div
@@ -143,10 +145,10 @@ export default function ContactPage() {
             </div>
 
             {/* Additional Info */}
-            <div className="space-y-8">
+            <div className="space-y-8 col-span-1 w-11/12 lg:w-full">
               {/* Departments */}
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8">
-                <h3 className="text-2xl font-bold mb-6">
+                <h3 className="text-lg lg:text-2xl font-bold mb-6">
                   Contact by Department
                 </h3>
                 <div className="space-y-4">
@@ -177,7 +179,7 @@ export default function ContactPage() {
               </div>
 
               {/* Business Hours */}
-              <div className="bg-white rounded-3xl p-8 shadow-lg">
+              <div className="bg-white rounded-3xl p-4 lg:p-8 shadow-lg">
                 <h3 className="text-2xl font-bold mb-6 flex items-center">
                   <Clock className="w-6 h-6 mr-3" />
                   Business Hours
@@ -206,7 +208,7 @@ export default function ContactPage() {
               </div>
 
               {/* FAQ Link */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-8">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-4 lg:p-8">
                 <h3 className="text-2xl font-bold mb-4">Have Questions?</h3>
                 <p className="mb-6 opacity-90">
                   Check our FAQ section for quick answers to common questions.
@@ -221,12 +223,14 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-4 lg:py-20 bg-gray-50">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Visit Our Office</h2>
-              <p className="text-gray-600 mb-8">
+              <h2 className="text-xl lg:text-3xl font-bold mb-2 lg:mb-6">
+                Visit Our Office
+              </h2>
+              <p className="text-gray-600 mb-8 text-justify">
                 Located in the heart of San Francisco&apos;s tech district, our
                 office is designed for collaboration and innovation. Come visit
                 us to discuss your project in person.
@@ -299,9 +303,6 @@ export default function ContactPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
               Book Free Consultation
-            </button>
-            <button className="border-2 border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors">
-              Download Brochure
             </button>
           </div>
         </div>

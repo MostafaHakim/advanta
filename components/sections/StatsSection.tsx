@@ -128,18 +128,18 @@ const StatsSection = () => {
             Trusted by leading brands worldwide
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-8 md:gap-16">
+          <div className="w-full mx-auto grid grid-cols-2 lg:grid-cols-5 items-center justify-center  gap-6 lg:gap-8 md:gap-16 px-4">
             {brands.map((brand) => (
               <div
                 key={brand._id}
-                className="cursor-pointer p-4 rounded-lg hover:bg-gray-50 transition-all duration-300 group "
+                className="cursor-pointer  rounded-lg hover:bg-gray-50 transition-all duration-300 group "
               >
                 <Image
                   src={brand.image}
                   alt={brand.name}
                   width={150}
-                  height={200}
-                  className="text-base md:text-lg font-semibold text-gray-700 transition-colors group-hover:text-blue-600"
+                  height={150}
+                  className="text-base md:text-lg font-semibold text-gray-700 transition-colors group-hover:text-blue-600 rounded-lg"
                 />
               </div>
             ))}

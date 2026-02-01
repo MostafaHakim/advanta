@@ -101,7 +101,7 @@ export default async function BlogPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <section className="pt-32 pb-10 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container-custom relative">
           {/* Background Pattern */}
           <div className="absolute inset-0 overflow-hidden opacity-10">
@@ -110,20 +110,15 @@ export default async function BlogPage() {
           </div>
 
           <div className="relative z-10">
-            <div className="text-center max-w-4xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                Latest Insights
-              </div>
-
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight">
+            <div className="text-center max-w-4xl mx-auto mb-4">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-8 tracking-tight">
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Marketing
                 </span>{" "}
                 <span className="text-gray-900">Blog</span>
               </h1>
 
-              <p className="text-2xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg lg:text-xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
                 Expert insights, actionable strategies, and industry trends to
                 transform your digital marketing approach.
               </p>
@@ -178,28 +173,21 @@ export default async function BlogPage() {
       </section>
 
       {/* Featured Posts */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-700 font-medium mb-3">
+              <div className="text-md lg:text-lg inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-700 font-medium mb-3">
                 <Star className="w-4 h-4" />
                 Editor&apos;s Pick
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
                 Featured <span className="text-amber-600">Articles</span>
               </h2>
             </div>
-            <Link
-              href="/blog/category/featured"
-              className="group mt-4 md:mt-0 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-lg"
-            >
-              View All Featured
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {featuredPosts.map((post, index) => (
               <div
                 key={post._id}
@@ -208,7 +196,7 @@ export default async function BlogPage() {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-purple-600/10 z-10" />
 
-                <div className="relative h-[500px]">
+                <div className="relative h-[200px] lg:h-[300px]">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -220,28 +208,18 @@ export default async function BlogPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-20" />
 
                   {/* Content Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-30">
-                    <div className="flex items-center gap-4 mb-4">
-                      <span className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full text-sm font-semibold">
+                  <div className="absolute bottom-0 left-0 right-0 p-2 text-white z-30 text-sm ">
+                    <div className="flex items-center gap-1 ">
+                      <span className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full font-semibold text-xs absolute right-2 -top-42">
                         {post.category}
                       </span>
-                      <div className="flex items-center gap-4 text-sm text-gray-300">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {post.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Eye className="w-4 h-4" />
-                          {post.views?.toLocaleString() || "0"} views
-                        </span>
-                      </div>
                     </div>
 
-                    <h3 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                    <h3 className="text-lg md:text-xl font-bold  leading-tight">
                       {post.title}
                     </h3>
 
-                    <p className="text-gray-200 mb-6 text-lg leading-relaxed line-clamp-2">
+                    <p className="text-gray-200 text-xs leading-relaxed line-clamp-2">
                       {post.excerpt}
                     </p>
 
@@ -265,7 +243,7 @@ export default async function BlogPage() {
                         </button>
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+                          className="flex items-center text-sm gap-2 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
                         >
                           Read More...
                           <ChevronRight className="w-4 h-4" />

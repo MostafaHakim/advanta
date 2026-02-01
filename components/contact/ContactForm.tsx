@@ -130,7 +130,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       onSubmit={handleSubmit}
-      className="space-y-6"
+      className="space-y-6 w-11/12 lg:-w-full"
     >
       {/* Message */}
       <div>
