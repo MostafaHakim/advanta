@@ -31,9 +31,28 @@ const departmentSchema = new mongoose.Schema({
     type: String, // MessageSquare, Users, Headphones
     required: true,
   },
-  order: {
-    type: Number,
-    default: 0,
+});
+
+const addressSchema = new mongoose.Schema({
+  address: {
+    title: {
+      type: String,
+    },
+    details: [String],
+  },
+  visitHours: {
+    title: {
+      type: String,
+    },
+
+    details: [String],
+  },
+  Appointment: {
+    title: {
+      type: String,
+    },
+
+    details: [String],
   },
 });
 
@@ -41,6 +60,7 @@ const contactSettingsSchema = new mongoose.Schema(
   {
     contactInfo: [contactItemSchema],
     departments: [departmentSchema],
+    address: [addressSchema],
   },
   { timestamps: true },
 );

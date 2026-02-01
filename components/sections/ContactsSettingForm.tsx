@@ -1,220 +1,3 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
-
-// interface ContactInfo {
-//   title: string;
-//   icon: string;
-//   details: string[];
-//   description: string;
-// }
-
-// interface Department {
-//   name: string;
-//   email: string;
-//   icon: string;
-//   order: number;
-// }
-
-// interface ContactSettings {
-//   contactInfo: ContactInfo[];
-//   departments: Department[];
-// }
-
-// export default function ContactSettingsForm() {
-//   const [loading, setLoading] = useState(true);
-//   const [data, setData] = useState<ContactSettings>({
-//     contactInfo: [],
-//     departments: [],
-//   });
-
-//   useEffect(() => {
-//     fetch("/api/admin/contact")
-//       .then((res) => res.json())
-//       .then((res) => {
-//         if (res?.data) {
-//           // Ensure description exists
-//           const normalized = {
-//             ...res.data,
-//             contactInfo: res.data.contactInfo.map((c: any) => ({
-//               ...c,
-//               description: c.description || "",
-//             })),
-//           };
-//           setData(normalized);
-//         }
-//         setLoading(false);
-//       })
-//       .catch(() => setLoading(false));
-//   }, []);
-
-//   const saveSettings = async () => {
-//     const res = await fetch("/api/admin/contact", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(data),
-//     });
-
-//     if (res.ok) alert("Saved Successfully");
-//     else alert("Error saving data");
-//   };
-
-//   const updateContact = <K extends keyof ContactInfo>(
-//     i: number,
-//     field: K,
-//     value: ContactInfo[K],
-//   ) => {
-//     const updated = [...data.contactInfo];
-//     updated[i] = { ...updated[i], [field]: value };
-//     setData({ ...data, contactInfo: updated });
-//   };
-
-//   const updateDept = <K extends keyof Department>(
-//     i: number,
-//     field: K,
-//     value: Department[K],
-//   ) => {
-//     const updated = [...data.departments];
-//     updated[i] = { ...updated[i], [field]: value };
-//     setData({ ...data, departments: updated });
-//   };
-
-//   const addContactRow = () => {
-//     setData({
-//       ...data,
-//       contactInfo: [
-//         ...data.contactInfo,
-//         { title: "", icon: "", details: [], description: "" },
-//       ],
-//     });
-//   };
-
-//   const addDepartmentRow = () => {
-//     setData({
-//       ...data,
-//       departments: [
-//         ...data.departments,
-//         { name: "", email: "", icon: "", order: 0 },
-//       ],
-//     });
-//   };
-
-//   if (loading) return <p className="p-10">Loading...</p>;
-
-//   return (
-//     <div className="p-10 space-y-10">
-//       <h1 className="text-3xl font-bold">Contact Page Settings</h1>
-
-//       {/* Contact Info */}
-//       <div>
-//         <div className="flex justify-between items-center mb-4">
-//           <h2 className="text-xl font-semibold">Contact Info</h2>
-//           <button
-//             onClick={addContactRow}
-//             className="bg-blue-600 text-white px-3 py-1 rounded"
-//           >
-//             + Add Info
-//           </button>
-//         </div>
-
-//         {data.contactInfo.length === 0 && (
-//           <p className="text-gray-500">No contact info yet. Add one.</p>
-//         )}
-
-//         {data.contactInfo.map((item, i) => (
-//           <div key={i} className="grid grid-cols-4 gap-3 mb-4">
-//             <input
-//               value={item.title}
-//               onChange={(e) => updateContact(i, "title", e.target.value)}
-//               placeholder="Title"
-//               className="border p-2"
-//             />
-//             <input
-//               value={item.icon}
-//               onChange={(e) => updateContact(i, "icon", e.target.value)}
-//               placeholder="Icon"
-//               className="border p-2"
-//             />
-//             <input
-//               value={item.details.join(",")}
-//               onChange={(e) =>
-//                 updateContact(i, "details", e.target.value.split(","))
-//               }
-//               placeholder="Details (comma separated)"
-//               className="border p-2 col-span-2"
-//             />
-//             <textarea
-//               value={item.description}
-//               onChange={(e) => updateContact(i, "description", e.target.value)}
-//               placeholder="Description"
-//               className="border p-2 col-span-4"
-//             />
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Departments */}
-//       <div>
-//         <div className="flex justify-between items-center mb-4">
-//           <h2 className="text-xl font-semibold">Departments</h2>
-//           <button
-//             onClick={addDepartmentRow}
-//             className="bg-green-600 text-white px-3 py-1 rounded"
-//           >
-//             + Add Department
-//           </button>
-//         </div>
-
-//         {data.departments.length === 0 && (
-//           <p className="text-gray-500">No departments yet. Add one.</p>
-//         )}
-
-//         {data.departments.map((d, i) => (
-//           <div key={i} className="grid grid-cols-4 gap-3 mb-3">
-//             <input
-//               value={d.name}
-//               onChange={(e) => updateDept(i, "name", e.target.value)}
-//               placeholder="Name"
-//               className="border p-2"
-//             />
-//             <input
-//               value={d.email}
-//               onChange={(e) => updateDept(i, "email", e.target.value)}
-//               placeholder="Email"
-//               className="border p-2"
-//             />
-//             <input
-//               value={d.icon}
-//               onChange={(e) => updateDept(i, "icon", e.target.value)}
-//               placeholder="Icon"
-//               className="border p-2"
-//             />
-//           </div>
-//         ))}
-//       </div>
-//       <div className="flex flex-col items-center justify-start">
-//         <h2>Only these icos you can use</h2>
-//         <div className="flex flex-row items-center justify-between space-x-2">
-//           <span>Phone</span>
-//           <span>Mail</span>
-//           <span>MapPin</span>
-//           <span>Clock</span>
-//           <span>MessageSquare</span>
-//           <span>CheckCircle</span>
-//           <span>Users</span>
-//           <span>Headphones</span>
-//         </div>
-//       </div>
-//       <button
-//         onClick={saveSettings}
-//         className="bg-black text-white px-6 py-3 rounded"
-//       >
-//         Save Changes
-//       </button>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -231,6 +14,8 @@ import {
   Plus,
   Trash2,
   Eye,
+  Building,
+  Calendar,
 } from "lucide-react";
 
 interface ContactInfo {
@@ -244,12 +29,27 @@ interface Department {
   name: string;
   email: string;
   icon: string;
-  order: number;
+}
+
+interface AddressSection {
+  address: {
+    title: string;
+    details: string[];
+  };
+  visitHours: {
+    title: string;
+    details: string[];
+  };
+  Appointment: {
+    title: string;
+    details: string[];
+  };
 }
 
 interface ContactSettings {
   contactInfo: ContactInfo[];
   departments: Department[];
+  address: AddressSection[];
 }
 
 const ICON_OPTIONS = [
@@ -261,6 +61,8 @@ const ICON_OPTIONS = [
   { value: "CheckCircle", label: "Check", icon: CheckCircle },
   { value: "Users", label: "Users", icon: Users },
   { value: "Headphones", label: "Headphones", icon: Headphones },
+  { value: "Building", label: "Building", icon: Building },
+  { value: "Calendar", label: "Calendar", icon: Calendar },
 ];
 
 export default function ContactSettingsForm() {
@@ -268,6 +70,13 @@ export default function ContactSettingsForm() {
   const [data, setData] = useState<ContactSettings>({
     contactInfo: [],
     departments: [],
+    address: [
+      {
+        address: { title: "Address", details: [""] },
+        visitHours: { title: "Visit Hours", details: [""] },
+        Appointment: { title: "Appointment", details: [""] },
+      },
+    ],
   });
   const [previewMode, setPreviewMode] = useState(false);
 
@@ -278,11 +87,20 @@ export default function ContactSettingsForm() {
         if (res?.data) {
           const normalized = {
             ...res.data,
-            contactInfo: res.data.contactInfo.map((c: any) => ({
-              ...c,
-              description: c.description || "",
-              details: Array.isArray(c.details) ? c.details : [],
-            })),
+            contactInfo:
+              res.data.contactInfo?.map((c: any) => ({
+                ...c,
+                description: c.description || "",
+                details: Array.isArray(c.details) ? c.details : [],
+              })) || [],
+            departments: res.data.departments || [],
+            address: res.data.address || [
+              {
+                address: { title: "Address", details: [""] },
+                visitHours: { title: "Visit Hours", details: [""] },
+                Appointment: { title: "Appointment", details: [""] },
+              },
+            ],
           };
           setData(normalized);
         }
@@ -325,6 +143,30 @@ export default function ContactSettingsForm() {
     setData({ ...data, departments: updated });
   };
 
+  const updateAddressSection = (
+    section: keyof AddressSection,
+    field: "title" | "details",
+    value: string | string[],
+  ) => {
+    const updated = [...data.address];
+    if (updated.length === 0) {
+      updated.push({
+        address: { title: "Address", details: [""] },
+        visitHours: { title: "Visit Hours", details: [""] },
+        Appointment: { title: "Appointment", details: [""] },
+      });
+    }
+
+    updated[0] = {
+      ...updated[0],
+      [section]: {
+        ...updated[0][section],
+        [field]: value,
+      },
+    };
+    setData({ ...data, address: updated });
+  };
+
   const addContactRow = () => {
     setData({
       ...data,
@@ -340,7 +182,7 @@ export default function ContactSettingsForm() {
       ...data,
       departments: [
         ...data.departments,
-        { name: "New Department", email: "", icon: "Users", order: 0 },
+        { name: "New Department", email: "", icon: "Users" },
       ],
     });
   };
@@ -381,7 +223,8 @@ export default function ContactSettingsForm() {
                 Contact Page Settings
               </h1>
               <p className="text-gray-600 mt-2">
-                Manage your contact information and departments
+                Manage your contact information, departments, and address
+                details
               </p>
             </div>
             <div className="flex gap-3">
@@ -440,6 +283,85 @@ export default function ContactSettingsForm() {
                     </p>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Address Section Preview */}
+            <div className="bg-white rounded-2xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6 pb-4 border-b">
+                Address & Hours Preview
+              </h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {data.address.length > 0 && (
+                  <>
+                    <div className="bg-gradient-to-br from-green-50 to-white rounded-xl p-6 border border-green-100">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center">
+                          <Building className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800">
+                          {data.address[0].address.title || "Address"}
+                        </h3>
+                      </div>
+                      <div className="space-y-2">
+                        {data.address[0].address.details.map((detail, idx) => (
+                          <p
+                            key={idx}
+                            className="text-gray-700 bg-white p-3 rounded-lg border"
+                          >
+                            {detail || "No address provided"}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-amber-50 to-white rounded-xl p-6 border border-amber-100">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center">
+                          <Clock className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800">
+                          {data.address[0].visitHours.title || "Visit Hours"}
+                        </h3>
+                      </div>
+                      <div className="space-y-2">
+                        {data.address[0].visitHours.details.map(
+                          (detail, idx) => (
+                            <p
+                              key={idx}
+                              className="text-gray-700 bg-white p-3 rounded-lg border"
+                            >
+                              {detail || "No hours provided"}
+                            </p>
+                          ),
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-purple-50 to-white rounded-xl p-6 border border-purple-100">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center">
+                          <Calendar className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800">
+                          {data.address[0].Appointment.title || "Appointment"}
+                        </h3>
+                      </div>
+                      <div className="space-y-2">
+                        {data.address[0].Appointment.details.map(
+                          (detail, idx) => (
+                            <p
+                              key={idx}
+                              className="text-gray-700 bg-white p-3 rounded-lg border"
+                            >
+                              {detail || "No appointment details provided"}
+                            </p>
+                          ),
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -544,7 +466,7 @@ export default function ContactSettingsForm() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Icon
                             </label>
-                            <div className="grid grid-cols-4  gap-2">
+                            <div className="grid grid-cols-4 gap-2">
                               {ICON_OPTIONS.map((iconOpt) => (
                                 <button
                                   key={iconOpt.value}
@@ -602,6 +524,175 @@ export default function ContactSettingsForm() {
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* Address Section */}
+            <div className="bg-white rounded-2xl shadow-lg p-6">
+              <div className="flex justify-between items-center mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-800">
+                    Address & Hours
+                  </h2>
+                  <p className="text-gray-600 mt-1">
+                    Manage address, visit hours, and appointment details
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Address */}
+                <div className="border border-gray-200 rounded-xl p-6 hover:border-green-300 transition-all">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center">
+                      <Building className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Address
+                    </h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Title
+                      </label>
+                      <input
+                        value={data.address[0]?.address.title || ""}
+                        onChange={(e) =>
+                          updateAddressSection(
+                            "address",
+                            "title",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="e.g., Office Address"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Details (One per line)
+                      </label>
+                      <textarea
+                        value={(data.address[0]?.address.details || [""]).join(
+                          "\n",
+                        )}
+                        onChange={(e) =>
+                          updateAddressSection(
+                            "address",
+                            "details",
+                            e.target.value.split("\n"),
+                          )
+                        }
+                        placeholder="123 Main Street&#10;City, State 12345"
+                        className="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Visit Hours */}
+                <div className="border border-gray-200 rounded-xl p-6 hover:border-amber-300 transition-all">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center">
+                      <Clock className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Visit Hours
+                    </h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Title
+                      </label>
+                      <input
+                        value={data.address[0]?.visitHours.title || ""}
+                        onChange={(e) =>
+                          updateAddressSection(
+                            "visitHours",
+                            "title",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="e.g., Business Hours"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Details (One per line)
+                      </label>
+                      <textarea
+                        value={(
+                          data.address[0]?.visitHours.details || [""]
+                        ).join("\n")}
+                        onChange={(e) =>
+                          updateAddressSection(
+                            "visitHours",
+                            "details",
+                            e.target.value.split("\n"),
+                          )
+                        }
+                        placeholder="Monday - Friday: 9am - 5pm&#10;Saturday: 10am - 2pm"
+                        className="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all"
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Appointment */}
+                <div className="border border-gray-200 rounded-xl p-6 hover:border-purple-300 transition-all">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center">
+                      <Calendar className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Appointment
+                    </h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Title
+                      </label>
+                      <input
+                        value={data.address[0]?.Appointment.title || ""}
+                        onChange={(e) =>
+                          updateAddressSection(
+                            "Appointment",
+                            "title",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="e.g., Schedule Appointment"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Details (One per line)
+                      </label>
+                      <textarea
+                        value={(
+                          data.address[0]?.Appointment.details || [""]
+                        ).join("\n")}
+                        onChange={(e) =>
+                          updateAddressSection(
+                            "Appointment",
+                            "details",
+                            e.target.value.split("\n"),
+                          )
+                        }
+                        placeholder="Call to schedule&#10;Online booking available"
+                        className="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all"
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Departments Section */}

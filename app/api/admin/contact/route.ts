@@ -19,6 +19,7 @@ export async function POST(req: Request) {
   if (settings) {
     settings.contactInfo = body.contactInfo;
     settings.departments = body.departments;
+    settings.address = body.address;
     await settings.save();
   } else {
     settings = await ContactSettings.create(body);

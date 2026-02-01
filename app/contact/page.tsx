@@ -28,10 +28,22 @@ export default function ContactPage() {
     email: string;
   };
 
+  type AddressDetail = {
+    title: string;
+    details: string[];
+  };
+
+  type AddressItem = {
+    address?: AddressDetail;
+    visitHours?: AddressDetail;
+    Appointment?: AddressDetail;
+  };
+
   type ContactSettingsType = {
     data: {
       contactInfo: ContactInfo[];
       departments: Department[];
+      address?: AddressItem[];
     };
   };
 
@@ -262,43 +274,65 @@ export default function ContactPage() {
               </p>
 
               <div className="space-y-6">
-                <div className="flex items-start">
-                  <MapPin className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold mb-2">Address</h4>
-                    <p className="text-gray-600">
-                      123 Marketing Street
-                      <br />
-                      San Francisco, CA 94107
-                      <br />
-                      United States
-                    </p>
-                  </div>
-                </div>
+                {contactSetting?.data?.address?.map((item, index) => (
+                  <div key={index}>
+                    {/* Address Section */}
+                    <div className="flex items-start">
+                      <MapPin className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold mb-2">
+                          {item.address?.title || "Address"}
+                        </h4>
+                        <p className="text-gray-600">
+                          {item.address?.details?.map((detail: string, idx) => (
+                            <span key={idx}>
+                              {detail}
+                              <br />
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="flex items-start">
-                  <Clock className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold mb-2">Visiting Hours</h4>
-                    <p className="text-gray-600">
-                      Monday - Friday: 9am - 6pm
-                      <br />
-                      By appointment only
-                    </p>
-                  </div>
-                </div>
+                    {/* Visit Hours Section */}
+                    <div className="flex items-start mt-6">
+                      <Clock className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold mb-2">
+                          {item.visitHours?.title || "Visiting Hours"}
+                        </h4>
+                        <p className="text-gray-600">
+                          {item.visitHours?.details?.map((detail, idx) => (
+                            <span key={idx}>
+                              {detail}
+                              <br />
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="flex items-start">
-                  <Phone className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold mb-2">Appointment</h4>
-                    <p className="text-gray-600">
-                      Call ahead to schedule your visit:
-                      <br />
-                      +1 (555) 123-4567
-                    </p>
+                    {/* Appointment Section */}
+                    <div className="flex items-start mt-6">
+                      <Phone className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold mb-2">
+                          {item.Appointment?.title || "Appointment"}
+                        </h4>
+                        <p className="text-gray-600">
+                          {item.Appointment?.details?.map(
+                            (detail: string, idx) => (
+                              <span key={idx}>
+                                {detail}
+                                <br />
+                              </span>
+                            ),
+                          )}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
 
               <button className="mt-8 btn-primary">Get Directions</button>
