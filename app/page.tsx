@@ -76,10 +76,10 @@ export default function Home() {
         <FeatureProject />
       </AnimatedSection>
 
-      {/* Testimonials with fadeIn */}
+      {/* Testimonials with fadeIn
       <AnimatedSection variant="fadeIn" delay={0.5}>
         <TestimonialsSection />
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       {/* CTA with special attention */}
       <motion.div

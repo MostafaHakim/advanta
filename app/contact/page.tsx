@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -16,27 +16,13 @@ import { ContactForm } from "@/components/contact";
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [contactSetting, setContactSettings] = useState({});
 
-  const contactInfo = [
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Phone",
-      details: ["+8801722440899", "+8801761933911"],
-      description: "Mon-Fri, 9am-6pm EST",
-    },
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email",
-      details: ["support@advantascale.com", "contact@advantascale.com"],
-      description: "Response within 24 hours",
-    },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Office",
-      details: ["Bonani Dhaka", "Dhaka-1212 Banhladesh "],
-      description: "Visit us anytime",
-    },
-  ];
+  useEffect(() => {
+    fetch("/api/admin/contact")
+      .then((res) => res.json())
+      .then((res) => setContactSettings(res));
+  }, []);
 
   const departments = [
     {
@@ -56,10 +42,24 @@ export default function ContactPage() {
     },
   ];
 
+  const getIconComponent = (iconName) => {
+    const iconMap = {
+      Phone: <Phone className="w-6 h-6" />,
+      Mail: <Mail className="w-6 h-6" />,
+      MapPin: <MapPin className="w-6 h-6" />,
+      Clock: <Clock className="w-6 h-6" />,
+      MessageSquare: <MessageSquare className="w-6 h-6" />,
+      CheckCircle: <CheckCircle className="w-6 h-6" />,
+      Users: <Users className="w-6 h-6" />,
+      Headphones: <Headphones className="w-6 h-6" />,
+    };
+    return iconMap[iconName] || null;
+  };
+
   return (
     <>
       {/* Hero Section */}
-      <section className=" pt-20 lg:pt-32 lg:pb-20 bg-gradient-to-b from-blue-50 to-white">
+      <section className=" pt-20 lg:pt-32 lg:pb-4 bg-gradient-to-b from-blue-50 to-white">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 lg:mb-6">
@@ -70,21 +70,15 @@ export default function ContactPage() {
               team for a free consultation and discover how we can help your
               business grow.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="btn-primary">Schedule a Call</button>
-              <button className="px-6 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
-                View Pricing
-              </button>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Info */}
-      <section className="py-4 lg:py-20 bg-white">
+      <section className="py-4  bg-white">
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-4 lg:gap-8 mb-4 lg:mb-20">
-            {contactInfo.map((info, index) => (
+            {contactSetting?.data?.contactInfo?.map((info, index) => (
               <motion.div
                 key={info.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -94,7 +88,7 @@ export default function ContactPage() {
                 className="text-center p-8 bg-gray-50 rounded-3xl hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white mb-6">
-                  {info.icon}
+                  {getIconComponent(info.icon)}
                 </div>
                 <h3 className="text-xl font-bold mb-4">{info.title}</h3>
                 <div className="space-y-1 mb-4">
@@ -152,7 +146,7 @@ export default function ContactPage() {
                   Contact by Department
                 </h3>
                 <div className="space-y-4">
-                  {departments.map((dept, index) => (
+                  {contactSetting?.data?.departments?.map((dept, index) => (
                     <motion.div
                       key={dept.name}
                       initial={{ opacity: 0, x: 20 }}
@@ -162,7 +156,7 @@ export default function ContactPage() {
                       className="flex items-center p-4 bg-white rounded-xl"
                     >
                       <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-4">
-                        {dept.icon}
+                        {getIconComponent(dept.icon)}
                       </div>
                       <div>
                         <h4 className="font-bold">{dept.name}</h4>

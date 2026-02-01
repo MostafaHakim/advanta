@@ -153,12 +153,15 @@ export default async function PortfolioPage() {
             Ready to Start Your Success Story?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Let&apos;s discuss how we can help you achieve similar results for your
-            business
+            Let&apos;s discuss how we can help you achieve similar results for
+            your business
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+          <a
+            href="/contact"
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+          >
             Start Your Project
-          </button>
+          </a>
         </div>
       </section>
     </>
