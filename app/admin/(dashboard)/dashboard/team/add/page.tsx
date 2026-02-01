@@ -264,25 +264,6 @@ export default function AddTeamMemberPage() {
                       onChange={handleChange}
                       className={inputClasses}
                     />
-                    {form.image && (
-                      <div className="mt-4 p-3 border border-gray-200 rounded-lg bg-gray-50">
-                        <p className="text-sm font-medium text-gray-700 mb-2">
-                          Image Preview:
-                        </p>
-                        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
-                          <NextImage
-                            src={form.image}
-                            alt="Preview"
-                            layout="fill"
-                            objectFit="cover"
-                            onError={(e) => {
-                              e.currentTarget.src =
-                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E";
-                            }}
-                          />
-                        </div>
-                      </div>
-                    )}
                   </div>
 
                   <div>
@@ -394,8 +375,8 @@ export default function AddTeamMemberPage() {
                 </div>
 
                 <p className="text-gray-600 mb-6">
-                  Add up to 2 key statistics to highlight on the team member&apos;s
-                  profile
+                  Add up to 2 key statistics to highlight on the team
+                  member&apos;s profile
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
