@@ -243,17 +243,6 @@ export default function ContactPage() {
                   </p>
                 </div>
               </div>
-
-              {/* FAQ Link */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-4 lg:p-8">
-                <h3 className="text-2xl font-bold mb-4">Have Questions?</h3>
-                <p className="mb-6 opacity-90">
-                  Check our FAQ section for quick answers to common questions.
-                </p>
-                <button className="w-full bg-white text-blue-600 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
-                  Visit FAQ
-                </button>
-              </div>
             </div>
           </div>
         </div>
