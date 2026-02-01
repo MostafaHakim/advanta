@@ -974,7 +974,7 @@ export default function Blogs() {
             </div>
 
             <Link
-              href="/admin/dashboard/blogs/create"
+              href="/admin/dashboard/blog/create"
               className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-0.5"
             >
               <Plus className="w-5 h-5" />

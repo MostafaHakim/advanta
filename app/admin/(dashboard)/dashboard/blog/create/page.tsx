@@ -310,7 +310,7 @@ export default function CreateBlogPage() {
         });
 
         setTimeout(() => {
-          router.push("/admin/dashboard/blogs");
+          router.push("/admin/dashboard/blog");
         }, 1500);
       } else {
         throw new Error(data.message || "Failed to create blog");
