@@ -6,8 +6,9 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     const body = await req.json();
-
+    console.log(body);
     const member = await TeamMember.create(body);
+    console.log(member);
     return NextResponse.json(member, { status: 201 });
   } catch (error) {
     return NextResponse.json(

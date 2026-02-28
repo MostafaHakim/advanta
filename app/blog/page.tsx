@@ -261,7 +261,7 @@ export default async function BlogPage() {
       {/* Main Content Section */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10">
@@ -366,15 +366,15 @@ export default async function BlogPage() {
                 ))}
               </div>
 
-              {/* Pagination */}
+              {/* Pagination
               <div className="flex justify-center mt-16">
                 <nav className="flex items-center gap-2">
                   <button className="px-5 py-3 border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:bg-gray-50 transition-colors flex items-center gap-2">
                     <ChevronRight className="w-4 h-4 rotate-180" />
-                    Previous
+                    <span className="hidden md:block">Previous</span>
                   </button>
 
-                  {[1, 2, 3, 4, 5].map((num) => (
+                  {[1, 2, 3].map((num) => (
                     <button
                       key={num}
                       className={`w-12 h-12 flex items-center justify-center rounded-xl font-semibold transition-all ${
@@ -388,11 +388,11 @@ export default async function BlogPage() {
                   ))}
 
                   <button className="px-5 py-3 border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:bg-gray-50 transition-colors flex items-center gap-2">
-                    Next
+                    <span className="hidden md:block">Next</span>
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </nav>
-              </div>
+              </div> */}
             </div>
 
             {/* Sidebar */}

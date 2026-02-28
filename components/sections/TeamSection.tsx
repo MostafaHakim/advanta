@@ -20,7 +20,10 @@ type TeamMember = {
   name: string;
   position: string;
   bio: string;
-  image: string;
+  image: {
+    url: string;
+    public_id: string;
+  };
   expertise: string[];
   social: {
     linkedin?: string;
@@ -177,7 +180,8 @@ const TeamSection = () => {
                       <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl">
                         <Image
                           src={
-                            featuredMember.image || "/placeholder-avatar.jpg"
+                            featuredMember?.image?.url ||
+                            "/placeholder-avatar.jpg"
                           }
                           alt={featuredMember.name}
                           fill
@@ -371,7 +375,7 @@ const TeamSection = () => {
                     >
                       <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl">
                         <Image
-                          src={member.image || "/placeholder-avatar.jpg"}
+                          src={member?.image?.url || "/placeholder-avatar.jpg"}
                           alt={member.name}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-500"

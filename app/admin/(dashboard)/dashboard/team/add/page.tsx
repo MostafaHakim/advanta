@@ -1,3 +1,1314 @@
+// "use client";
+
+// import { useState } from "react";
+// import { motion } from "framer-motion";
+// import NextImage from "next/image";
+// import {
+//   Plus,
+//   Upload,
+//   User,
+//   Briefcase,
+//   FileText,
+//   Link,
+//   Mail,
+//   Award,
+//   Check,
+//   X,
+//   Globe,
+//   BarChart3,
+// } from "lucide-react";
+// import { useRouter } from "next/navigation";
+
+// export default function AddTeamMemberPage() {
+//   const [form, setForm] = useState({
+//     name: "",
+//     position: "",
+//     bio: "",
+//     image: "",
+//     expertise: "",
+//     linkedin: "",
+//     twitter: "",
+//     email: "",
+//     featured: false,
+//     stat1Label: "",
+//     stat1Value: "",
+//     stat2Label: "",
+//     stat2Value: "",
+//   });
+//   const router = useRouter();
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [submitSuccess, setSubmitSuccess] = useState(false);
+//   const [submitError, setSubmitError] = useState("");
+
+//   const handleChange = (e: any) => {
+//     const { name, value, type, checked } = e.target;
+//     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+//     // Clear any previous submit status when user edits form
+//     if (submitSuccess || submitError) {
+//       setSubmitSuccess(false);
+//       setSubmitError("");
+//     }
+//   };
+
+//   const handleSubmit = async (e: any) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+//     setSubmitError("");
+
+//     const payload = {
+//       name: form.name,
+//       position: form.position,
+//       bio: form.bio,
+//       image: form.image,
+//       expertise: form.expertise.split(",").map((e) => e.trim()),
+//       featured: form.featured,
+//       social: {
+//         linkedin: form.linkedin,
+//         twitter: form.twitter,
+//         email: form.email,
+//       },
+//       stats: [
+//         { label: form.stat1Label, value: form.stat1Value },
+//         { label: form.stat2Label, value: form.stat2Value },
+//       ],
+//     };
+
+//     // Simulate API delay
+//     await new Promise((resolve) => setTimeout(resolve, 800));
+
+//     try {
+//       const res = await fetch("/api/team", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(payload),
+//       });
+
+//       if (res.ok) {
+//         setSubmitSuccess(true);
+//         // Reset form after successful submission
+//         setTimeout(() => {
+//           setForm({
+//             name: "",
+//             position: "",
+//             bio: "",
+//             image: "",
+//             expertise: "",
+//             linkedin: "",
+//             twitter: "",
+//             email: "",
+//             featured: false,
+//             stat1Label: "",
+//             stat1Value: "",
+//             stat2Label: "",
+//             stat2Value: "",
+//           });
+//           setIsSubmitting(false);
+
+//           router.push("/admin/dashboard/team");
+//         }, 1500);
+//       } else {
+//         throw new Error("Failed to add team member");
+//       }
+//     } catch (error) {
+//       setSubmitError("Something went wrong. Please try again.");
+//       setIsSubmitting(false);
+//     }
+//   };
+
+//   const inputClasses =
+//     "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white text-gray-800 placeholder-gray-500";
+//   const labelClasses = "block text-sm font-medium text-gray-700 mb-2";
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 20 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.4 }}
+//       className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-8"
+//     >
+//       <div className="max-w-4xl mx-auto">
+//         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+//           {/* Header */}
+//           <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 md:p-8 text-white">
+//             <div className="flex items-center justify-between">
+//               <div>
+//                 <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
+//                   <Plus className="w-8 h-8" />
+//                   Add New Team Member
+//                 </h1>
+//                 <p className="text-blue-100 mt-2">
+//                   Fill in the details below to add a new member to your team
+//                 </p>
+//               </div>
+//               <div className="hidden md:flex items-center justify-center bg-white/20 rounded-full w-16 h-16">
+//                 <User className="w-8 h-8" />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Form */}
+//           <form onSubmit={handleSubmit} className="p-6 md:p-8">
+//             <div className="space-y-8">
+//               {/* Personal Information Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <User className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Personal Information
+//                   </h2>
+//                 </div>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div>
+//                     <label htmlFor="name" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <User className="w-4 h-4" />
+//                         Full Name
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="name"
+//                       name="name"
+//                       value={form.name}
+//                       placeholder="John Doe"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                       required
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label htmlFor="position" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Briefcase className="w-4 h-4" />
+//                         Position / Role
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="position"
+//                       name="position"
+//                       value={form.position}
+//                       placeholder="Senior Developer"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                       required
+//                     />
+//                   </div>
+
+//                   <div className="md:col-span-2">
+//                     <label htmlFor="email" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Mail className="w-4 h-4" />
+//                         Email Address
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="email"
+//                       name="email"
+//                       type="email"
+//                       value={form.email}
+//                       placeholder="john.doe@company.com"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                       required
+//                     />
+//                   </div>
+
+//                   <div className="md:col-span-2">
+//                     <label htmlFor="bio" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <FileText className="w-4 h-4" />
+//                         Bio / Description
+//                       </span>
+//                     </label>
+//                     <textarea
+//                       id="bio"
+//                       name="bio"
+//                       value={form.bio}
+//                       placeholder="Brief description about the team member..."
+//                       onChange={handleChange}
+//                       className={`${inputClasses} min-h-[120px] resize-vertical`}
+//                       rows={4}
+//                       required
+//                     />
+//                     <p className="text-xs text-gray-500 mt-2">
+//                       Provide a comprehensive bio highlighting skills and
+//                       experience
+//                     </p>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Image & Expertise Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <Upload className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Profile & Expertise
+//                   </h2>
+//                 </div>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div>
+//                     <label htmlFor="image" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Globe className="w-4 h-4" />
+//                         Profile Image URL
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="image"
+//                       name="image"
+//                       value={form.image}
+//                       placeholder="https://example.com/profile.jpg"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label htmlFor="expertise" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Award className="w-4 h-4" />
+//                         Areas of Expertise
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="expertise"
+//                       name="expertise"
+//                       value={form.expertise}
+//                       placeholder="React, TypeScript, UI/UX Design, Project Management"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                     <p className="text-xs text-gray-500 mt-2">
+//                       Separate multiple expertise areas with commas
+//                     </p>
+
+//                     <div className="mt-6">
+//                       <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+//                         <div
+//                           className={`flex items-center justify-center w-6 h-6 rounded border ${form.featured ? "bg-blue-600 border-blue-600" : "border-gray-400"}`}
+//                         >
+//                           {form.featured && (
+//                             <Check className="w-4 h-4 text-white" />
+//                           )}
+//                         </div>
+//                         <input
+//                           type="checkbox"
+//                           name="featured"
+//                           checked={form.featured}
+//                           onChange={handleChange}
+//                           className="hidden"
+//                         />
+//                         <div>
+//                           <p className="font-medium text-gray-800">
+//                             Featured Team Member
+//                           </p>
+//                           <p className="text-sm text-gray-600">
+//                             This member will be highlighted on the team page
+//                           </p>
+//                         </div>
+//                       </label>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Social Media Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <Link className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Social Media Links
+//                   </h2>
+//                 </div>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div>
+//                     <label htmlFor="linkedin" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <div className="w-5 h-5 bg-blue-700 text-white rounded flex items-center justify-center">
+//                           <span className="text-xs font-bold">in</span>
+//                         </div>
+//                         LinkedIn URL
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="linkedin"
+//                       name="linkedin"
+//                       value={form.linkedin}
+//                       placeholder="https://linkedin.com/in/johndoe"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label htmlFor="twitter" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <div className="w-5 h-5 bg-blue-400 text-white rounded flex items-center justify-center">
+//                           <span className="text-xs font-bold">𝕏</span>
+//                         </div>
+//                         Twitter / X URL
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="twitter"
+//                       name="twitter"
+//                       value={form.twitter}
+//                       placeholder="https://twitter.com/johndoe"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Stats Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <BarChart3 className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Key Statistics
+//                   </h2>
+//                 </div>
+
+//                 <p className="text-gray-600 mb-6">
+//                   Add up to 2 key statistics to highlight on the team
+//                   member&apos;s profile
+//                 </p>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div className="space-y-4">
+//                     <div className="bg-blue-50 p-5 rounded-xl border border-blue-100">
+//                       <h3 className="font-medium text-blue-800 mb-4">
+//                         Statistic 1
+//                       </h3>
+//                       <div className="space-y-4">
+//                         <div>
+//                           <label
+//                             htmlFor="stat1Label"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Label
+//                           </label>
+//                           <input
+//                             id="stat1Label"
+//                             name="stat1Label"
+//                             value={form.stat1Label}
+//                             placeholder="Projects Completed"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                         <div>
+//                           <label
+//                             htmlFor="stat1Value"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Value
+//                           </label>
+//                           <input
+//                             id="stat1Value"
+//                             name="stat1Value"
+//                             value={form.stat1Value}
+//                             placeholder="150+"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   <div className="space-y-4">
+//                     <div className="bg-indigo-50 p-5 rounded-xl border border-indigo-100">
+//                       <h3 className="font-medium text-indigo-800 mb-4">
+//                         Statistic 2
+//                       </h3>
+//                       <div className="space-y-4">
+//                         <div>
+//                           <label
+//                             htmlFor="stat2Label"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Label
+//                           </label>
+//                           <input
+//                             id="stat2Label"
+//                             name="stat2Label"
+//                             value={form.stat2Label}
+//                             placeholder="Client Satisfaction"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                         <div>
+//                           <label
+//                             htmlFor="stat2Value"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Value
+//                           </label>
+//                           <input
+//                             id="stat2Value"
+//                             name="stat2Value"
+//                             value={form.stat2Value}
+//                             placeholder="98%"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Submit Section */}
+//               <div className="pt-6 border-t border-gray-200">
+//                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+//                   <div>
+//                     {submitSuccess && (
+//                       <motion.div
+//                         initial={{ opacity: 0, y: -10 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         className="flex items-center gap-3 text-green-600 bg-green-50 px-4 py-3 rounded-lg"
+//                       >
+//                         <Check className="w-5 h-5" />
+//                         <span className="font-medium">
+//                           Team member added successfully!
+//                         </span>
+//                       </motion.div>
+//                     )}
+
+//                     {submitError && (
+//                       <motion.div
+//                         initial={{ opacity: 0, y: -10 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         className="flex items-center gap-3 text-red-600 bg-red-50 px-4 py-3 rounded-lg"
+//                       >
+//                         <X className="w-5 h-5" />
+//                         <span className="font-medium">{submitError}</span>
+//                       </motion.div>
+//                     )}
+//                   </div>
+
+//                   <div className="flex gap-4">
+//                     <button
+//                       type="button"
+//                       onClick={() => {
+//                         setForm({
+//                           name: "",
+//                           position: "",
+//                           bio: "",
+//                           image: "",
+//                           expertise: "",
+//                           linkedin: "",
+//                           twitter: "",
+//                           email: "",
+//                           featured: false,
+//                           stat1Label: "",
+//                           stat1Value: "",
+//                           stat2Label: "",
+//                           stat2Value: "",
+//                         });
+//                         setSubmitError("");
+//                         setSubmitSuccess(false);
+//                       }}
+//                       className="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+//                     >
+//                       Reset Form
+//                     </button>
+
+//                     <button
+//                       type="submit"
+//                       disabled={isSubmitting}
+//                       className={`px-8 py-3 rounded-lg font-medium text-white flex items-center gap-3 transition-all ${isSubmitting ? "bg-blue-400" : "bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg hover:shadow-xl"}`}
+//                     >
+//                       {isSubmitting ? (
+//                         <>
+//                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+//                           Adding...
+//                         </>
+//                       ) : (
+//                         <>
+//                           <Plus className="w-5 h-5" />
+//                           Add Team Member
+//                         </>
+//                       )}
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </form>
+//         </div>
+
+//         {/* Form Preview Card */}
+//         <div className="mt-8 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+//           <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+//             <User className="w-5 h-5 text-blue-600" />
+//             Member Preview
+//           </h3>
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+//             <div className="md:col-span-2">
+//               <div className="flex items-start gap-4">
+//                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
+//                   {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+//                 </div>
+//                 <div>
+//                   <h4 className="font-bold text-xl text-gray-800">
+//                     {form.name || "Team Member Name"}
+//                   </h4>
+//                   <p className="text-blue-600 font-medium">
+//                     {form.position || "Position"}
+//                   </p>
+//                   <p className="text-gray-600 mt-2 text-sm line-clamp-2">
+//                     {form.bio || "Bio will appear here"}
+//                   </p>
+//                 </div>
+//               </div>
+
+//               {form.expertise && (
+//                 <div className="mt-4">
+//                   <p className="text-sm font-medium text-gray-700 mb-2">
+//                     Expertise:
+//                   </p>
+//                   <div className="flex flex-wrap gap-2">
+//                     {form.expertise.split(",").map(
+//                       (skill, index) =>
+//                         skill.trim() && (
+//                           <span
+//                             key={index}
+//                             className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+//                           >
+//                             {skill.trim()}
+//                           </span>
+//                         ),
+//                     )}
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <div className="bg-gray-50 p-4 rounded-xl">
+//               <h5 className="font-medium text-gray-700 mb-3">Quick Stats</h5>
+//               <div className="space-y-3">
+//                 {form.stat1Label && (
+//                   <div>
+//                     <p className="text-sm text-gray-600">{form.stat1Label}</p>
+//                     <p className="text-xl font-bold text-gray-800">
+//                       {form.stat1Value}
+//                     </p>
+//                   </div>
+//                 )}
+//                 {form.stat2Label && (
+//                   <div>
+//                     <p className="text-sm text-gray-600">{form.stat2Label}</p>
+//                     <p className="text-xl font-bold text-gray-800">
+//                       {form.stat2Value}
+//                     </p>
+//                   </div>
+//                 )}
+//                 {!form.stat1Label && !form.stat2Label && (
+//                   <p className="text-gray-500 text-sm">No stats added yet</p>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+// }
+
+// "use client";
+
+// import { useState } from "react";
+// import { motion } from "framer-motion";
+// import NextImage from "next/image";
+// import {
+//   Plus,
+//   Upload,
+//   User,
+//   Briefcase,
+//   FileText,
+//   Link,
+//   Mail,
+//   Award,
+//   Check,
+//   X,
+//   Globe,
+//   BarChart3,
+// } from "lucide-react";
+// import { useRouter } from "next/navigation";
+
+// export default function AddTeamMemberPage() {
+//   const [form, setForm] = useState({
+//     name: "",
+//     position: "",
+//     bio: "",
+//     image: {
+//       url: "",
+//       public_id: "",
+//     },
+//     expertise: "",
+//     linkedin: "",
+//     twitter: "",
+//     email: "",
+//     featured: false,
+//     stat1Label: "",
+//     stat1Value: "",
+//     stat2Label: "",
+//     stat2Value: "",
+//   });
+//   const router = useRouter();
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [submitSuccess, setSubmitSuccess] = useState(false);
+//   const [submitError, setSubmitError] = useState("");
+
+//   const handleChange = (e: any) => {
+//     const { name, value, type, checked } = e.target;
+//     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+//     // Clear any previous submit status when user edits form
+//     if (submitSuccess || submitError) {
+//       setSubmitSuccess(false);
+//       setSubmitError("");
+//     }
+//   };
+
+//   const handleImageUpload = async (file: File) => {
+//     const reader = new FileReader();
+
+//     reader.onloadend = async () => {
+//       const res = await fetch("/api/upload", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ image: reader.result }),
+//       });
+
+//       const data = await res.json();
+
+//       setForm((prev) => ({
+//         ...prev,
+//         image: {
+//           url: data.url,
+//           public_id: data.public_id,
+//         },
+//       }));
+//     };
+
+//     reader.readAsDataURL(file);
+//   };
+
+//   const handleSubmit = async (e: any) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+//     setSubmitError("");
+
+//     const payload = {
+//       name: form.name,
+//       position: form.position,
+//       bio: form.bio,
+//       image: form.image, // এখন object যাবে
+//       expertise: form.expertise.split(",").map((e) => e.trim()),
+//       featured: form.featured,
+//       social: {
+//         linkedin: form.linkedin,
+//         twitter: form.twitter,
+//         email: form.email,
+//       },
+//       stats: [
+//         { label: form.stat1Label, value: form.stat1Value },
+//         { label: form.stat2Label, value: form.stat2Value },
+//       ],
+//     };
+
+//     // Simulate API delay
+//     await new Promise((resolve) => setTimeout(resolve, 800));
+
+//     try {
+//       const res = await fetch("/api/team", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(payload),
+//       });
+
+//       if (res.ok) {
+//         setSubmitSuccess(true);
+//         // Reset form after successful submission
+//         setTimeout(() => {
+//           setForm({
+//             name: "",
+//             position: "",
+//             bio: "",
+//             image: {
+//               url: "",
+//               public_id: "",
+//             },
+//             expertise: "",
+//             linkedin: "",
+//             twitter: "",
+//             email: "",
+//             featured: false,
+//             stat1Label: "",
+//             stat1Value: "",
+//             stat2Label: "",
+//             stat2Value: "",
+//           });
+//           setIsSubmitting(false);
+
+//           router.push("/admin/dashboard/team");
+//         }, 1500);
+//       } else {
+//         throw new Error("Failed to add team member");
+//       }
+//     } catch (error) {
+//       setSubmitError("Something went wrong. Please try again.");
+//       setIsSubmitting(false);
+//     }
+//   };
+
+//   const inputClasses =
+//     "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white text-gray-800 placeholder-gray-500";
+//   const labelClasses = "block text-sm font-medium text-gray-700 mb-2";
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 20 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.4 }}
+//       className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-8"
+//     >
+//       <div className="max-w-4xl mx-auto">
+//         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+//           {/* Header */}
+//           <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 md:p-8 text-white">
+//             <div className="flex items-center justify-between">
+//               <div>
+//                 <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
+//                   <Plus className="w-8 h-8" />
+//                   Add New Team Member
+//                 </h1>
+//                 <p className="text-blue-100 mt-2">
+//                   Fill in the details below to add a new member to your team
+//                 </p>
+//               </div>
+//               <div className="hidden md:flex items-center justify-center bg-white/20 rounded-full w-16 h-16">
+//                 <User className="w-8 h-8" />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Form */}
+//           <form onSubmit={handleSubmit} className="p-6 md:p-8">
+//             <div className="space-y-8">
+//               {/* Personal Information Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <User className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Personal Information
+//                   </h2>
+//                 </div>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div>
+//                     <label htmlFor="name" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <User className="w-4 h-4" />
+//                         Full Name
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="name"
+//                       name="name"
+//                       value={form.name}
+//                       placeholder="John Doe"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                       required
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label htmlFor="position" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Briefcase className="w-4 h-4" />
+//                         Position / Role
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="position"
+//                       name="position"
+//                       value={form.position}
+//                       placeholder="Senior Developer"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                       required
+//                     />
+//                   </div>
+
+//                   <div className="md:col-span-2">
+//                     <label htmlFor="email" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Mail className="w-4 h-4" />
+//                         Email Address
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="email"
+//                       name="email"
+//                       type="email"
+//                       value={form.email}
+//                       placeholder="john.doe@company.com"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                       required
+//                     />
+//                   </div>
+
+//                   <div className="md:col-span-2">
+//                     <label htmlFor="bio" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <FileText className="w-4 h-4" />
+//                         Bio / Description
+//                       </span>
+//                     </label>
+//                     <textarea
+//                       id="bio"
+//                       name="bio"
+//                       value={form.bio}
+//                       placeholder="Brief description about the team member..."
+//                       onChange={handleChange}
+//                       className={`${inputClasses} min-h-[120px] resize-vertical`}
+//                       rows={4}
+//                       required
+//                     />
+//                     <p className="text-xs text-gray-500 mt-2">
+//                       Provide a comprehensive bio highlighting skills and
+//                       experience
+//                     </p>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Image & Expertise Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <Upload className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Profile & Expertise
+//                   </h2>
+//                 </div>
+//                 {form.image.url ? (
+//                   <NextImage
+//                     src={form.image.url}
+//                     alt="profile"
+//                     width={64}
+//                     height={64}
+//                     className="rounded-full object-cover"
+//                   />
+//                 ) : (
+//                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
+//                     {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+//                   </div>
+//                 )}
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div>
+//                     <label htmlFor="image" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Globe className="w-4 h-4" />
+//                         Profile Image URL
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="image"
+//                       name="image"
+//                       value={form.image.url}
+//                       placeholder="https://example.com/profile.jpg"
+//                       onChange={(e) =>
+//                         setForm({
+//                           ...form,
+//                           image: { ...form.image, url: e.target.value },
+//                         })
+//                       }
+//                       className={inputClasses}
+//                     />
+//                     <div className="mt-3">
+//                       <input
+//                         type="file"
+//                         accept="image/*"
+//                         onChange={(e) =>
+//                           e.target.files && handleImageUpload(e.target.files[0])
+//                         }
+//                       />
+//                     </div>
+//                   </div>
+
+//                   <div>
+//                     <label htmlFor="expertise" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <Award className="w-4 h-4" />
+//                         Areas of Expertise
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="expertise"
+//                       name="expertise"
+//                       value={form.expertise}
+//                       placeholder="React, TypeScript, UI/UX Design, Project Management"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                     <p className="text-xs text-gray-500 mt-2">
+//                       Separate multiple expertise areas with commas
+//                     </p>
+
+//                     <div className="mt-6">
+//                       <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+//                         <div
+//                           className={`flex items-center justify-center w-6 h-6 rounded border ${form.featured ? "bg-blue-600 border-blue-600" : "border-gray-400"}`}
+//                         >
+//                           {form.featured && (
+//                             <Check className="w-4 h-4 text-white" />
+//                           )}
+//                         </div>
+//                         <input
+//                           type="checkbox"
+//                           name="featured"
+//                           checked={form.featured}
+//                           onChange={handleChange}
+//                           className="hidden"
+//                         />
+//                         <div>
+//                           <p className="font-medium text-gray-800">
+//                             Featured Team Member
+//                           </p>
+//                           <p className="text-sm text-gray-600">
+//                             This member will be highlighted on the team page
+//                           </p>
+//                         </div>
+//                       </label>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Social Media Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <Link className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Social Media Links
+//                   </h2>
+//                 </div>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div>
+//                     <label htmlFor="linkedin" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <div className="w-5 h-5 bg-blue-700 text-white rounded flex items-center justify-center">
+//                           <span className="text-xs font-bold">in</span>
+//                         </div>
+//                         LinkedIn URL
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="linkedin"
+//                       name="linkedin"
+//                       value={form.linkedin}
+//                       placeholder="https://linkedin.com/in/johndoe"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                   </div>
+
+//                   <div>
+//                     <label htmlFor="twitter" className={labelClasses}>
+//                       <span className="flex items-center gap-2">
+//                         <div className="w-5 h-5 bg-blue-400 text-white rounded flex items-center justify-center">
+//                           <span className="text-xs font-bold">𝕏</span>
+//                         </div>
+//                         Twitter / X URL
+//                       </span>
+//                     </label>
+//                     <input
+//                       id="twitter"
+//                       name="twitter"
+//                       value={form.twitter}
+//                       placeholder="https://twitter.com/johndoe"
+//                       onChange={handleChange}
+//                       className={inputClasses}
+//                     />
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Stats Section */}
+//               <div>
+//                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+//                   <BarChart3 className="w-6 h-6 text-blue-600" />
+//                   <h2 className="text-xl font-bold text-gray-800">
+//                     Key Statistics
+//                   </h2>
+//                 </div>
+
+//                 <p className="text-gray-600 mb-6">
+//                   Add up to 2 key statistics to highlight on the team
+//                   member&apos;s profile
+//                 </p>
+
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//                   <div className="space-y-4">
+//                     <div className="bg-blue-50 p-5 rounded-xl border border-blue-100">
+//                       <h3 className="font-medium text-blue-800 mb-4">
+//                         Statistic 1
+//                       </h3>
+//                       <div className="space-y-4">
+//                         <div>
+//                           <label
+//                             htmlFor="stat1Label"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Label
+//                           </label>
+//                           <input
+//                             id="stat1Label"
+//                             name="stat1Label"
+//                             value={form.stat1Label}
+//                             placeholder="Projects Completed"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                         <div>
+//                           <label
+//                             htmlFor="stat1Value"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Value
+//                           </label>
+//                           <input
+//                             id="stat1Value"
+//                             name="stat1Value"
+//                             value={form.stat1Value}
+//                             placeholder="150+"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   <div className="space-y-4">
+//                     <div className="bg-indigo-50 p-5 rounded-xl border border-indigo-100">
+//                       <h3 className="font-medium text-indigo-800 mb-4">
+//                         Statistic 2
+//                       </h3>
+//                       <div className="space-y-4">
+//                         <div>
+//                           <label
+//                             htmlFor="stat2Label"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Label
+//                           </label>
+//                           <input
+//                             id="stat2Label"
+//                             name="stat2Label"
+//                             value={form.stat2Label}
+//                             placeholder="Client Satisfaction"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                         <div>
+//                           <label
+//                             htmlFor="stat2Value"
+//                             className="text-sm font-medium text-gray-700 block mb-2"
+//                           >
+//                             Value
+//                           </label>
+//                           <input
+//                             id="stat2Value"
+//                             name="stat2Value"
+//                             value={form.stat2Value}
+//                             placeholder="98%"
+//                             onChange={handleChange}
+//                             className={inputClasses}
+//                           />
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Submit Section */}
+//               <div className="pt-6 border-t border-gray-200">
+//                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+//                   <div>
+//                     {submitSuccess && (
+//                       <motion.div
+//                         initial={{ opacity: 0, y: -10 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         className="flex items-center gap-3 text-green-600 bg-green-50 px-4 py-3 rounded-lg"
+//                       >
+//                         <Check className="w-5 h-5" />
+//                         <span className="font-medium">
+//                           Team member added successfully!
+//                         </span>
+//                       </motion.div>
+//                     )}
+
+//                     {submitError && (
+//                       <motion.div
+//                         initial={{ opacity: 0, y: -10 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         className="flex items-center gap-3 text-red-600 bg-red-50 px-4 py-3 rounded-lg"
+//                       >
+//                         <X className="w-5 h-5" />
+//                         <span className="font-medium">{submitError}</span>
+//                       </motion.div>
+//                     )}
+//                   </div>
+
+//                   <div className="flex gap-4">
+//                     <button
+//                       type="button"
+//                       onClick={() => {
+//                         setForm({
+//                           name: "",
+//                           position: "",
+//                           bio: "",
+//                           image: {
+//                             url: "",
+//                             public_id: "",
+//                           },
+//                           expertise: "",
+//                           linkedin: "",
+//                           twitter: "",
+//                           email: "",
+//                           featured: false,
+//                           stat1Label: "",
+//                           stat1Value: "",
+//                           stat2Label: "",
+//                           stat2Value: "",
+//                         });
+//                         setSubmitError("");
+//                         setSubmitSuccess(false);
+//                       }}
+//                       className="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+//                     >
+//                       Reset Form
+//                     </button>
+
+//                     <button
+//                       type="submit"
+//                       disabled={isSubmitting}
+//                       className={`px-8 py-3 rounded-lg font-medium text-white flex items-center gap-3 transition-all ${isSubmitting ? "bg-blue-400" : "bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg hover:shadow-xl"}`}
+//                     >
+//                       {isSubmitting ? (
+//                         <>
+//                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+//                           Adding...
+//                         </>
+//                       ) : (
+//                         <>
+//                           <Plus className="w-5 h-5" />
+//                           Add Team Member
+//                         </>
+//                       )}
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </form>
+//         </div>
+
+//         {/* Form Preview Card */}
+//         <div className="mt-8 bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+//           <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+//             <User className="w-5 h-5 text-blue-600" />
+//             Member Preview
+//           </h3>
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+//             <div className="md:col-span-2">
+//               <div className="flex items-start gap-4">
+//                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
+//                   {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+//                 </div>
+//                 <div>
+//                   <h4 className="font-bold text-xl text-gray-800">
+//                     {form.name || "Team Member Name"}
+//                   </h4>
+//                   <p className="text-blue-600 font-medium">
+//                     {form.position || "Position"}
+//                   </p>
+//                   <p className="text-gray-600 mt-2 text-sm line-clamp-2">
+//                     {form.bio || "Bio will appear here"}
+//                   </p>
+//                 </div>
+//               </div>
+
+//               {form.expertise && (
+//                 <div className="mt-4">
+//                   <p className="text-sm font-medium text-gray-700 mb-2">
+//                     Expertise:
+//                   </p>
+//                   <div className="flex flex-wrap gap-2">
+//                     {form.expertise.split(",").map(
+//                       (skill, index) =>
+//                         skill.trim() && (
+//                           <span
+//                             key={index}
+//                             className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+//                           >
+//                             {skill.trim()}
+//                           </span>
+//                         ),
+//                     )}
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <div className="bg-gray-50 p-4 rounded-xl">
+//               <h5 className="font-medium text-gray-700 mb-3">Quick Stats</h5>
+//               <div className="space-y-3">
+//                 {form.stat1Label && (
+//                   <div>
+//                     <p className="text-sm text-gray-600">{form.stat1Label}</p>
+//                     <p className="text-xl font-bold text-gray-800">
+//                       {form.stat1Value}
+//                     </p>
+//                   </div>
+//                 )}
+//                 {form.stat2Label && (
+//                   <div>
+//                     <p className="text-sm text-gray-600">{form.stat2Label}</p>
+//                     <p className="text-xl font-bold text-gray-800">
+//                       {form.stat2Value}
+//                     </p>
+//                   </div>
+//                 )}
+//                 {!form.stat1Label && !form.stat2Label && (
+//                   <p className="text-gray-500 text-sm">No stats added yet</p>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+// }
+
 "use client";
 
 import { useState } from "react";
@@ -19,12 +1330,35 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+// টাইপ ডিফাইন করা হলো
+interface FormData {
+  name: string;
+  position: string;
+  bio: string;
+  image: {
+    url: string;
+    public_id: string;
+  };
+  expertise: string;
+  linkedin: string;
+  twitter: string;
+  email: string;
+  featured: boolean;
+  stat1Label: string;
+  stat1Value: string;
+  stat2Label: string;
+  stat2Value: string;
+}
+
 export default function AddTeamMemberPage() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormData>({
     name: "",
     position: "",
     bio: "",
-    image: "",
+    image: {
+      url: "",
+      public_id: "",
+    },
     expertise: "",
     linkedin: "",
     twitter: "",
@@ -35,46 +1369,102 @@ export default function AddTeamMemberPage() {
     stat2Label: "",
     stat2Value: "",
   });
+
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  const handleChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
+  // ইভেন্ট টাইপ ঠিক করা হলো
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
-    // Clear any previous submit status when user edits form
+
     if (submitSuccess || submitError) {
       setSubmitSuccess(false);
       setSubmitError("");
     }
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleImageUpload = async (file: File) => {
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = async () => {
+      try {
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: reader.result }),
+        });
+
+        if (!res.ok) {
+          throw new Error("Image upload failed");
+        }
+
+        const data = await res.json();
+
+        setForm((prev) => ({
+          ...prev,
+          image: {
+            url: data.url,
+            public_id: data.public_id,
+          },
+        }));
+      } catch (error) {
+        setSubmitError("Failed to upload image. Please try again.");
+      }
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  // ফাইল আপলোড হ্যান্ডলার
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleImageUpload(file);
+    }
+  };
+
+  // সাবমিট হ্যান্ডলার টাইপ ঠিক করা হলো
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError("");
+
+    // এক্সপার্টাইজ অ্যারে তৈরি করা হলো
+    const expertiseArray = form.expertise
+      .split(",")
+      .map((e) => e.trim())
+      .filter((e) => e !== "");
 
     const payload = {
       name: form.name,
       position: form.position,
       bio: form.bio,
       image: form.image,
-      expertise: form.expertise.split(",").map((e) => e.trim()),
+      expertise: expertiseArray,
       featured: form.featured,
       social: {
-        linkedin: form.linkedin,
-        twitter: form.twitter,
-        email: form.email,
+        linkedin: form.linkedin || null,
+        twitter: form.twitter || null,
+        email: form.email || null,
       },
       stats: [
-        { label: form.stat1Label, value: form.stat1Value },
-        { label: form.stat2Label, value: form.stat2Value },
+        ...(form.stat1Label && form.stat1Value
+          ? [{ label: form.stat1Label, value: form.stat1Value }]
+          : []),
+        ...(form.stat2Label && form.stat2Value
+          ? [{ label: form.stat2Label, value: form.stat2Value }]
+          : []),
       ],
     };
-
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
 
     try {
       const res = await fetch("/api/team", {
@@ -85,34 +1475,67 @@ export default function AddTeamMemberPage() {
 
       if (res.ok) {
         setSubmitSuccess(true);
-        // Reset form after successful submission
-        setTimeout(() => {
-          setForm({
-            name: "",
-            position: "",
-            bio: "",
-            image: "",
-            expertise: "",
-            linkedin: "",
-            twitter: "",
-            email: "",
-            featured: false,
-            stat1Label: "",
-            stat1Value: "",
-            stat2Label: "",
-            stat2Value: "",
-          });
-          setIsSubmitting(false);
 
+        // ফর্ম রিসেট করা হলো
+        setForm({
+          name: "",
+          position: "",
+          bio: "",
+          image: {
+            url: "",
+            public_id: "",
+          },
+          expertise: "",
+          linkedin: "",
+          twitter: "",
+          email: "",
+          featured: false,
+          stat1Label: "",
+          stat1Value: "",
+          stat2Label: "",
+          stat2Value: "",
+        });
+
+        setTimeout(() => {
+          setIsSubmitting(false);
           router.push("/admin/dashboard/team");
         }, 1500);
       } else {
-        throw new Error("Failed to add team member");
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to add team member");
       }
     } catch (error) {
-      setSubmitError("Something went wrong. Please try again.");
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
       setIsSubmitting(false);
     }
+  };
+
+  // রিসেট ফাংশন
+  const handleReset = () => {
+    setForm({
+      name: "",
+      position: "",
+      bio: "",
+      image: {
+        url: "",
+        public_id: "",
+      },
+      expertise: "",
+      linkedin: "",
+      twitter: "",
+      email: "",
+      featured: false,
+      stat1Label: "",
+      stat1Value: "",
+      stat2Label: "",
+      stat2Value: "",
+    });
+    setSubmitError("");
+    setSubmitSuccess(false);
   };
 
   const inputClasses =
@@ -169,6 +1592,7 @@ export default function AddTeamMemberPage() {
                     <input
                       id="name"
                       name="name"
+                      type="text"
                       value={form.name}
                       placeholder="John Doe"
                       onChange={handleChange}
@@ -187,6 +1611,7 @@ export default function AddTeamMemberPage() {
                     <input
                       id="position"
                       name="position"
+                      type="text"
                       value={form.position}
                       placeholder="Senior Developer"
                       onChange={handleChange}
@@ -227,7 +1652,7 @@ export default function AddTeamMemberPage() {
                       value={form.bio}
                       placeholder="Brief description about the team member..."
                       onChange={handleChange}
-                      className={`${inputClasses} min-h-[120px] resize-vertical`}
+                      className={`${inputClasses} min-h-[120px]`}
                       rows={4}
                       required
                     />
@@ -259,11 +1684,47 @@ export default function AddTeamMemberPage() {
                     <input
                       id="image"
                       name="image"
-                      value={form.image}
+                      type="text"
+                      value={form.image.url}
                       placeholder="https://example.com/profile.jpg"
-                      onChange={handleChange}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          image: { ...form.image, url: e.target.value },
+                        })
+                      }
                       className={inputClasses}
                     />
+
+                    {/* ইমেজ প্রিভিউ */}
+                    {form.image.url && (
+                      <div className="mt-4">
+                        <p className="text-sm font-medium text-gray-700 mb-2">
+                          Preview:
+                        </p>
+                        <div className="relative w-24 h-24 rounded-lg overflow-hidden border border-gray-200">
+                          <NextImage
+                            src={form.image.url}
+                            alt="Profile preview"
+                            fill
+                            className="object-cover"
+                            unoptimized // বাহ্যিক URL এর জন্য
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="mt-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Or upload new image:
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -276,6 +1737,7 @@ export default function AddTeamMemberPage() {
                     <input
                       id="expertise"
                       name="expertise"
+                      type="text"
                       value={form.expertise}
                       placeholder="React, TypeScript, UI/UX Design, Project Management"
                       onChange={handleChange}
@@ -287,19 +1749,12 @@ export default function AddTeamMemberPage() {
 
                     <div className="mt-6">
                       <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-                        <div
-                          className={`flex items-center justify-center w-6 h-6 rounded border ${form.featured ? "bg-blue-600 border-blue-600" : "border-gray-400"}`}
-                        >
-                          {form.featured && (
-                            <Check className="w-4 h-4 text-white" />
-                          )}
-                        </div>
                         <input
                           type="checkbox"
                           name="featured"
                           checked={form.featured}
                           onChange={handleChange}
-                          className="hidden"
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                         />
                         <div>
                           <p className="font-medium text-gray-800">
@@ -337,6 +1792,7 @@ export default function AddTeamMemberPage() {
                     <input
                       id="linkedin"
                       name="linkedin"
+                      type="url"
                       value={form.linkedin}
                       placeholder="https://linkedin.com/in/johndoe"
                       onChange={handleChange}
@@ -356,6 +1812,7 @@ export default function AddTeamMemberPage() {
                     <input
                       id="twitter"
                       name="twitter"
+                      type="url"
                       value={form.twitter}
                       placeholder="https://twitter.com/johndoe"
                       onChange={handleChange}
@@ -396,6 +1853,7 @@ export default function AddTeamMemberPage() {
                           <input
                             id="stat1Label"
                             name="stat1Label"
+                            type="text"
                             value={form.stat1Label}
                             placeholder="Projects Completed"
                             onChange={handleChange}
@@ -412,6 +1870,7 @@ export default function AddTeamMemberPage() {
                           <input
                             id="stat1Value"
                             name="stat1Value"
+                            type="text"
                             value={form.stat1Value}
                             placeholder="150+"
                             onChange={handleChange}
@@ -438,6 +1897,7 @@ export default function AddTeamMemberPage() {
                           <input
                             id="stat2Label"
                             name="stat2Label"
+                            type="text"
                             value={form.stat2Label}
                             placeholder="Client Satisfaction"
                             onChange={handleChange}
@@ -454,6 +1914,7 @@ export default function AddTeamMemberPage() {
                           <input
                             id="stat2Value"
                             name="stat2Value"
+                            type="text"
                             value={form.stat2Value}
                             placeholder="98%"
                             onChange={handleChange}
@@ -478,7 +1939,7 @@ export default function AddTeamMemberPage() {
                       >
                         <Check className="w-5 h-5" />
                         <span className="font-medium">
-                          Team member added successfully!
+                          Team member added successfully! Redirecting...
                         </span>
                       </motion.div>
                     )}
@@ -498,25 +1959,7 @@ export default function AddTeamMemberPage() {
                   <div className="flex gap-4">
                     <button
                       type="button"
-                      onClick={() => {
-                        setForm({
-                          name: "",
-                          position: "",
-                          bio: "",
-                          image: "",
-                          expertise: "",
-                          linkedin: "",
-                          twitter: "",
-                          email: "",
-                          featured: false,
-                          stat1Label: "",
-                          stat1Value: "",
-                          stat2Label: "",
-                          stat2Value: "",
-                        });
-                        setSubmitError("");
-                        setSubmitSuccess(false);
-                      }}
+                      onClick={handleReset}
                       className="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                       Reset Form
@@ -525,7 +1968,11 @@ export default function AddTeamMemberPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`px-8 py-3 rounded-lg font-medium text-white flex items-center gap-3 transition-all ${isSubmitting ? "bg-blue-400" : "bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg hover:shadow-xl"}`}
+                      className={`px-8 py-3 rounded-lg font-medium text-white flex items-center gap-3 transition-all ${
+                        isSubmitting
+                          ? "bg-blue-400 cursor-not-allowed"
+                          : "bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg hover:shadow-xl"
+                      }`}
                     >
                       {isSubmitting ? (
                         <>
@@ -555,8 +2002,20 @@ export default function AddTeamMemberPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
-                  {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+                <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
+                  {form.image.url ? (
+                    <NextImage
+                      src={form.image.url}
+                      alt={form.name || "Profile"}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <span>
+                      {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h4 className="font-bold text-xl text-gray-800">
@@ -596,7 +2055,7 @@ export default function AddTeamMemberPage() {
             <div className="bg-gray-50 p-4 rounded-xl">
               <h5 className="font-medium text-gray-700 mb-3">Quick Stats</h5>
               <div className="space-y-3">
-                {form.stat1Label && (
+                {form.stat1Label && form.stat1Value && (
                   <div>
                     <p className="text-sm text-gray-600">{form.stat1Label}</p>
                     <p className="text-xl font-bold text-gray-800">
@@ -604,7 +2063,7 @@ export default function AddTeamMemberPage() {
                     </p>
                   </div>
                 )}
-                {form.stat2Label && (
+                {form.stat2Label && form.stat2Value && (
                   <div>
                     <p className="text-sm text-gray-600">{form.stat2Label}</p>
                     <p className="text-xl font-bold text-gray-800">
