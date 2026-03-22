@@ -151,7 +151,6 @@
 // };
 
 // export default StatsSection;
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -290,15 +289,10 @@ const StatsSection = () => {
               className="group relative"
             >
               {/* Card */}
-              <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 transition-all duration-500 hover:bg-white/20 hover:shadow-2xl hover:scale-105">
-                {/* Gradient Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#33d9b2] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10 blur-xl"></div>
-
+              <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 transition-all duration-500">
                 {/* Icon */}
-                <div className="mx-auto mb-4 lg:mb-6 inline-flex w-14 h-14 lg:w-16 lg:h-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-110 group-hover:bg-white/30">
-                  <div className="text-[#33d9b2] group-hover:text-white transition-colors duration-300">
-                    {stat.icon}
-                  </div>
+                <div className="mx-auto mb-4 lg:mb-6 inline-flex w-14 h-14 lg:w-16 lg:h-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 transition-all duration-300 group-hover:scale-110">
+                  <div className="text-[#33d9b2]">{stat.icon}</div>
                 </div>
 
                 {/* Number */}
@@ -366,7 +360,7 @@ const StatsSection = () => {
                 transition={{ duration: 0.5, delay: 0.7 + index * 0.05 }}
                 className="group cursor-pointer"
               >
-                <div className="relative bg-white/5 backdrop-blur-sm rounded-xl p-4 transition-all duration-300 hover:bg-white/15 hover:scale-105 border border-white/10 hover:border-white/30">
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-xl p-4 transition-all duration-300 border border-white/10">
                   <Image
                     src={brand.image}
                     alt={brand.name}
