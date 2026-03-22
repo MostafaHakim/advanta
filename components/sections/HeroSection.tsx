@@ -127,14 +127,14 @@ export default function HeroSectionUnique() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#0B1221_1px,transparent_1px),linear-gradient(to_bottom,#0B1221_1px,transparent_1px)] bg-[size:80px_80px]" />
       </div>
 
-      <div className="relative z-10 container-custom min-h-screen flex flex-col justify-center pt-6 lg:pt-20 lg:py-20">
+      <div className="relative z-10 container-custom min-h-screen flex flex-col justify-center  lg:pt-20 lg:py-20">
         {/* Main Heading - DATA IS NOW AVAILABLE */}
         <div className="mb-4 lg:mb-12">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl md:text-4xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight"
+            className="text-center md:text-left text-2xl md:text-4xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight"
           >
             <span className="text-gray-900">{hero.titleFirst}</span>
             <br />
@@ -145,7 +145,7 @@ export default function HeroSectionUnique() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-md md:text-2xl text-gray-600 mt-2 lg:mt-6 max-w-3xl leading-relaxed"
+            className="text-md md:text-2xl text-gray-600 mt-2 lg:mt-6 max-w-3xl leading-relaxed text-center md:text-left"
           >
             {hero.subTitle}
           </motion.p>

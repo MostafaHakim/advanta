@@ -15,6 +15,7 @@ import {
   Users,
   Globe,
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 interface ServiceDetailProps {
@@ -269,7 +270,8 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
                         color: "bg-emerald-500",
                       },
                     ].map((item, index) => (
-                      <motion.div
+                      <motion.a
+                        href={`${index === 0 ? "https://calendly.com/advantascale/30min" : "/contact"}`}
                         key={index}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -282,7 +284,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
                           >
                             {item.icon}
                           </div>
-                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center text-xs font-bold">
+                          <div className="absolute top-0 right-0   w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center text-xs font-bold">
                             {index + 1}
                           </div>
                         </div>
@@ -293,15 +295,18 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
                           <p className="text-sm text-gray-500">{item.desc}</p>
                         </div>
                         <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                      </motion.div>
+                      </motion.a>
                     ))}
                   </div>
 
                   {/* Card Footer */}
                   <div className="px-8 pb-8">
-                    <button className="w-full py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95">
+                    <Link
+                      href="/contact"
+                      className=" w-full px-6 cursor-pointer  py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+                    >
                       Start Your Journey
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

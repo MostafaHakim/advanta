@@ -56,8 +56,16 @@ const addressSchema = new mongoose.Schema({
   },
 });
 
+const socialUrlSchema = new mongoose.Schema({
+  facebook: String,
+  instagram: String,
+  twitter: String,
+  linkedin: String,
+});
+
 const contactSettingsSchema = new mongoose.Schema(
   {
+    socialUrl: socialUrlSchema,
     contactInfo: [contactItemSchema],
     departments: [departmentSchema],
     address: [addressSchema],

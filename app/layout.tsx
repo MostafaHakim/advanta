@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLayoutWrapper from "@/components/layouts/ClientLayoutWrapper";
-
+import { ToastContainer } from "react-toastify";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -84,6 +84,7 @@ export default function RootLayout({
         className={`${inter.className} bg-white text-gray-900 overflow-x-hidden w-screen`}
       >
         <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <ToastContainer />
       </body>
     </html>
   );

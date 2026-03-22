@@ -6,11 +6,10 @@ import { SignJWT } from "jose";
 
 // Use the same secret and encoding as the middleware
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "your-secret-key-change-in-production"
+  process.env.JWT_SECRET || "your-secret-key-change-in-production",
 );
 
 export async function POST(request: NextRequest) {
-  console.log("Login request received");
   try {
     await dbConnect();
 
@@ -21,7 +20,7 @@ export async function POST(request: NextRequest) {
       console.error("Error parsing request body:", error);
       return NextResponse.json(
         { success: false, message: "Invalid JSON body" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -29,7 +28,7 @@ export async function POST(request: NextRequest) {
     if (!email || !password) {
       return NextResponse.json(
         { success: false, message: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -37,7 +36,14 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" },
-        { status: 401 }
+        { status: 401 },
+      );
+    }
+    const isActive = user.status !== "active";
+    if (isActive) {
+      return NextResponse.json(
+        { success: false, message: "User isn't active" },
+        { status: 401 },
       );
     }
 
@@ -45,7 +51,7 @@ export async function POST(request: NextRequest) {
     if (!isMatch) {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -81,7 +87,7 @@ export async function POST(request: NextRequest) {
     console.error("An unexpected error occurred during login:", err);
     return NextResponse.json(
       { success: false, message: "An unexpected server error occurred" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

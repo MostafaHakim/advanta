@@ -351,9 +351,12 @@ export default function ContactPage() {
             businesses with our expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+            <Link
+              href="https://calendly.com/advantascale/30min"
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors cursor-pointer"
+            >
               Book Free Consultation
-            </button>
+            </Link>
           </div>
         </div>
       </section>

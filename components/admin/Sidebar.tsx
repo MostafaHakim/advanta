@@ -16,6 +16,7 @@ import {
   MessageSquare,
   CreditCard,
   Globe,
+  User2,
 } from "lucide-react";
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
@@ -72,6 +73,11 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       icon: <CreditCard className="w-5 h-5" />,
     },
     {
+      name: "Users",
+      href: "/admin/dashboard/users",
+      icon: <User2 className="w-5 h-5" />,
+    },
+    {
       name: "Settings",
       href: "/admin/dashboard/settings",
       icon: <Settings className="w-5 h-5" />,
@@ -80,8 +86,11 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/admin/logout", { method: "POST" });
-      router.push("/admin/login");
+      const res = await fetch("/api/admin/logout", { method: "POST" });
+      if (res.ok) {
+        localStorage.removeItem("bis_data");
+        router.push("/admin/login");
+      }
     } catch (error) {
       console.error("Logout failed:", error);
     }

@@ -48,6 +48,12 @@ const FooterPremium = () => {
 
   type ContactSettingsType = {
     data: {
+      socialUrl: {
+        facebook: string;
+        twitter: string;
+        instagram: string;
+        linkedin: string;
+      };
       contactInfo: ContactInfo[];
       departments: Department[];
       address?: AddressItem[];
@@ -117,12 +123,28 @@ const FooterPremium = () => {
       { name: "Compliance", href: "/compliance" },
     ],
   };
-
+  console.log(contactSetting);
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    {
+      icon: Facebook,
+      href: contactSetting?.data?.socialUrl?.facebook,
+      label: "Facebook",
+    },
+    {
+      icon: Twitter,
+      href: contactSetting?.data?.socialUrl?.twitter,
+      label: "Twitter",
+    },
+    {
+      icon: Instagram,
+      href: contactSetting?.data?.socialUrl?.instagram,
+      label: "Instagram",
+    },
+    {
+      icon: Linkedin,
+      href: contactSetting?.data?.socialUrl?.linkedin,
+      label: "LinkedIn",
+    },
   ];
 
   const certifications = [

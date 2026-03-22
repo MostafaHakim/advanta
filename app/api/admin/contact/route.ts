@@ -13,13 +13,15 @@ export async function GET() {
 export async function POST(req: Request) {
   await dbConnect();
   const body = await req.json();
-
+  console.log(body);
   let settings = await ContactSettings.findOne();
 
   if (settings) {
     settings.contactInfo = body.contactInfo;
     settings.departments = body.departments;
     settings.address = body.address;
+    settings.socialUrl = body.socialUrl;
+
     await settings.save();
   } else {
     settings = await ContactSettings.create(body);

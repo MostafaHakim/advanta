@@ -2,15 +2,12 @@
 
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesSection from "@/components/sections/ServicesSection";
-import PortfolioSection from "@/components/sections/PortfolioSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 import StatsSection from "@/components/sections/StatsSection";
 import { TeamSection } from "@/components/sections";
 import { motion, Variants } from "framer-motion";
 import { fadeInUp, fadeIn, staggerContainer } from "@/lib/utils";
 import FeatureProject from "@/components/sections/FeatureProject";
-
 // Type for variant options
 type VariantType = "fadeInUp" | "fadeIn";
 
@@ -65,15 +62,14 @@ export default function Home() {
       <AnimatedSection delay={0.2}>
         <ServicesSection />
       </AnimatedSection>
+      {/* Portfolio with fadeInUp */}
+      <AnimatedSection delay={0.4}>
+        <FeatureProject />
+      </AnimatedSection>
 
       {/* Team with fadeIn */}
       <AnimatedSection variant="fadeIn" delay={0.3}>
         <TeamSection />
-      </AnimatedSection>
-
-      {/* Portfolio with fadeInUp */}
-      <AnimatedSection delay={0.4}>
-        <FeatureProject />
       </AnimatedSection>
 
       {/* Testimonials with fadeIn
