@@ -258,13 +258,13 @@ const CTASection = () => {
                         {
                           name: "name",
                           label: "Your Name *",
-                          placeholder: "Mostafa",
+                          placeholder: "Jon Doe!",
                           type: "text",
                         },
                         {
                           name: "email",
                           label: "Email Address *",
-                          placeholder: "mostafa@example.com",
+                          placeholder: "advantascale@example.com",
                           type: "email",
                         },
                       ].map((field) => (
@@ -307,7 +307,7 @@ const CTASection = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full px-4 py-3 md:px-5 md:py-4 rounded-lg bg-gray-50 border border-gray-300 hover:border-blue-400 transition-all duration-300 text-sm md:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
-                          placeholder="+8801722440899"
+                          placeholder="+8801956690068"
                         />
                       </motion.div>
 
