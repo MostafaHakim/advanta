@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import NextImage from "next/image";
+import Link from "next/link";
 
 interface Result {
   value: string;
@@ -23,7 +24,7 @@ interface ProjectForm {
 }
 
 interface Project {
-  id: string;
+  _id: string;
   title: string;
   slug: string;
   description: string;
@@ -423,7 +424,7 @@ export default function Project() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {projects.map((project) => (
                     <div
-                      key={project.id}
+                      key={project._id}
                       className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
                     >
                       <div className="h-48 overflow-hidden relative">
@@ -468,6 +469,25 @@ export default function Project() {
                             </a>
                           )}
                         </div>
+                        <Link
+                          href={`/admin/dashboard/projects/edit/${project._id}`}
+                          className="mt-2 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            />
+                          </svg>
+                          Edit Project
+                        </Link>
                       </div>
                     </div>
                   ))}

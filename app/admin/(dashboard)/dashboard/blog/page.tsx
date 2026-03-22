@@ -258,7 +258,7 @@ const BlogCard = ({
                   </button>
 
                   <Link
-                    href={`/admin/dashboard/blogs/edit/${blog._id}`}
+                    href={`/admin/dashboard/blog/edit/${blog._id}`}
                     className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all hover:scale-110"
                     title="Edit blog"
                   >

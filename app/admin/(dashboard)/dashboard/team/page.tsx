@@ -590,7 +590,10 @@ type TeamMember = {
   _id: string;
   name: string;
   position: string;
-  image: string;
+  image: {
+    url: string;
+  };
+
   featured: boolean;
   expertise: string[];
   bio?: string;
@@ -1001,7 +1004,7 @@ export default function TeamDashboardPage() {
                   <div className="relative h-36 sm:h-40 md:h-48 bg-gradient-to-br from-gray-200 to-gray-300">
                     {member.image ? (
                       <Image
-                        src={member.image}
+                        src={member.image.url}
                         alt={member.name}
                         fill
                         className="object-cover"
@@ -1211,7 +1214,7 @@ export default function TeamDashboardPage() {
                           <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600">
                             {member.image ? (
                               <Image
-                                src={member.image}
+                                src={member.image.url}
                                 alt={member.name}
                                 fill
                                 className="object-cover"

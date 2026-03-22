@@ -47,3 +47,32 @@ export async function DELETE(
     );
   }
 }
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) {
+  try {
+    await dbConnect();
+    const body = await request.json();
+
+    const blog = await Blog.findByIdAndUpdate(params.id, body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!blog) {
+      return NextResponse.json(
+        { success: false, message: "Blog not found" },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({ success: true, data: blog });
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, message: "Failed to update blog" },
+      { status: 500 },
+    );
+  }
+}

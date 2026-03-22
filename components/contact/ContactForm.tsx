@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Clock } from "lucide-react";
+import Link from "next/link";
 
 interface ContactFormProps {
   onSuccess: () => void;
@@ -197,15 +198,15 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Phone Number
+            Your website/Social media url
           </label>
           <input
-            type="tel"
+            type="text"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-            placeholder="+8801722440899"
+            placeholder="https://www.google.com"
           />
         </div>
 
@@ -299,6 +300,13 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
         )}
       </button>
 
+      <Link
+        className="w-full border border-amber-400 p-2 rounded-lg  transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center hover:bg-amber-400 hover:text-white"
+        href="https://calendly.com/advantascale/30min"
+      >
+        <Clock className="w-5 h-5 mr-2" />
+        Schedule a meeting
+      </Link>
       <p className="text-sm text-gray-500 text-center">
         By submitting this form, you agree to our{" "}
         <a href="/privacy" className="text-blue-600 hover:text-blue-700">

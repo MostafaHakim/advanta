@@ -13,6 +13,7 @@ import {
   Headphones,
 } from "lucide-react";
 import { ContactForm } from "@/components/contact";
+import Link from "next/link";
 
 export default function ContactPage() {
   type ContactInfo = {
@@ -57,6 +58,7 @@ export default function ContactPage() {
       .then((res) => setContactSettings(res));
   }, []);
 
+  console.log(contactSetting);
   const departments = [
     {
       icon: <MessageSquare className="w-5 h-5" />,
@@ -148,8 +150,8 @@ export default function ContactPage() {
 
           <div className=" grid lg:grid-cols-2 gap-4 lg:gap-8">
             {/* Contact Form */}
-            <div className="col-span-1">
-              <h2 className="text-xl lg:text-3xl font-bold  lg:mb-8">
+            <div className="col-span-1 ">
+              <h2 className="text-xl lg:text-3xl font-bold ">
                 Send us a Message
               </h2>
 

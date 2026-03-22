@@ -11,11 +11,82 @@ import {
   Shield,
   Award,
   Globe,
+  Clock,
+  MessageSquare,
+  CheckCircle,
+  User,
+  Headphones,
 } from "lucide-react";
 import Image from "next/image";
 import Logo from "../../public/logo.png";
+import { useEffect, useState } from "react";
 
 const FooterPremium = () => {
+  type ContactInfo = {
+    icon: IconName;
+    title: string;
+    details: string[];
+    description?: string;
+  };
+
+  type Department = {
+    icon: IconName;
+    name: string;
+    email: string;
+  };
+
+  type AddressDetail = {
+    title: string;
+    details: string[];
+  };
+
+  type AddressItem = {
+    address?: AddressDetail;
+    visitHours?: AddressDetail;
+    Appointment?: AddressDetail;
+  };
+
+  type ContactSettingsType = {
+    data: {
+      contactInfo: ContactInfo[];
+      departments: Department[];
+      address?: AddressItem[];
+    };
+  };
+
+  type IconName =
+    | "Phone"
+    | "Mail"
+    | "MapPin"
+    | "Clock"
+    | "MessageSquare"
+    | "CheckCircle"
+    | "Users"
+    | "Headphones";
+
+  const getIconComponent = (iconName: IconName) => {
+    const iconMap: Record<IconName, JSX.Element> = {
+      Phone: <Phone className="w-6 h-6" />,
+      Mail: <Mail className="w-6 h-6" />,
+      MapPin: <MapPin className="w-6 h-6" />,
+      Clock: <Clock className="w-6 h-6" />,
+      MessageSquare: <MessageSquare className="w-6 h-6" />,
+      CheckCircle: <CheckCircle className="w-6 h-6" />,
+      Users: <User className="w-6 h-6" />,
+      Headphones: <Headphones className="w-6 h-6" />,
+    };
+    return iconMap[iconName] || null;
+  };
+
+  const [contactSetting, setContactSettings] =
+    useState<ContactSettingsType | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/contact")
+      .then((res) => res.json())
+      .then((res) => setContactSettings(res));
+  }, []);
+
   const footerLinks = {
     "Digital Solutions": [
       { name: "SEO Optimization", href: "/services/seo" },
@@ -117,66 +188,48 @@ const FooterPremium = () => {
             </div>
 
             {/* Contact Info */}
+
             <div className="grid md:grid-cols-2 gap-4 lg:gap-8">
               <div>
                 <h4 className="font-semibold text-white mb-2">Get in Touch</h4>
                 <div className="space-y-2 ">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                      <Phone className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-400">Phone</div>
-                      <div className="text-white font-medium">
-                        +8801722440899
+                  {contactSetting?.data?.contactInfo?.map((info, index) => (
+                    <div key={index} className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
+                        {getIconComponent(info.icon)}
+                      </div>
+
+                      <div>
+                        <div className="text-sm text-gray-400">
+                          {info.title}
+                        </div>
+
+                        {info.details.map((detail, idx) => (
+                          <div key={idx} className="text-white font-medium">
+                            {detail}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                      <Mail className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-400">Email</div>
-                      <div className="text-white font-medium">
-                        hello@dvatascale.com
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                      <MapPin className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-400">Location</div>
-                      <div className="text-white font-medium">
-                        Dhaka, Bangladesh
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
               {/* Business Hours */}
-              <div>
-                <h4 className="font-semibold text-white mb-2 lg:mb-6">
-                  Business Hours
-                </h4>
-                <div className="space-y-2 lg:space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Monday - Friday</span>
-                    <span className="text-white">9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Saturday</span>
-                    <span className="text-white">10:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Sunday</span>
-                    <span className="text-white">Closed</span>
-                  </div>
+              {contactSetting?.data?.address?.map((add, index) => (
+                <div key={index}>
+                  <h4 className="font-semibold text-white mb-2 lg:mb-6">
+                    {add?.visitHours?.title}
+                  </h4>
+                  {add.visitHours?.details.map((dte, i) => (
+                    <div key={i}>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-white">{dte}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
