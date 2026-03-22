@@ -88,10 +88,12 @@ const FooterPremium = () => {
     useState<ContactSettingsType | null>(null);
 
   useEffect(() => {
-    fetch("/api/admin/contact")
+    fetch("/api/settings")
       .then((res) => res.json())
       .then((res) => setContactSettings(res));
   }, []);
+
+  console.log(contactSetting);
 
   const footerLinks = {
     "Digital Solutions": [
