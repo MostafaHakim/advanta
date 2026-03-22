@@ -11,6 +11,7 @@ import {
   CheckCircle,
   Users,
   Headphones,
+  Building,
 } from "lucide-react";
 import { ContactForm } from "@/components/contact";
 import Link from "next/link";
@@ -85,7 +86,8 @@ export default function ContactPage() {
     | "MessageSquare"
     | "CheckCircle"
     | "Users"
-    | "Headphones";
+    | "Headphones"
+    | "Building";
 
   const getIconComponent = (iconName: IconName) => {
     const iconMap: Record<IconName, JSX.Element> = {
@@ -97,6 +99,7 @@ export default function ContactPage() {
       CheckCircle: <CheckCircle className="w-6 h-6" />,
       Users: <Users className="w-6 h-6" />,
       Headphones: <Headphones className="w-6 h-6" />,
+      Building: <Building className="w-6 h-6" />,
     };
     return iconMap[iconName] || null;
   };
@@ -190,31 +193,35 @@ export default function ContactPage() {
                 <h3 className="text-lg lg:text-2xl font-bold mb-6">
                   Contact by Department
                 </h3>
-                <div className="space-y-4">
-                  {contactSetting?.data?.departments?.map((dept, index) => (
-                    <motion.div
-                      key={dept.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex items-center p-4 bg-white rounded-xl"
-                    >
-                      <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-4">
-                        {getIconComponent(dept.icon)}
-                      </div>
-                      <div>
-                        <h4 className="font-bold">{dept.name}</h4>
-                        <a
-                          href={`mailto:${dept.email}`}
-                          className="text-blue-600 hover:text-blue-700"
-                        >
-                          {dept.email}
-                        </a>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                {contactSetting ? (
+                  <div className="space-y-4">
+                    {contactSetting?.data?.departments?.map((dept, index) => (
+                      <motion.div
+                        key={dept.name}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-center p-4 bg-white rounded-xl"
+                      >
+                        <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-4">
+                          {getIconComponent(dept.icon)}
+                        </div>
+                        <div>
+                          <h4 className="font-bold">{dept.name}</h4>
+                          <a
+                            href={`mailto:${dept.email}`}
+                            className="text-blue-600 hover:text-blue-700"
+                          >
+                            {dept.email}
+                          </a>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>Loading...</div>
+                )}
               </div>
 
               {/* Business Hours */}

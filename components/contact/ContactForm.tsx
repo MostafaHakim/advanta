@@ -167,7 +167,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all ${
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Mostafa"
+            placeholder="Jon Doe!"
           />
           {errors.name && (
             <p className="mt-1 text-sm text-red-500">{errors.name}</p>
@@ -186,7 +186,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="mostafa@example.com"
+            placeholder="advantascale@example.com"
           />
           {errors.email && (
             <p className="mt-1 text-sm text-red-500">{errors.email}</p>
