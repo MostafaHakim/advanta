@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ClipLoader } from "react-spinners";
 import {
   Phone,
   Mail,
@@ -58,25 +59,6 @@ export default function ContactPage() {
       .then((res) => res.json())
       .then((res) => setContactSettings(res));
   }, []);
-
-  console.log(contactSetting);
-  const departments = [
-    {
-      icon: <MessageSquare className="w-5 h-5" />,
-      name: "Sales & Partnerships",
-      email: "sales@advantascale.com",
-    },
-    {
-      icon: <Users className="w-5 h-5" />,
-      name: "Client Support",
-      email: "support@advantascale.com",
-    },
-    {
-      icon: <Headphones className="w-5 h-5" />,
-      name: "Technical Support",
-      email: "tech@advantascale.com",
-    },
-  ];
 
   type IconName =
     | "Phone"
@@ -220,7 +202,9 @@ export default function ContactPage() {
                     ))}
                   </div>
                 ) : (
-                  <div>Loading...</div>
+                  <div className="flex items-center p-4 bg-white rounded-xl">
+                    <ClipLoader />
+                  </div>
                 )}
               </div>
 
@@ -331,16 +315,6 @@ export default function ContactPage() {
                     </div>
                   </div>
                 ))}
-              </div>
-
-              <button className="mt-8 btn-primary">Get Directions</button>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl h-[400px] flex items-center justify-center text-white">
-              <div className="text-center">
-                <MapPin className="w-16 h-16 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold mb-2">Interactive Map</h3>
-                <p>Google Maps Integration</p>
               </div>
             </div>
           </div>
