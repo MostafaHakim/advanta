@@ -21,9 +21,7 @@ interface PortfolioItem {
 }
 
 async function getProjects() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`, {
-    cache: "no-store",
-  });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch services");
@@ -134,10 +132,6 @@ export default async function PortfolioPage() {
                           </div>
                         ))}
                       </div>
-
-                      <button className="w-full btn-primary">
-                        View Case Study
-                      </button>
                     </div>
                   </div>
                 ))}

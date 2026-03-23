@@ -74,32 +74,6 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
               {item.category}
             </span>
           </div>
-
-          {/* Hover Actions */}
-          <div className="absolute inset-0 z-20 flex items-center justify-center gap-4 bg-gradient-to-br from-blue-600/80 to-purple-600/80 opacity-0 group-hover:opacity-100 transition-opacity">
-            {item.liveUrl && (
-              <a
-                href={item.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="p-3 bg-white rounded-full hover:scale-110 transition"
-              >
-                <ExternalLink className="w-5 h-5 text-blue-600" />
-              </a>
-            )}
-            {item.githubUrl && (
-              <a
-                href={item.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="p-3 bg-white rounded-full hover:scale-110 transition"
-              >
-                <Github className="w-5 h-5 text-gray-800" />
-              </a>
-            )}
-          </div>
         </div>
 
         {/* Content */}
@@ -158,11 +132,6 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
               </div>
             </div>
           )}
-
-          {/* CTA */}
-          <div className="mt-6 text-center text-blue-600 font-medium hover:text-blue-700 transition">
-            View Case Study →
-          </div>
         </div>
       </Link>
     </motion.div>
