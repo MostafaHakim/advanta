@@ -53,7 +53,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
       className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
     >
       {/* Card Link */}
-      <Link href={`/portfolio/${item.slug}`} className="block h-full">
+      <div className="block h-full">
         {/* Image Section */}
         <div className="relative h-64 overflow-hidden">
           <Image
@@ -133,7 +133,7 @@ const PortfolioCard = ({ item, index }: PortfolioCardProps) => {
             </div>
           )}
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 };
