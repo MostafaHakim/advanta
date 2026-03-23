@@ -107,32 +107,6 @@ export default function ContactPage() {
       {/* Contact Info */}
       <section className="py-4  bg-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-3 gap-4 lg:gap-8 mb-4 lg:mb-20">
-            {contactSetting?.data?.contactInfo?.map((info, index) => (
-              <motion.div
-                key={info.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center p-8 bg-gray-50 rounded-3xl hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white mb-6">
-                  {getIconComponent(info.icon)}
-                </div>
-                <h3 className="text-xl font-bold mb-4">{info.title}</h3>
-                <div className="space-y-1 mb-4">
-                  {info.details.map((detail, idx) => (
-                    <p key={idx} className="text-gray-700">
-                      {detail}
-                    </p>
-                  ))}
-                </div>
-                <p className="text-gray-600 text-sm">{info.description}</p>
-              </motion.div>
-            ))}
-          </div>
-
           <div className=" grid lg:grid-cols-2 gap-4 lg:gap-8">
             {/* Contact Form */}
             <div className="col-span-1 ">
@@ -316,6 +290,31 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 lg:gap-8 mb-4 lg:mb-20">
+              {contactSetting?.data?.contactInfo?.map((info, index) => (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center p-8 bg-gray-50 rounded-3xl hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white mb-6">
+                    {getIconComponent(info.icon)}
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">{info.title}</h3>
+                  <div className="space-y-1 mb-4">
+                    {info.details.map((detail, idx) => (
+                      <p key={idx} className="text-gray-700">
+                        {detail}
+                      </p>
+                    ))}
+                  </div>
+                  <p className="text-gray-600 text-sm">{info.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
