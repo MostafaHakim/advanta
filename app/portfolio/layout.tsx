@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Portfolio | Digital Marketing Agency",
     description: "Our successful projects and case studies",
     type: "website",
-    url: "https://yourdomain.com/portfolio",
+    url: "https://www.advantascale.com/portfolio",
   },
   twitter: {
     card: "summary_large_image",

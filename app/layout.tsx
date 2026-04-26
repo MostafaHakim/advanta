@@ -25,10 +25,10 @@ export const metadata: Metadata = {
   creator: "NextMarketing",
   publisher: "NextMarketing Agency",
 
-  metadataBase: new URL("https://www.advantascale.com"),
+  metadataBase: new URL("https://www.advantascale.com/"),
 
   alternates: {
-    canonical: "/",
+    canonical: "https://www.advantascale.com/",
   },
 
   openGraph: {
