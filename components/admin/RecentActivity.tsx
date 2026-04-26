@@ -136,8 +136,8 @@ const RecentActivity = () => {
                       activity.status === "completed"
                         ? "bg-emerald-50 text-emerald-700"
                         : activity.status === "pending"
-                        ? "bg-amber-50 text-amber-700"
-                        : "bg-blue-50 text-blue-700"
+                          ? "bg-amber-50 text-amber-700"
+                          : "bg-blue-50 text-blue-700"
                     }`}
                   >
                     {activity.status}
