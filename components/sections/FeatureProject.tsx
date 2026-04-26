@@ -23,54 +23,6 @@ interface Project {
   createdAt: string;
 }
 
-// const portfolioItems = [
-//   {
-//     id: 4,
-//     title: "PPC Advertising",
-//     category: "PPC",
-//     description: "Google Ads campaign with 5x ROI",
-//     image: `https://picsum.photos/id/4/600/400`,
-//     tags: ["Google Ads", "Conversion Tracking", "A/B Testing"],
-//     results: [
-//       { label: "ROI", value: "5x" },
-//       { label: "Cost per Lead", value: "-60%" },
-//     ],
-//     liveUrl: "#",
-//     githubUrl: "#",
-//     featured: true,
-//   },
-//   {
-//     id: 5,
-//     title: "Content Marketing",
-//     category: "Content",
-//     description: "Blog content strategy generating 10K monthly visitors",
-//     image: "https://picsum.photos/id/5/600/400",
-//     tags: ["Blog Writing", "SEO", "Content Strategy"],
-//     results: [
-//       { label: "Monthly Visitors", value: "10K" },
-//       { label: "Conversion Rate", value: "8%" },
-//     ],
-//     liveUrl: "#",
-//     githubUrl: "#",
-//     featured: false,
-//   },
-//   {
-//     id: 6,
-//     title: "Brand Redesign",
-//     category: "Design",
-//     description: "Complete brand identity and website redesign",
-//     image: "https://picsum.photos/id/6/600/400",
-//     tags: ["UI/UX", "Branding", "Web Design"],
-//     results: [
-//       { label: "User Engagement", value: "+200%" },
-//       { label: "Bounce Rate", value: "-40%" },
-//     ],
-//     liveUrl: "#",
-//     githubUrl: "#",
-//     featured: true,
-//   },
-// ];
-
 interface Result {
   label: string;
   value: string;
@@ -86,7 +38,7 @@ const FeatureProject = () => {
   const fetchProjects = async () => {
     setFetchLoading(true);
     try {
-      const res = await fetch("/api/projects");
+      const res = await fetch("/api/projects/feature");
       const data = await res.json();
       if (data.success && data.data) {
         setProjects(data.data);

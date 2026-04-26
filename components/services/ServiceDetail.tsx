@@ -109,9 +109,9 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
   const colorClasses = getColorClasses();
 
   return (
-    <div className="min-h-screen pt-10">
+    <div className="min-h-screen lg:pt-10">
       {/* Hero Section */}
-      <section className="pt-28 pb-24 relative overflow-hidden">
+      <section className="pt-28 pb-6 lg:pb-24 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
           <div
@@ -316,7 +316,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
       </section>
 
       {/* Results Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-6 lg:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -377,7 +377,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white">
+      <section className="py-6 lg:py-24 bg-white">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -451,7 +451,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <section className="py-6 lg:py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -527,7 +527,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
       {/* Pricing Section */}
       <section
         id="pricing"
-        className="py-24 bg-gradient-to-b from-white to-gray-50"
+        className="py-6 lg:py-24 bg-gradient-to-b from-white to-gray-50"
       >
         <div className="container-custom">
           <motion.div
@@ -597,7 +597,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: idx * 0.05 }}
-                        className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center px-2 py-1 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div
                           className={`w-8 h-8 rounded-lg flex items-center justify-center mr-4 ${
@@ -632,7 +632,7 @@ const ServiceDetail = ({ service }: ServiceDetailProps) => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-white">
+      <section className="py-6 lg:py-24 bg-white">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

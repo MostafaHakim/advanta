@@ -53,11 +53,11 @@ interface RelatedServicesProps {
 
 const RelatedServices = ({ currentServiceId }: RelatedServicesProps) => {
   const relatedServices = allServices.filter(
-    (service) => service.id !== currentServiceId
+    (service) => service.id !== currentServiceId,
   );
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-6 lg:py-20 bg-white">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

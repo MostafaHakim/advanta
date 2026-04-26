@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, Mail, Sun, Moon } from "lucide-react";
+import Link from "next/link";
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -107,7 +108,7 @@ const FAQSection = () => {
 
   return (
     <section
-      className="py-12 md:py-20 transition-colors duration-300"
+      className="py-6 md:py-20 transition-colors duration-300"
       style={{ backgroundColor: themeColors.sectionBackground }}
     >
       <div className="container-custom">
@@ -143,21 +144,6 @@ const FAQSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div
-            className="inline-flex items-center px-4 py-2 rounded-full mb-4"
-            style={{
-              backgroundColor: isDarkMode
-                ? themeColors.primaryLight
-                : "#dbeafe",
-              color: isDarkMode ? "#dbeafe" : themeColors.primary,
-            }}
-          >
-            <span
-              className="w-2 h-2 rounded-full mr-2"
-              style={{ backgroundColor: themeColors.primary }}
-            />
-            <span className="text-sm font-medium">FAQ</span>
-          </div>
           <h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
             style={{ color: themeColors.textPrimary }}
@@ -326,19 +312,23 @@ const FAQSection = () => {
               Still Have Questions?
             </h3>
             <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Can&apos;t find the answer you&apos;re looking for? Our team is here to
-              help.
+              Can&apos;t find the answer you&apos;re looking for? Our team is
+              here to help.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button
+              <Link
+                href="/contact"
                 className="bg-white px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
                 style={{ color: themeColors.primary }}
               >
                 Contact Support
-              </button>
-              <button className="border-2 border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors">
+              </Link>
+              <Link
+                href="https://calendly.com/advantascale/30min"
+                className="border-2 border-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors"
+              >
                 Schedule a Call
-              </button>
+              </Link>
             </div>
           </div>
         </motion.div>

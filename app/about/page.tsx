@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+      <section className="pt-32 pb-6 lg:pb-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -65,7 +65,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-white">
+      <section className="py-6 lg:py-20 bg-white">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="p-8 bg-blue-50 rounded-3xl">

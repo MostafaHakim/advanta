@@ -91,7 +91,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                <div className="w-12 lg:w-16 h-12 lg:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
                   <span className="text-3xl text-white">
                     <Globe />
                   </span>
@@ -103,7 +103,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
                       Premium
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-2xl font-bold text-white capitalize">
                     {service.title}
                   </h3>
                 </div>
@@ -218,10 +218,13 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
                 }}
               >
                 <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                <span className="relative flex items-center gap-2">
+                <Link
+                  href="/contact"
+                  className="relative flex items-center gap-2 text-sm lg:text-md"
+                >
                   Get Started
                   <ArrowRight className="w-4 h-4" />
-                </span>
+                </Link>
               </motion.button>
             </div>
 

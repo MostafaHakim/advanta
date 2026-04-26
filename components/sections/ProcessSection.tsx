@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Search, Target, Palette, Rocket, BarChart, Users } from "lucide-react";
+import Link from "next/link";
 
 const ProcessSection = () => {
   const steps = [
@@ -107,13 +108,17 @@ const ProcessSection = () => {
                     index % 2 === 0 ? "order-1 pr-8" : "order-3 pl-8"
                   }`}
                 >
-                  {index % 2 !== 0 && <div className="w-full h-0.5 bg-gray-200"></div>}
+                  {index % 2 !== 0 && (
+                    <div className="w-full h-0.5 bg-gray-200"></div>
+                  )}
                   <div className="flex-shrink-0 w-12 h-12 bg-white border-4 border-blue-600 rounded-full z-10 flex items-center justify-center">
                     <span className="text-sm font-bold text-blue-600">
                       {step.number}
                     </span>
                   </div>
-                  {index % 2 === 0 && <div className="w-full h-0.5 bg-gray-200"></div>}
+                  {index % 2 === 0 && (
+                    <div className="w-full h-0.5 bg-gray-200"></div>
+                  )}
                 </div>
 
                 {/* Content Card */}
@@ -125,22 +130,31 @@ const ProcessSection = () => {
                       </div>
                       <div>
                         <div className="flex items-center lg:hidden">
-                           <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
-                              <span className="text-white text-sm font-bold">{step.number}</span>
-                           </div>
-                           <h3 className="text-xl md:text-2xl font-bold">{step.title}</h3>
+                          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                            <span className="text-white text-sm font-bold">
+                              {step.number}
+                            </span>
+                          </div>
+                          <h3 className="text-xl md:text-2xl font-bold">
+                            {step.title}
+                          </h3>
                         </div>
-                         <h3 className="text-2xl font-bold hidden lg:block">{step.title}</h3>
+                        <h3 className="text-2xl font-bold hidden lg:block">
+                          {step.title}
+                        </h3>
                       </div>
                     </div>
-                    
+
                     <p className="text-gray-600 mb-6 ml-0 lg:ml-0">
                       {step.description}
                     </p>
 
                     <ul className="space-y-2">
                       {step.details.map((detail, idx) => (
-                        <li key={idx} className="flex items-center text-gray-700">
+                        <li
+                          key={idx}
+                          className="flex items-center text-gray-700"
+                        >
                           <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0" />
                           <span>{detail}</span>
                         </li>
@@ -191,7 +205,9 @@ const ProcessSection = () => {
                         <div className="w-2 h-2 bg-blue-500 rounded-full" />
                       </div>
                       <div>
-                        <h4 className="font-semibold md:font-bold mb-1">{item.title}</h4>
+                        <h4 className="font-semibold md:font-bold mb-1">
+                          {item.title}
+                        </h4>
                         <p className="text-gray-600">{item.description}</p>
                       </div>
                     </div>
@@ -200,14 +216,16 @@ const ProcessSection = () => {
               </div>
 
               <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
-                <h4 className="text-xl md:text-2xl font-bold mb-4">Ready to Start?</h4>
+                <h4 className="text-xl md:text-2xl font-bold mb-4">
+                  Ready to Start?
+                </h4>
                 <p className="text-gray-600 mb-6">
                   Begin your journey with our proven process and start seeing
                   results.
                 </p>
-                <button className="w-full btn-primary">
+                <Link href="/contact" className="w-full btn-primary">
                   Start Your Project
-                </button>
+                </Link>
                 <p className="text-sm text-gray-500 text-center mt-4">
                   No commitment required for initial consultation
                 </p>

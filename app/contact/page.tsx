@@ -218,79 +218,11 @@ export default function ContactPage() {
       {/* Map Section */}
       <section className="py-4 lg:py-20 bg-gray-50">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-xl lg:text-3xl font-bold mb-2 lg:mb-6">
-                Visit Our Office
-              </h2>
-              <p className="text-gray-600 mb-8 text-justify">
-                Located in the heart of San Francisco&apos;s tech district, our
-                office is designed for collaboration and innovation. Come visit
-                us to discuss your project in person.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-12">
+            <h2 className="text-xl lg:text-3xl font-bold  lg:mb-6 text-center lg:text-left">
+              Visit Our Office
+            </h2>
 
-              <div className="space-y-6">
-                {contactSetting?.data?.address?.map((item, index) => (
-                  <div key={index}>
-                    {/* Address Section */}
-                    <div className="flex items-start">
-                      <MapPin className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
-                      <div>
-                        <h4 className="font-bold mb-2">
-                          {item.address?.title || "Address"}
-                        </h4>
-                        <p className="text-gray-600">
-                          {item.address?.details?.map((detail: string, idx) => (
-                            <span key={idx}>
-                              {detail}
-                              <br />
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Visit Hours Section */}
-                    <div className="flex items-start mt-6">
-                      <Clock className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
-                      <div>
-                        <h4 className="font-bold mb-2">
-                          {item.visitHours?.title || "Visiting Hours"}
-                        </h4>
-                        <p className="text-gray-600">
-                          {item.visitHours?.details?.map((detail, idx) => (
-                            <span key={idx}>
-                              {detail}
-                              <br />
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Appointment Section */}
-                    <div className="flex items-start mt-6">
-                      <Phone className="w-6 h-6 text-blue-600 mt-1 mr-4 flex-shrink-0" />
-                      <div>
-                        <h4 className="font-bold mb-2">
-                          {item.Appointment?.title || "Appointment"}
-                        </h4>
-                        <p className="text-gray-600">
-                          {item.Appointment?.details?.map(
-                            (detail: string, idx) => (
-                              <span key={idx}>
-                                {detail}
-                                <br />
-                              </span>
-                            ),
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
             <div className="grid md:grid-cols-2 gap-4 lg:gap-8 mb-4 lg:mb-20">
               {contactSetting?.data?.contactInfo?.map((info, index) => (
                 <motion.div
@@ -299,7 +231,7 @@ export default function ContactPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center p-8 bg-gray-50 rounded-3xl hover:shadow-xl transition-shadow duration-300"
+                  className="text-center lg:p-8 bg-gray-50 rounded-3xl hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white mb-6">
                     {getIconComponent(info.icon)}

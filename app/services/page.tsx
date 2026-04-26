@@ -1,6 +1,7 @@
 import { Zap, Users, Target, Rocket } from "lucide-react";
 import { ServiceCard } from "@/components/services";
 import { FAQSection, ProcessSection } from "@/components/sections";
+import Link from "next/link";
 
 interface Service {
   _id: string;
@@ -38,7 +39,7 @@ export default async function ServicesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+      <section className="pt-32 pb-6 lg:pb-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -47,10 +48,16 @@ export default async function ServicesPage() {
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               We offer end-to-end digital marketing solutions tailored to your
-              business goals. From SEO to social media, we&apos;ve got you covered.
+              business goals. From SEO to social media, we&apos;ve got you
+              covered.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="btn-primary">Get Free Consultation</button>
+              <Link
+                href="https://calendly.com/advantascale/30min"
+                className="btn-primary"
+              >
+                Get Free Consultation
+              </Link>
               <button className="px-6 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
                 View Pricing Plans
               </button>
@@ -60,14 +67,11 @@ export default async function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-6 lg:py-20 bg-white">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services?.map((service) => (
-              <ServiceCard
-                key={service._id}
-                service={service}
-              />
+              <ServiceCard key={service._id} service={service} />
             ))}
           </div>
         </div>
@@ -87,7 +91,8 @@ export default async function ServicesPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[{
+            {[
+              {
                 icon: <Zap className="w-8 h-8" />,
                 title: "Fast Results",
                 description: "Quick implementation and rapid results delivery",
@@ -132,18 +137,21 @@ export default async function ServicesPage() {
       <FAQSection />
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="lg:py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container-custom text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Transform Your Digital Presence?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Let&apos;s discuss how our services can help you achieve your business
-            goals
+            Let&apos;s discuss how our services can help you achieve your
+            business goals
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+          <Link
+            href="/contact"
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+          >
             Start Your Project Today
-          </button>
+          </Link>
         </div>
       </section>
     </>

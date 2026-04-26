@@ -93,8 +93,6 @@ const FooterPremium = () => {
       .then((res) => setContactSettings(res));
   }, []);
 
-  console.log(contactSetting);
-
   const footerLinks = {
     "Digital Solutions": [
       { name: "SEO Optimization", href: "/services/seo" },
@@ -125,7 +123,7 @@ const FooterPremium = () => {
       { name: "Compliance", href: "/compliance" },
     ],
   };
-  console.log(contactSetting);
+
   const socialLinks = [
     {
       icon: Facebook,

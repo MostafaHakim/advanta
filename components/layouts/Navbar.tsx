@@ -27,6 +27,10 @@ import {
   FileText,
   DollarSign,
   Headphones,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
 } from "lucide-react";
 import Image from "next/image";
 import Logo from "../../public/logo.svg";
@@ -53,14 +57,96 @@ interface ServiceCategory {
   }[];
 }
 
+type ContactInfo = {
+  icon: IconName;
+  title: string;
+  details: string[];
+  description?: string;
+};
+
+type Department = {
+  icon: IconName;
+  name: string;
+  email: string;
+};
+
+type AddressDetail = {
+  title: string;
+  details: string[];
+};
+
+type AddressItem = {
+  address?: AddressDetail;
+  visitHours?: AddressDetail;
+  Appointment?: AddressDetail;
+};
+
+type ContactSettingsType = {
+  data: {
+    socialUrl: {
+      facebook: string;
+      twitter: string;
+      instagram: string;
+      linkedin: string;
+    };
+    contactInfo: ContactInfo[];
+    departments: Department[];
+    address?: AddressItem[];
+  };
+};
+
+type IconName =
+  | "Phone"
+  | "Mail"
+  | "MapPin"
+  | "Clock"
+  | "MessageSquare"
+  | "CheckCircle"
+  | "Users"
+  | "Headphones";
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeService, setActiveService] = useState<string | null>(null);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
+  const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>(
+    [],
+  );
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  const [contactSetting, setContactSettings] =
+    useState<ContactSettingsType | null>(null);
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((res) => res.json())
+      .then((res) => setContactSettings(res));
+  }, []);
+
+  const socialLinks = [
+    {
+      icon: Facebook,
+      href: contactSetting?.data?.socialUrl?.facebook,
+      label: "Facebook",
+    },
+    {
+      icon: Twitter,
+      href: contactSetting?.data?.socialUrl?.twitter,
+      label: "Twitter",
+    },
+    {
+      icon: Instagram,
+      href: contactSetting?.data?.socialUrl?.instagram,
+      label: "Instagram",
+    },
+    {
+      icon: Linkedin,
+      href: contactSetting?.data?.socialUrl?.linkedin,
+      label: "LinkedIn",
+    },
+  ];
 
   const navItems = [
     { name: "Home", href: "/", icon: Sparkles },
@@ -76,21 +162,24 @@ const Navbar = () => {
     { name: "Contact", href: "/contact", icon: Headphones },
   ];
 
-  const iconMap: { [key: string]: JSX.Element } = useMemo(() => ({
-    search: <Search className="w-5 h-5" />,
-    trendingup: <TrendingUp className="w-5 h-5" />,
-    messagesquare: <MessageSquare className="w-5 h-5" />,
-    pentool: <PenTool className="w-5 h-5" />,
-    monitor: <Monitor className="w-5 h-5" />,
-    smartphone: <Smartphone className="w-5 h-5" />,
-    globe: <Globe className="w-5 h-5" />,
-    sparkles: <Sparkles className="w-5 h-5" />,
-    barchart: <BarChart className="w-5 h-5" />,
-    zap: <Zap className="w-5 h-5" />,
-    shield: <Shield className="w-5 h-5" />,
-    code: <Code className="w-6 h-6" />,
-    target: <Target className="w-6 h-6" />,
-  }), []);
+  const iconMap: { [key: string]: JSX.Element } = useMemo(
+    () => ({
+      search: <Search className="w-5 h-5" />,
+      trendingup: <TrendingUp className="w-5 h-5" />,
+      messagesquare: <MessageSquare className="w-5 h-5" />,
+      pentool: <PenTool className="w-5 h-5" />,
+      monitor: <Monitor className="w-5 h-5" />,
+      smartphone: <Smartphone className="w-5 h-5" />,
+      globe: <Globe className="w-5 h-5" />,
+      sparkles: <Sparkles className="w-5 h-5" />,
+      barchart: <BarChart className="w-5 h-5" />,
+      zap: <Zap className="w-5 h-5" />,
+      shield: <Shield className="w-5 h-5" />,
+      code: <Code className="w-6 h-6" />,
+      target: <Target className="w-6 h-6" />,
+    }),
+    [],
+  );
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -115,7 +204,7 @@ const Navbar = () => {
           "Tech Solutions": "from-blue-600 to-blue-700",
           "Analytics & Strategy": "from-blue-700 to-blue-800",
         };
-        
+
         const categoryIcons: { [key: string]: JSX.Element } = {
           "Digital Marketing": <Zap className="w-6 h-6" />,
           "Tech Solutions": <Code className="w-6 h-6" />,
@@ -126,13 +215,17 @@ const Navbar = () => {
           categories,
         ).map((categoryTitle) => ({
           title: categoryTitle,
-          icon: categoryIcons[categoryTitle] || <Sparkles className="w-6 h-6" />,
+          icon: categoryIcons[categoryTitle] || (
+            <Sparkles className="w-6 h-6" />
+          ),
           color: categoryColors[categoryTitle] || "from-gray-500 to-gray-600",
           services: categories[categoryTitle].map((service) => ({
             name: service.title,
             href: `/services/${service.slug}`,
             description: service.description,
-            icon: iconMap[service.icon.toLowerCase()] || <Sparkles className="w-5 h-5" />,
+            icon: iconMap[service.icon.toLowerCase()] || (
+              <Sparkles className="w-5 h-5" />
+            ),
           })),
         }));
         setServiceCategories(formattedCategories);
@@ -600,29 +693,36 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-
+              {/* ==============Mobile Socila Link=================== */}
+              {/* ==============Mobile Socila Link=================== */}
+              {/* ==============Mobile Socila Link=================== */}
               {/* Social Links */}
               <div className="p-4 sm:p-6 bg-gray-50">
                 <div className="text-center">
                   <p className="text-xs sm:text-sm text-gray-600 mb-3">
                     Follow us
                   </p>
-                  <div className="flex justify-center space-x-3 sm:space-x-4">
-                    {["Facebook", "Twitter", "Instagram", "LinkedIn"].map(
-                      (social) => (
+                  {/* Social Links */}
+                  <div className="flex items-center justify-center gap-4">
+                    {socialLinks.map((social) => {
+                      const Icon = social.icon;
+                      return (
                         <a
-                          key={social}
-                          href="#"
-                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-md transition-all text-xs sm:text-sm border border-gray-200"
-                          style={{ borderRadius: "8px" }}
+                          key={social.label}
+                          href={social.href}
+                          aria-label={social.label}
+                          className="w-10 h-10 bg-white/5 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-colors group border border-gray-300"
                         >
-                          {social.charAt(0)}
+                          <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                         </a>
-                      ),
-                    )}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
+              {/* ==============Mobile Socila Link=================== */}
+              {/* ==============Mobile Socila Link=================== */}
+              {/* ==============Mobile Socila Link=================== */}
             </motion.div>
           </>
         )}

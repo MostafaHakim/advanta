@@ -286,10 +286,10 @@ const StatsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative"
+              className="group relative "
             >
               {/* Card */}
-              <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 transition-all duration-500">
+              <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 transition-all duration-500 flex flex-col items-center text-center shadow-lg hover:shadow-2xl">
                 {/* Icon */}
                 <div className="mx-auto mb-4 lg:mb-6 inline-flex w-14 h-14 lg:w-16 lg:h-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 transition-all duration-300 group-hover:scale-110">
                   <div className="text-[#33d9b2]">{stat.icon}</div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Target, Users, Shield, Zap, TrendingUp, Heart } from "lucide-react";
+import Link from "next/link";
 
 const values = [
   {
@@ -76,7 +77,7 @@ const values = [
 
 const ValuesSection = () => {
   return (
-    <section className="py-12 md:py-20 bg-gray-50">
+    <section className="py-6 md:py-20 bg-gray-50">
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -201,7 +202,7 @@ const ValuesSection = () => {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl flex flex-col items-center justify-center mx-auto">
             <h3 className="text-xl md:text-2xl font-bold mb-6">
               Our Commitment to You
             </h3>
@@ -210,9 +211,9 @@ const ValuesSection = () => {
               expectations. Our values are not just words on a page - they are
               the foundation of how we work with every client, on every project.
             </p>
-            <button className="btn-primary">
+            <Link href="/contact" className="btn-primary">
               Learn More About Our Approach
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>
