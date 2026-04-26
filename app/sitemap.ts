@@ -7,7 +7,8 @@ import dbConnect from "@/lib/db";
 export const runtime = "nodejs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.advantascale.com";
 
   await dbConnect();
 
