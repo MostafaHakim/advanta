@@ -28,10 +28,10 @@ interface Result {
   value: string;
 }
 
-const FeatureProject = () => {
+const FeatureProject = ({ initialProjects }: { initialProjects?: Project[] }) => {
   const [loading, setLoading] = useState(false);
-  const [fetchLoading, setFetchLoading] = useState(false);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [fetchLoading, setFetchLoading] = useState(!initialProjects);
+  const [projects, setProjects] = useState<Project[]>(initialProjects || []);
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   // Fetch projects
@@ -53,8 +53,10 @@ const FeatureProject = () => {
   };
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (!initialProjects || initialProjects.length === 0) {
+      fetchProjects();
+    }
+  }, [initialProjects]);
 
   const filteredItems =
     activeCategory === "All"

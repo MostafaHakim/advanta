@@ -312,15 +312,17 @@ type TeamMember = {
   }>;
 };
 
-const TeamSection = () => {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
-  const [loading, setLoading] = useState(true);
+const TeamSection = ({ initialTeam }: { initialTeam?: TeamMember[] }) => {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(initialTeam || []);
+  const [loading, setLoading] = useState(!initialTeam);
   const [error, setError] = useState<string | null>(null);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchTeamMembers();
-  }, []);
+    if (!initialTeam || initialTeam.length === 0) {
+      fetchTeamMembers();
+    }
+  }, [initialTeam]);
 
   const fetchTeamMembers = async () => {
     try {

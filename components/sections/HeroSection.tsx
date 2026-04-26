@@ -19,10 +19,10 @@ interface HeroData {
   }[];
 }
 
-export default function HeroSectionUnique() {
+export default function HeroSectionUnique({ initialData }: { initialData?: HeroData | null }) {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [data, setData] = useState<HeroData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<HeroData | null>(initialData || null);
+  const [loading, setLoading] = useState(!initialData);
 
   useEffect(() => {
     const move = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY });
@@ -31,6 +31,8 @@ export default function HeroSectionUnique() {
   }, []);
 
   useEffect(() => {
+    if (initialData) return; // Skip fetching if we already have initialData
+
     const fetchHeroData = async () => {
       try {
         setLoading(true);
@@ -44,7 +46,7 @@ export default function HeroSectionUnique() {
       }
     };
     fetchHeroData();
-  }, []);
+  }, [initialData]);
 
   const hero = data?.data?.[0];
 

@@ -204,21 +204,27 @@ type Brand = {
   image: string;
 };
 
-const StatsSection = () => {
-  const [brands, setBrands] = useState<Brand[]>([]);
+const StatsSection = ({ initialBrands }: { initialBrands?: Brand[] }) => {
+  const [brands, setBrands] = useState<Brand[]>(initialBrands || []);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.15,
   });
 
   const fetchBrands = async () => {
-    const res = await axios.get("/api/brand");
-    setBrands(res.data.data);
+    try {
+      const res = await axios.get("/api/brand");
+      setBrands(res.data.data);
+    } catch (error) {
+      console.error("Failed to fetch brands", error);
+    }
   };
 
   useEffect(() => {
-    fetchBrands();
-  }, []);
+    if (!initialBrands || initialBrands.length === 0) {
+      fetchBrands();
+    }
+  }, [initialBrands]);
 
   return (
     <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#218c74] via-[#1e7a64] to-[#33d9b2] overflow-hidden">
