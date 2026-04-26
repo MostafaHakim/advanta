@@ -1,6 +1,9 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
-
-User-agent: *
-Allow: /
-
-Sitemap: https://www.advantascale.com/sitemap.xml
+export default function robots() {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+    },
+    sitemap: "https://www.advantascale.com/sitemap.xml",
+  };
+}
