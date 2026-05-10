@@ -1,30 +1,27 @@
 import type { Metadata } from "next";
 // ==================work pending=============
 export const metadata: Metadata = {
-  title: "Contact | Our Successful Projects",
+  title: "Contact Us | Get in Touch",
   description:
-    "Explore our portfolio of successful digital marketing campaigns and web development projects.",
+    "Ready to transform your digital presence? Get in touch with our team for a free consultation and discover how we can help your business grow.",
   keywords: [
-    "portfolio",
-    "digital marketing",
-    "case studies",
-    "web development",
+    "contact",
+    "digital marketing consultation",
+    "business growth",
+    "marketing inquiry",
   ],
-  openGraph: {
-    title: "Portfolio | Digital Marketing Agency",
-    description: "Our successful projects and case studies",
-    type: "website",
-    url: "https://www.advantascale.com/portfolio",
+  alternates: {
+    canonical: "/contact",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Portfolio | Our Successful Projects",
-    description:
-      "Explore our portfolio of successful digital marketing campaigns",
+  openGraph: {
+    title: "Contact Us | Digital Marketing Agency",
+    description: "Get in touch for a free consultation",
+    type: "website",
+    url: "https://www.advantascale.com/contact",
   },
 };
 
-export default function PortfolioLayout({
+export default function ContactLayout({
   children,
 }: {
   children: React.ReactNode;

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     "case studies",
     "web development",
   ],
+  alternates: {
+    canonical: "/portfolio",
+  },
   openGraph: {
     title: "Portfolio | Digital Marketing Agency",
     description: "Our successful projects and case studies",

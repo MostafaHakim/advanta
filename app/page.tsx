@@ -10,6 +10,13 @@ import Brand from "@/models/brandModel";
 import Project from "@/models/projectModel";
 import TeamMember from "@/models/teamModel";
 import { SectionWrapper, FadeInWrapper, SpringWrapper } from "@/components/home/SectionWrapper";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 async function getData() {
   try {

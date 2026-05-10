@@ -6,6 +6,9 @@ export const metadata = {
   title: "About Us | Digital Marketing Agency",
   description:
     "Learn about our mission, values, and team of digital marketing experts.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {

@@ -91,6 +91,9 @@ export async function generateMetadata({
       description: item.description,
       images: [item.image],
     },
+    alternates: {
+      canonical: `${getBaseUrl()}/portfolio/${item.slug}`,
+    },
   };
 }
 

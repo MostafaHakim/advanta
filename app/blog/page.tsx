@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     "social media",
     "blog",
   ],
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
     title: "Digital Marketing Blog | Latest Trends & Insights",
     description: "Expert insights on digital marketing strategies",

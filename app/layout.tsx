@@ -27,10 +27,6 @@ export const metadata: Metadata = {
 
   metadataBase: new URL("https://www.advantascale.com/"),
 
-  alternates: {
-    canonical: "https://www.advantascale.com/",
-  },
-
   openGraph: {
     type: "website",
     locale: "en_US",

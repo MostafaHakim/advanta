@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { ServiceDetail, RelatedServices } from "@/components/services";
 import CTASection from "@/components/sections/CTASection";
 import { Metadata } from "next";
+import { getBaseUrl } from "@/lib/url";
 
 async function getService(slug: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/slug/${slug}`, {
@@ -42,6 +43,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${service.title} | NextMarketing`,
       description: service.description,
+    },
+    alternates: {
+      canonical: `${getBaseUrl()}/services/${params.slug}`,
     },
   };
 }

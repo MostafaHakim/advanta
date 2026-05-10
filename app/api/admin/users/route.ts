@@ -8,6 +8,7 @@ export async function GET() {
     const users = await Users.find().sort({
       createdAt: -1,
     });
+    console.log(users);
     return NextResponse.json(users);
   } catch (error) {
     return NextResponse.json(

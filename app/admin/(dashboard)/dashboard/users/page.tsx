@@ -17,7 +17,7 @@ export default function UserList() {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
-
+  console.log(users);
   const handeleStatusUpdate = async (id: string) => {
     const res = await fetch(`/api/admin/users/edit/${id}`, {
       method: "PUT",
