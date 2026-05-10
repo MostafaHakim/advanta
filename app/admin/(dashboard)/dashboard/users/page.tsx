@@ -17,12 +17,12 @@ export default function UserList() {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
-  console.log(users);
+
   const handeleStatusUpdate = async (id: string) => {
     const res = await fetch(`/api/admin/users/edit/${id}`, {
       method: "PUT",
     });
-
+    console.log(res);
     if (res.ok) {
       const data = await res.json();
       toast.success("Status Update Successfully");
@@ -32,6 +32,9 @@ export default function UserList() {
           user._id === id ? { ...user, status: data.data.status } : user,
         ),
       );
+      await fetch("/api/admin/users")
+        .then((res) => res.json())
+        .then((data) => setUsers(data));
     }
   };
 
