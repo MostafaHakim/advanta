@@ -5,10 +5,11 @@ import Users from "@/models/userModel";
 export async function GET() {
   try {
     await dbConnect();
+
     const users = await Users.find().sort({
       createdAt: -1,
     });
-    console.log(users);
+
     return NextResponse.json(users);
   } catch (error) {
     return NextResponse.json(

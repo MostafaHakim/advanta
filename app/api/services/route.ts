@@ -4,7 +4,9 @@ import Service from "@/models/serviceModel";
 
 export async function GET() {
   await dbConnect();
-  const services = await Service.find().sort({ order: 1 });
+
+  const services = await Service.find().sort({ order: -1 });
+
   return NextResponse.json(services);
 }
 

@@ -22,7 +22,7 @@ export default function UserList() {
     const res = await fetch(`/api/admin/users/edit/${id}`, {
       method: "PUT",
     });
-    console.log(res);
+
     if (res.ok) {
       const data = await res.json();
       toast.success("Status Update Successfully");
